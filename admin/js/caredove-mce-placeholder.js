@@ -88,6 +88,7 @@
 
                       for(i=0; i < t.shortcodes[shortcode].popupbody.length; i++) {
                         if(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name)){
+                            console.log(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name));
                           if(t.shortcodes[shortcode].popupbody[i].hasOwnProperty('checked')){
                             t.shortcodes[shortcode].popupbody[i].checked = attributes[t.shortcodes[shortcode].popupbody[i].name];
                           }

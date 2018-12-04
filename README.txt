@@ -38,6 +38,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.1.8 =
+* updated API structure to include 'results'
+* +Caredove Button function now working, user can insert booking buttons
+
 = 0.1.7 =
 * auto update and check for updates now working
 

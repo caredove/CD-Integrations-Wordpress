@@ -25,19 +25,25 @@
     	  ?>
     </form>
 
-    <?php $caredove_api_data = Caredove_Admin::get_listings(); 
+    <?php delete_transient( 'caredove_listings' ); ?>
+
+    <?php $caredove_api_data = Caredove_Admin::connect_to_api(); 
 
     $api_object = json_decode($caredove_api_data, true);
-    
-		foreach ($api_object as $result){
-			if (isset($result['eReferral']['formUrl'])){
-				print $result['id'].'-'.$result['name'].'-'.$result['eReferral']['formUrl'].'<br />';	
-			}
-		}
+
+   //  if (isset($api_object['results'])){
+   //  	foreach ($api_object['results'] as $result){
+   //  		print_r($result);
+			// 	if (isset($result['eReferral']['formUrl'])){
+			// 		print $result['id'].'-'.$result['name'].'-'.$result['eReferral']['formUrl'].'<br />';	
+			// 	}
+			// }
+   //  }
+		
 
 		$listing_categories = Caredove_Admin::get_categories();
 
-		print_r($listing_categories);
+		// print_r($listing_categories);
 
     ?>
 

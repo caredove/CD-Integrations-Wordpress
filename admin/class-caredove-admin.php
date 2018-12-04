@@ -132,15 +132,20 @@ class Caredove_Admin {
 			$popup = new stdClass();
 			//Define the standard buttons (these can be overridden for a specific shortcode if desired)
 			$popup->buttons = [array ('text' => 'cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit')];
-
+			
+			$caredove_booking_buttons = [];
 		  $caredove_api_data = $this->connect_to_api();
 		  $api_object = json_decode($caredove_api_data, true);
-			
-			foreach ($api_object as $result){
-				if (isset($result['eReferral']['formUrl'])){
-					$caredove_booking_buttons[] = array('text' => $result['name'], 'value' => $result['eReferral']['formUrl']);
-				}
-			}
+
+		  $caredove_api_categories = $this->get_categories();
+
+			if(isset($api_object['results'])){
+				foreach ($api_object['results'] as $result){
+					if (isset($result['eReferral']['formUrl']) && $result['eReferral']['formUrl'] !== '' ){
+						$caredove_booking_buttons[] = array('text' => $result['name'], 'value' => esc_url($result['eReferral']['formUrl']));
+					}
+				}	
+			}			
 
 			//these are the defaults for button_options we want included whenever there is buttons available
 		  $popup->button_options[] = array(
@@ -150,15 +155,10 @@ class Caredove_Admin {
               'tooltip'=> 'This will be used for the button text'
             );
 		  $popup->button_options[] = array (
-              'type'   => 'colorbox',
+              'type'   => 'textbox',
               'name'   => 'button_color',
               'label'  => 'Button Color',
               'text'   => '#fff',
-              'values' => [
-                  array ( 'text'=> 'White', 'value'=> '#fff' ),
-                  array ( 'text'=> 'Black', 'value'=> '#000' ),                 
-              ],
-              'onaction' => 'createColorPickAction()'
 			      );
 			 $popup->button_options[] = array( 
 		    			'type'   => 'listbox',
@@ -376,6 +376,7 @@ class Caredove_Admin {
 			);
 			$response = wp_remote_get( $url, $args );
 			$http_code = wp_remote_retrieve_response_code( $response );
+
 			if($http_code == '200'){
 				$caredove_api_data = wp_remote_retrieve_body( $response );	
 			} else {
@@ -407,14 +408,16 @@ class Caredove_Admin {
 		$caredove_api_data = Caredove_Admin::get_listings();
 
     $api_object = json_decode($caredove_api_data, true);
-    
-		foreach ($api_object as $result){
-			if (isset($result['category']['display'])){
-				if(!in_array($result['category']['display'], $listing_categories, true)){
-        	array_push($listing_categories, $result['category']['display']);
-    		}
+    if(isset($api_object['results'])){
+    	foreach ($api_object['results'] as $result){
+				if (isset($result['category']['display'])){
+					if(!in_array($result['category']['display'], $listing_categories, true)){
+	        	array_push($listing_categories, $result['category']['display']);
+	    		}
+				}
 			}
-		}
+    }
+		
 
 		return $listing_categories;
 	}
