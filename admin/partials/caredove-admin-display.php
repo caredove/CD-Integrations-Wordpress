@@ -21,31 +21,23 @@
         <?php
             settings_fields( $this->plugin_name );
             do_settings_sections( $this->plugin_name );
+
+            $api_test_results = Caredove_Admin::test_api();		
+
+						// $listing_categories = Caredove_Admin::get_categories();
+						if ($api_test_results == '200') {
+							echo "<span style='color:green;font-weight:800;'>API Connected</span>";
+						} else {
+							echo "<span style='color:red;font-weight:600;'>";
+							print_r($api_test_results);
+							echo "<span>";
+						}
+
             submit_button();
     	  ?>
     </form>
 
     <?php delete_transient( 'caredove_listings' ); ?>
-
-    <?php $caredove_api_data = Caredove_Admin::connect_to_api(); 
-
-    $api_object = json_decode($caredove_api_data, true);
-
-   //  if (isset($api_object['results'])){
-   //  	foreach ($api_object['results'] as $result){
-   //  		print_r($result);
-			// 	if (isset($result['eReferral']['formUrl'])){
-			// 		print $result['id'].'-'.$result['name'].'-'.$result['eReferral']['formUrl'].'<br />';	
-			// 	}
-			// }
-   //  }
-		
-
-		$listing_categories = Caredove_Admin::get_categories();
-
-		// print_r($listing_categories);
-
-    ?>
 
 
 </div>

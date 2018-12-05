@@ -360,14 +360,44 @@ class Caredove_Admin {
 	public function caredove_api_org_id_field() {
 		$api_org_id = get_option( $this->option_name . '_api_org_id' );
 		echo '<input type="text" name="' . $this->option_name . '_api_org_id' . '" id="' . $this->option_name . '_api_org_id' . '" value="' . $api_org_id . '"> ' . __( 'get your organization ID from caredove.com', 'caredove' );
-	}
+	}	
 
+	public function test_api() {
+			$api_username = get_option('caredove_api_username',array());
+    	$api_password = get_option('caredove_api_password',array());
+    	$api_org_id = get_option('caredove_api_org_id',array());
+    	$api_auth = $api_username . ':' . $api_password;
+			$url = 'https://sandbox.caredove.com/api/native_v1/Service/?organization_id=' . $api_org_id;
+			$args = array(
+	    'headers' => array(
+	        'Authorization' => 'Basic ' . base64_encode($api_auth)
+			    )
+			);
+
+			if (strlen($api_username) == 0 || strlen($api_password) == 0 || strlen($api_org_id) == 0) {
+				$caredove_api_response = 'please enter connection info';
+				return $caredove_api_response;
+				die;
+			}    
+
+			$response = wp_remote_get( $url, $args );
+			$http_code = wp_remote_retrieve_response_code( $response );
+
+			if($http_code == '200'){
+				$caredove_api_response = $http_code;	
+			} else {
+				$caredove_api_response = "something went wrong: " . $http_code . ' - ' . wp_remote_retrieve_response_message( $response );
+			}
+			
+			return $caredove_api_response;
+	}
 	public function connect_to_api() {
 
     	$api_username = get_option('caredove_api_username',array());
     	$api_password = get_option('caredove_api_password',array());
     	$api_org_id = get_option('caredove_api_org_id',array());
     	$api_auth = $api_username . ':' . $api_password;
+
 			$url = 'https://sandbox.caredove.com/api/native_v1/Service/?organization_id=' . $api_org_id;
 			$args = array(
 	    'headers' => array(

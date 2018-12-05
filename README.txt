@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 4.4
-Stable tag: 0.1.7
+Stable tag: 0.1.9
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,9 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.1.9 =
+* added additional API error responses
 
 = 0.1.8 =
 * updated API structure to include 'results'
@@ -73,5 +76,5 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Upgrade Notice ==
 
-= 1.0 =
-This is the latest test version, some functions work. 
+= 0.1.9 =
+This is the latest test version 
