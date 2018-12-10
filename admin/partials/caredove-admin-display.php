@@ -34,10 +34,17 @@
 						}
 
             submit_button();
-    	  ?>
-    </form>
 
-    <?php delete_transient( 'caredove_listings' ); ?>
+    	  ?>    	  
+				<!-- <input name="reset_all" type="button" value="Reset to default values" class="button" onclick="submit_form(this, document.forms['form'])" /> -->
+    	   
+    </form>
+    <form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
+        <input type="hidden" name="action" value="options_page_delete_transients">
+        	<?php submit_button( 'Clear cache', 'delete', '', false ); ?>
+				</form>
+
+		<?php echo get_transient('caredove_listings'); ?>
 
 
 </div>

@@ -161,6 +161,7 @@ class Caredove {
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_setting' );
 		$this->loader->add_action( 'media_buttons', $plugin_admin, 'media_button_insert_search_page', 15);		
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'shortcode_config' );
+		$this->loader->add_action( 'admin_post_options_page_delete_transients', $plugin_admin, 'options_page_delete_transients' );
 	}
 
 	/**

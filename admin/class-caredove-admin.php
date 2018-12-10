@@ -134,7 +134,7 @@ class Caredove_Admin {
 			$popup->buttons = [array ('text' => 'cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit')];
 			
 			$caredove_booking_buttons = [];
-		  $caredove_api_data = $this->connect_to_api();
+		  $caredove_api_data = $this->get_api_data();
 		  $api_object = json_decode($caredove_api_data, true);
 
 		  $caredove_api_categories = $this->get_categories();
@@ -281,6 +281,12 @@ class Caredove_Admin {
 
 	}
 
+	public function options_page_delete_transients() {
+	  delete_transient( 'caredove_listings' );
+	  // at the end redirect to target page
+	  exit( wp_redirect( admin_url( 'options-general.php?page=caredove' ) ) );
+	}
+
 	/**
 	 * Render the options page for plugin
 	 *
@@ -419,14 +425,15 @@ class Caredove_Admin {
 			
 	}
 
-	public function get_listings() {
+	public function get_api_data() {
 			//https://gist.github.com/leocaseiro/455df1f8e1118cb8a2a2
 			$listings = get_transient('caredove_listings');
-		
-			if (!$listings) {
-				
-				return Caredove_Admin::connect_to_api();
-			}
+
+			if(isset($listings['results'])){
+	    	if (sizeof($listings['results']) == 0) {
+	    		$listings =  Caredove_Admin::connect_to_api();
+	    	}
+	    }
 
 			return $listings;
 	}
@@ -435,7 +442,7 @@ class Caredove_Admin {
 
 		$listing_categories = array();
 
-		$caredove_api_data = Caredove_Admin::get_listings();
+		$caredove_api_data = Caredove_Admin::get_api_data();
 
     $api_object = json_decode($caredove_api_data, true);
     if(isset($api_object['results'])){
