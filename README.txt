@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 4.4
-Stable tag: 0.1.9
+Stable tag: 0.1.10
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,11 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.1.10 =
+* Improved error handling on settings page
+* Added Ability to clear cache from settings page
+* Added custom cache handling for more reliable API results
 
 = 0.1.9 =
 * added additional API error responses
@@ -76,5 +81,5 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Upgrade Notice ==
 
-= 0.1.9 =
+= 0.1.10 =
 This is the latest test version 

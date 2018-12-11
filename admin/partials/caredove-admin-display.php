@@ -22,14 +22,13 @@
             settings_fields( $this->plugin_name );
             do_settings_sections( $this->plugin_name );
 
-            $api_test_results = Caredove_Admin::test_api();		
+            $api_test_results = Caredove_Admin::connect_to_api('test');
 
-						// $listing_categories = Caredove_Admin::get_categories();
-						if ($api_test_results == '200') {
+						if ($api_test_results->http_code == '200') {
 							echo "<span style='color:green;font-weight:800;'>API Connected</span>";
 						} else {
-							echo "<span style='color:red;font-weight:600;'>";
-							print_r($api_test_results);
+							echo "<span style='color:red;font-weight:600;'>Connection Error: ";
+							print_r($api_test_results->http_code);
 							echo "<span>";
 						}
 
@@ -42,9 +41,13 @@
     <form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
         <input type="hidden" name="action" value="options_page_delete_transients">
         	<?php submit_button( 'Clear cache', 'delete', '', false ); ?>
-				</form>
+		</form>
 
-		<?php echo get_transient('caredove_listings'); ?>
+		<?php 
+
+		//return get_transient('caredove_listings'); 
+
+		?>
 
 
 </div>

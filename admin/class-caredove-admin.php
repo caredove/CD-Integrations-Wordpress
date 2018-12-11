@@ -134,7 +134,7 @@ class Caredove_Admin {
 			$popup->buttons = [array ('text' => 'cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit')];
 			
 			$caredove_booking_buttons = [];
-		  $caredove_api_data = $this->get_api_data();
+		  $caredove_api_data = Caredove_Admin::get_api_data();
 		  $api_object = json_decode($caredove_api_data, true);
 
 		  $caredove_api_categories = $this->get_categories();
@@ -145,7 +145,7 @@ class Caredove_Admin {
 						$caredove_booking_buttons[] = array('text' => $result['name'], 'value' => esc_url($result['eReferral']['formUrl']));
 					}
 				}	
-			}			
+			}
 
 			//these are the defaults for button_options we want included whenever there is buttons available
 		  $popup->button_options[] = array(
@@ -281,6 +281,10 @@ class Caredove_Admin {
 
 	}
 
+	/** 
+	 * Add ability to clear transients from option page
+	 * @ since 0.1.10
+	 */
 	public function options_page_delete_transients() {
 	  delete_transient( 'caredove_listings' );
 	  // at the end redirect to target page
@@ -368,71 +372,53 @@ class Caredove_Admin {
 		echo '<input type="text" name="' . $this->option_name . '_api_org_id' . '" id="' . $this->option_name . '_api_org_id' . '" value="' . $api_org_id . '"> ' . __( 'get your organization ID from caredove.com', 'caredove' );
 	}	
 
-	public function test_api() {
-			$api_username = get_option('caredove_api_username',array());
-    	$api_password = get_option('caredove_api_password',array());
-    	$api_org_id = get_option('caredove_api_org_id',array());
-    	$api_auth = $api_username . ':' . $api_password;
-			$url = 'https://sandbox.caredove.com/api/native_v1/Service/?organization_id=' . $api_org_id;
-			$args = array(
-	    'headers' => array(
-	        'Authorization' => 'Basic ' . base64_encode($api_auth)
-			    )
-			);
+	public function connect_to_api($type = 'new') {
 
-			if (strlen($api_username) == 0 || strlen($api_password) == 0 || strlen($api_org_id) == 0) {
-				$caredove_api_response = 'please enter connection info';
-				return $caredove_api_response;
-				die;
-			}    
-
-			$response = wp_remote_get( $url, $args );
-			$http_code = wp_remote_retrieve_response_code( $response );
-
-			if($http_code == '200'){
-				$caredove_api_response = $http_code;	
-			} else {
-				$caredove_api_response = "something went wrong: " . $http_code . ' - ' . wp_remote_retrieve_response_message( $response );
-			}
-			
-			return $caredove_api_response;
-	}
-	public function connect_to_api() {
-
+    	$caredove_api = new StdClass;
     	$api_username = get_option('caredove_api_username',array());
     	$api_password = get_option('caredove_api_password',array());
     	$api_org_id = get_option('caredove_api_org_id',array());
     	$api_auth = $api_username . ':' . $api_password;
-
 			$url = 'https://sandbox.caredove.com/api/native_v1/Service/?organization_id=' . $api_org_id;
 			$args = array(
 	    'headers' => array(
 	        'Authorization' => 'Basic ' . base64_encode($api_auth)
 			    )
 			);
-			$response = wp_remote_get( $url, $args );
-			$http_code = wp_remote_retrieve_response_code( $response );
 
-			if($http_code == '200'){
-				$caredove_api_data = wp_remote_retrieve_body( $response );	
+			//first check to see if all of the necesary fields are filled out
+			if (strlen($api_username) == 0 || strlen($api_password) == 0 || strlen($api_org_id) == 0) {
+				$caredove_api->http_code = 'please enter connection info';
 			} else {
-				$caredove_api_data = "something went wrong: " . $http_code;
+				//if all of the fields are filled, then proceed to conenct
+				$response = wp_remote_get( $url, $args );
+				$http_code = wp_remote_retrieve_response_code( $response );
+
+
+				if($http_code == '200'){
+					//if connection is good, get and set the data
+					$caredove_api->data = wp_remote_retrieve_body( $response );	
+					$caredove_api->http_code = $http_code;
+					if($type !== 'test'){
+						set_transient('caredove_listings', $caredove_api->data, 60 * 10);	
+					}
+				} else {
+					//if connection is bad, send error response to admin page
+					$caredove_api->http_code = "something went wrong: " . $http_code . ' - ' . wp_remote_retrieve_response_message( $response );
+				}			
 			}
 
-			set_transient('caredove_listings', $caredove_api_data, 60 * 10);
-			
-			return $caredove_api_data;
+			return $caredove_api;
 			
 	}
 
 	public function get_api_data() {
 			//https://gist.github.com/leocaseiro/455df1f8e1118cb8a2a2
 			$listings = get_transient('caredove_listings');
-
-			if(isset($listings['results'])){
-	    	if (sizeof($listings['results']) == 0) {
-	    		$listings =  Caredove_Admin::connect_to_api();
-	    	}
+			// echo 'these are the listings: ';
+			// print_r($listings);
+			if(empty($listings)){
+	    		$listings = Caredove_Admin::connect_to_api();
 	    }
 
 			return $listings;
