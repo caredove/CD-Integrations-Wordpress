@@ -248,6 +248,7 @@
             return co.replace( t.regex, function(a,b,c){
                 c = c.replace(/\\([\s\S])|(\/")/, "\\$1$2");
                 return '<img src="'+t.shortcodes[b].image+'" id="vscImage'+(t.counter++)+'-'+b+'" class="mceItem jpbVisualShortcode" title="' + b + tinymce.DOM.encode(c) + '" data-mce-resize="false" data-mce-placeholder="1" data-shortcode="' + t.shortcodes[b].shortcode + '" />';
+                // return '<div style="background:#000;width:200px;height:40px;" id="vscImage'+(t.counter++)+'-'+b+'" class="mceItem jpbVisualShortcode" title="' + b + tinymce.DOM.encode(c) + '" data-mce-resize="false" data-mce-placeholder="1" data-shortcode="' + t.shortcodes[b].shortcode + '"></div>';
             });
         },
 

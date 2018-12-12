@@ -22,13 +22,14 @@
             settings_fields( $this->plugin_name );
             do_settings_sections( $this->plugin_name );
 
-            $api_test_results = Caredove_Admin::connect_to_api('test');
+            $api_test_results = Caredove_Admin::connect_to_api();
 
 						if ($api_test_results->http_code == '200') {
 							echo "<span style='color:green;font-weight:800;'>API Connected</span>";
 						} else {
 							echo "<span style='color:red;font-weight:600;'>Connection Error: ";
 							print_r($api_test_results->http_code);
+							print_r($api_test_results->response);
 							echo "<span>";
 						}
 
@@ -45,7 +46,7 @@
 
 		<?php 
 
-		//return get_transient('caredove_listings'); 
+		// print_r(get_transient('caredove_listings')); 
 
 		?>
 

@@ -136,7 +136,6 @@ class Caredove_Admin {
 			$caredove_booking_buttons = [];
 		  $caredove_api_data = Caredove_Admin::get_api_data();
 		  $api_object = json_decode($caredove_api_data, true);
-
 		  $caredove_api_categories = $this->get_categories();
 
 			if(isset($api_object['results'])){
@@ -372,7 +371,7 @@ class Caredove_Admin {
 		echo '<input type="text" name="' . $this->option_name . '_api_org_id' . '" id="' . $this->option_name . '_api_org_id' . '" value="' . $api_org_id . '"> ' . __( 'get your organization ID from caredove.com', 'caredove' );
 	}	
 
-	public function connect_to_api($type = 'new') {
+	public function connect_to_api() {
 
     	$caredove_api = new StdClass;
     	$api_username = get_option('caredove_api_username',array());
@@ -399,12 +398,10 @@ class Caredove_Admin {
 					//if connection is good, get and set the data
 					$caredove_api->data = wp_remote_retrieve_body( $response );	
 					$caredove_api->http_code = $http_code;
-					if($type !== 'test'){
-						set_transient('caredove_listings', $caredove_api->data, 60 * 10);	
-					}
 				} else {
 					//if connection is bad, send error response to admin page
 					$caredove_api->http_code = "something went wrong: " . $http_code . ' - ' . wp_remote_retrieve_response_message( $response );
+					$caredove_api->response = $response;
 				}			
 			}
 
@@ -418,7 +415,9 @@ class Caredove_Admin {
 			// echo 'these are the listings: ';
 			// print_r($listings);
 			if(empty($listings)){
-	    		$listings = Caredove_Admin::connect_to_api();
+	    		$caredove_api = Caredove_Admin::connect_to_api();
+					set_transient('caredove_listings', $caredove_api->data, 60 * 10);	
+					$listings = $caredove_api->data;
 	    }
 
 			return $listings;
