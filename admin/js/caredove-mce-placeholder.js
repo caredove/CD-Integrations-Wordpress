@@ -80,10 +80,10 @@
                     // override the object values with content from our HTML element when double clicked
                     // This isn't the most efficient way of pulling in the HTMl element content
                     // I will find a faster way
-                    if(img.match(/[\w-]+=".+?"/g) != null){
-                      img.match(/[\w-]+=".+?"/g).forEach(function(attribute) {
-                        attribute = attribute.match(/([\w-]+)="(.+?)"/);
-                        attributes[attribute[1]] = attribute[2];
+                    if(img.match(/[\w-]+=(["']).*?\1/g) != null){
+                      img.match(/[\w-]+=(["']).*?\1/g).forEach(function(attribute) {
+                        attribute = attribute.match(/([\w-]+)=(["'])(.*?)\2/);
+                        attributes[attribute[1]] = attribute[3];
                       });
 
                       for(i=0; i < t.shortcodes[shortcode].popupbody.length; i++) {
