@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 4.4
-Stable tag: 0.1.12
+Stable tag: 0.1.13
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.1.13 =
+* Set max width for modal popup to 1140px
+* Set consistent lineheight for Modal title and close button, vertically centred
 
 = 0.1.12 =
 * Fixed error where 'button color' field was pulling in next option title
