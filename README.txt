@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 4.4
-Stable tag: 0.1.14
+Stable tag: 0.1.15
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,13 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.1.15 =
+* Adjusted padding on bottom of Modal window
+* Adjusting and sanitizing formatting of modal footer
+* Adjusting and sanitizing fomatting of modal header
+* Added rounded corners to modal
+* Added description and logo to top of TinyMCE Editor popup windows
 
 = 0.1.14 =
 * Updated the TinyMCE "Add Buttons" design to include Caredove logo

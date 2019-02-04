@@ -159,6 +159,7 @@ class Caredove_Admin {
               'name'   => 'button_color',
               'label'  => 'Button Color',
               'text'   => '#fff',
+              'tooltip'=> 'Please use hex "#" color code',
               'classes' => 'caredove_button_color'
 			      );
 			 $popup->button_options[] = array( 
@@ -177,6 +178,16 @@ class Caredove_Admin {
               'classes' => 'caredove_button_style',
               'value' => 'default'
 			      );
+			 $popup->logo = array(
+			 				'type'=> 'container',
+			 				'html'=> '<img src="'.plugins_url("img/Caredove-Logo.svg", __FILE__).'" />',
+			 				'classes'=> 'caredove-tinymce-logo'
+			 			);
+			 $popup->button_sample = array(
+			 				'type'=> 'container',
+			 				'html'=> '<button class="caredove-sample-button caredove-iframe-button">Button Preview</button>',
+			 				'classes'=> 'caredove-sample-button-wrapper'
+			 			);
 
 		
 		  
@@ -190,6 +201,12 @@ class Caredove_Admin {
 		    	'command' => 'editImage',
 		    	'buttons' => $popup->buttons,
 		    	'popupbody' => [
+		    		$popup->logo,
+		    		array(
+						    'type'=> 'container',
+						    'html'=> '<p><strong>Add a Caredove search page to your website</strong> - These can be network search sites, or your organization\'s search site, or even service listings pages. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site">the tutorial</a> to learn more.</p>',
+						    'classes'=> 'caredove-tinymce-description'
+		    		),
             array(
               'type'=> 'textbox',
               'name'=> 'page_url',
@@ -215,7 +232,8 @@ class Caredove_Admin {
               'value'  => 'Search for Services',
               'tooltip' => 'The title for the popup modal, default: Serach for Services',
               'classes' => 'caredove_modal_title',
-            )
+            ),
+            // $popup->button_sample
           	]
 					), //seccond shortcode 'caredove button'
 					'1' => array (
@@ -224,7 +242,8 @@ class Caredove_Admin {
 						'image' => 'https://via.placeholder.com/150x150',
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
-		    		'popupbody' => [		    			
+		    		'popupbody' => [		
+		    			$popup->logo,    			
 			    		array( 
 			    					'type'   => 'listbox',
                     'name'   => 'page_url',
@@ -248,6 +267,7 @@ class Caredove_Admin {
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
 		    		'popupbody' => [
+		    			$popup->logo,
 			    		array(
 	              'type'   => 'listbox',
 	              'name'   => 'list_style',

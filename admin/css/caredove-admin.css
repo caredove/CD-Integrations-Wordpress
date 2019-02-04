@@ -17,3 +17,15 @@
  	background: #009AFF;
  	color:#fff;
  }
+
+.mce-caredove-tinymce-logo img{
+ 	max-width:200px;
+ 	width:200px;
+ 	height:32px;
+ 	margin-bottom:20px;
+ }
+ .mce-caredove-tinymce-description p {
+ 	padding:10px;
+ 	background:#F1F1F1;
+ 	border-radius:5px;
+ }

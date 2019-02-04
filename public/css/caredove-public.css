@@ -54,7 +54,7 @@ button.caredove-button-outline, input[type="button"].caredove-button-outline {
  #caredove-iframe, .modaal-iframe-elem {
     width:100%;
     min-height:300px;
-    height:85%;
+    height:100%;
     border:0;
     overflow-x:hidden; overflow-y:auto;
  }
