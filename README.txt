@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 4.4
-Stable tag: 0.1.13
+Stable tag: 0.1.14
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,16 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.1.14 =
+* Updated the TinyMCE "Add Buttons" design to include Caredove logo
+* Updated Title of the "Caredove Button" Window to say name of button or value of Modal Title field, not "Search for Services"
+* Updates to TinyMCE Add Search Page popup Design
+	* Added ability to hide and show fields depending on chosen options
+* Cleaned up the way public facing buttons were being generated, much more dynamic now
+* Added more styles for buttons, and better defined them in CSS
+* Fixed a few minor issues with the Styled list of lists with buttons)
+* Added .gitignore to ignore mac .DS files
 
 = 0.1.13 =
 * Set max width for modal popup to 1140px

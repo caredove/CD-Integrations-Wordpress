@@ -71,7 +71,7 @@
                     var attributes = {};
 
                     // console.log('shortcode Value: ' + shortcode);                
-                    console.log('this is the img tag: ' + img.length);
+                    // console.log('this is the img tag: ' + img.length);
                     if (img.length != 0) {
                         t.shortcodes[shortcode].buttons['1'].text = "Update";
                     } else {
@@ -88,11 +88,13 @@
 
                       for(i=0; i < t.shortcodes[shortcode].popupbody.length; i++) {
                         if(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name)){
-                            console.log(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name));
+                            //show the class of the field if set
+                            // console.log('class = ' + t.shortcodes[shortcode].popupbody[i].classes);
+                            // console.log(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name));
                           if(t.shortcodes[shortcode].popupbody[i].hasOwnProperty('checked')){
                             t.shortcodes[shortcode].popupbody[i].checked = attributes[t.shortcodes[shortcode].popupbody[i].name];
                           }
-                          t.shortcodes[shortcode].popupbody[i].value = attributes[t.shortcodes[shortcode].popupbody[i].name]
+                          t.shortcodes[shortcode].popupbody[i].value = attributes[t.shortcodes[shortcode].popupbody[i].name];                                          
                         }
                       }
                     };                                       
@@ -113,6 +115,14 @@
                           
                         // placeholder = placeholder + index +'="'+item'"';
                         ed.insertContent( '['+ t.shortcodes[shortcode].shortcode + ' ' + placeholder + ']' );
+                      },
+                      onopen: function( e ) {
+                        
+                        // console.log($('.mce-caredove_admin_display_options-show').attr('aria-checked'));
+                        // if($('.mce-caredove_admin_display_options-hide').attr('aria-checked') == 'true') {
+                            // $('.mce-caredove_admin_display_options').parentsUntil('.mce-formitem').hide();
+                        // }
+                   
                       }
                     
                     });

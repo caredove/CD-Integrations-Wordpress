@@ -885,11 +885,18 @@
 		create_iframe : function(url) {
 			var self = this;
 			var content;
+			var custom_iframe_title;
+
+			if (self.options.modalTitle) {
+				custom_iframe_title = self.options.modalTitle;
+			} else {
+				custom_iframe_title = self.options.iframe_title;
+			}
 
 			if ( self.options.width !== null || self.options.width !== undefined || self.options.height !== null || self.options.height !== undefined ) {
 				// iframe markup
 				content = 
-									'<div class="modaal-content-header"><h3 id="modaal-title">' + self.options.iframe_title + '</h3></div>' +
+									'<div class="modaal-content-header"><h3 id="modaal-title">' + custom_iframe_title + '</h3></div>' +
 									'<div class="modaal-content-container' + ( self.options.loading_class != '' ? ' ' + self.options.loading_class : '' ) + '">' + 
 										'<iframe src="' + url + self.options.url_param + '" class="modaal-iframe-elem" frameborder="0" allowfullscreen></iframe>' + 
 									'</div>' +
@@ -1168,6 +1175,7 @@
 		var options = {};
 		var inline_options = false;
 
+		
 		// option: type
 		if ( self.attr('data-modaal-type') ) {
 			inline_options = true;

@@ -51,8 +51,8 @@ class Caredove_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		add_shortcode('caredove_search', array($this, 'caredove_search_shortcode'));	
-		add_shortcode('caredove_button', array($this, 'caredove_booking_button_shortcode'));	
+		add_shortcode('caredove_search', array($this, 'caredove_shortcode'));	
+		add_shortcode('caredove_button', array($this, 'caredove_shortcode'));	
 		add_shortcode('caredove_listings', array($this, 'caredove_listings_shortcode'));	
 	}
 
@@ -105,57 +105,72 @@ class Caredove_Public {
 	}
 	public function caredove_modal() {
 		?>
-					<div class="caredove-modal">
+<!-- 					<div class="caredove-modal">
 				    <div class="caredove-modal-content">
 				        <span class="caredove-modal-close">×</span>
 				        	<iframe id="caredove-iframe" scrolling="yes" src=""></iframe>
 				    </div>
-					</div>
+					</div> -->
 		<?php	
 	}
 
-	public function caredove_search_shortcode($atts) {
+	//make the button function available, since it's used in more than one plance
+	public function caredove_button($a) {
+			$style_name = '';
+			$style_inline = '';
+
+			$button_style = explode('-', $a['button_style']);
+			foreach ($button_style as $value){
+				$style_name .= 'caredove-button-'.$value.' ';
+				switch($value){
+					case 'outline':
+						$style_inline = 'border-color:'.$a['button_color'].';';
+						$style_inline .= 'color:'.$a['button_color'].';';
+						break;
+					case 'solid':
+						$style_inline = 'background-color:'.$a['button_color'].';';
+						break;
+
+				}
+			}
+			
+		ob_start();
+						?> 
+		<button type="button" class="caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+		<?php
+		return ob_get_clean();
+	}
+
+	public function caredove_shortcode($atts) {
 				$a = shortcode_atts( array(
 						'page_url' => 'https://macrumors.com',
-						'modal' => 'false',
+						'display_option' => 'false',
 						'button_text' => 'Open Search',
 						'button_color' => '',
 						'button_style' => 'default',
-						'modal_title' => 'Search for Services'
+						'modal_title' => 'Search for Services',
+						'link_text' => 'Click Here'
 				), $atts );
 
 			 $iframe = '<iframe id="caredove-iframe" scrolling="yes" src="'.$a['page_url'].'?embed=1"></iframe>';
 
-			 if($a['modal'] == 'true'){
-						ob_start();
-						?> 
-							<button type="button" class="caredove-iframe-button caredove-button-<?php echo $a['button_style'] ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="background-color:<?php echo $a['button_color']?>;"><?php echo $a['button_text']; ?></button>
+			 if($a['display_option'] == 'modal' || $a['display_option'] == 'false'){
+						// ob_start();
 						
+						return $this->caredove_button($a);
+						
+						// return ob_get_clean();
+			 } elseif($a['display_option'] == 'link'){
+				 		ob_start();
+						?> 
+							<a href="<?php echo $a['page_url']; ?>" class="caredove-inline-link"><?php echo $a['link_text']; ?></a>
 						<?php
 						return ob_get_clean();
-			 } else {
+			 }else {
 			 		ob_start();
 					echo $iframe;
 					return ob_get_clean();	
 			 }
-
-	}
-
-	public function caredove_booking_button_shortcode($atts) {
-			$a = shortcode_atts( array(
-					'page_url' => 'https://macrumors.com',
-					'button_text' => 'Book Now',
-					'button_color' => '',
-					'button_style' => 'default',
-					'modal_title' => 'Book an Appointment'
-			), $atts );
-		
-					ob_start();
-					?> 
-						<button type="button" class="caredove-iframe-button caredove-button-<?php echo $a['button_style'] ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="background-color:<?php echo $a['button_color']?>;"><?php echo $a['button_text']; ?></button>
-					
-					<?php
-					return ob_get_clean();
 
 	}
 
@@ -172,30 +187,34 @@ class Caredove_Public {
 
 		    $caredove_api_data = Caredove_Admin::connect_to_api(); 
 
-		    $api_object = json_decode($caredove_api_data, true);
+		    if(is_object($caredove_api_data)){
+		    	// print_r($caredove_api_data->data);
+		    	$api_object = json_decode($caredove_api_data->data, true);
 		    	
-				ob_start();
-				?> 
-					<div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>">
-						<?php foreach ($api_object as $result){
-							if (isset($result['eReferral']['formUrl'])){
-							?>
-								<div class="caredove-listing-item">
-									<h3><?php echo $result['name'] ?></h3>
-									<p><?php echo $result['details']['description'] ?></p>
-									<br />
-									<button type="button" class="caredove-iframe-button caredove-button-<?php echo $a['button_style']?>" data-modal-title="<?php echo $a['modal_title']?>" href="<?php echo $result['eReferral']['formUrl']?>" style="background-color:<?php echo $a['button_color']?>;">
-										<?php echo html_entity_decode($a["button_text"]); ?>
-									</button>
+					ob_start();
+					?> 
+						<div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>">
+							<?php foreach ($api_object['results'] as $result){
+								if (isset($result['eReferral']['formUrl'])){
+								?>
+									<div class="caredove-listing-item">
+										<h3><?php echo $result['name'] ?></h3>
+										<p><?php echo $result['details']['description'] ?></p>
+										<br />
+										<button type="button" class="caredove-iframe-button caredove-button-<?php echo $a['button_style']?>" data-modal-title="<?php echo $a['modal_title']?>" href="<?php echo $result['eReferral']['formUrl']?>" style="background-color:<?php echo $a['button_color']?>;border-color:<?php echo $a['button_color']?>;">
+											<?php echo html_entity_decode($a["button_text"]); ?>
+										</button>
 
-								</div>
-							<?php
-							}
-						}?>
-					</div>
-				
-				<?php
-				return ob_get_clean();
+									</div>
+								<?php
+								}
+							}?>
+						</div>
+					
+					<?php
+					return ob_get_clean();
+		    }
+		    
 	}
 
 }

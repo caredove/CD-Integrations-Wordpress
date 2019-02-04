@@ -151,23 +151,30 @@ class Caredove_Admin {
               'type'=> 'textbox',
               'name'=> 'button_text',
               'label'=> 'Button Text',
-              'tooltip'=> 'This will be used for the button text'
+              'tooltip'=> 'This will be used for the button text',
+              'classes' => 'caredove_button_text'
             );
 		  $popup->button_options[] = array (
               'type'   => 'textbox',
               'name'   => 'button_color',
               'label'  => 'Button Color',
               'text'   => '#fff',
+              'classes' => 'caredove_button_color'
 			      );
 			 $popup->button_options[] = array( 
 		    			'type'   => 'listbox',
               'name'   => 'button_style',
               'label'  => 'Button Style',
               'values' => [
-                  array( 'text'=> 'Default', 'value'=> 'default' ),
-                  array( 'text'=> 'Style 1', 'value'=> 'style-1' ),
-                  array( 'text'=> 'Style 2', 'value'=> 'style-2' )
+                  array( 'text'=> 'Theme Default', 'value'=> 'default' ),
+                  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm' ),
+                  array( 'text'=> 'Medium - solid', 'value'=> 'solid-md' ),
+                  array( 'text'=> 'Large - solid', 'value'=> 'solid-lg' ),
+                  array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm' ),
+                  array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md' ),
+                  array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg' ),
               ],
+              'classes' => 'caredove_button_style',
               'value' => 'default'
 			      );
 
@@ -190,20 +197,25 @@ class Caredove_Admin {
               'tooltip'=> 'This is the Caredove URL of your search page'
             ),
             array (
-              'type'   => 'checkbox',
-              'name'   => 'modal',
-              'label'  => 'Show search in Modal?',
-              'text'   => 'Yes',
-              'checked' => true
-            ),
+              'type'   => 'listbox',
+              'values'  => [
+              	 		array( 'text'=> 'Button opens modal window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_button_style-show' ),
+	                  array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_color-show caredove_button_style-show' ),
+	                  array( 'text'=> 'Embeded in page', 'value'=> 'embeded', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-hide caredove_button_color-hide caredove_button_style-hide' )
+              ],
+              'name'   => 'display_option',
+              'label'  => 'Search Page Display',
+              'classes' => 'optional-control',
+							'value' => 'none'							
+            ),$popup->button_options[0],$popup->button_options[1],$popup->button_options[2],
             array (
               'type'   => 'textbox',
               'name'   => 'modal_title',
               'label'  => 'Modal Title',
               'value'  => 'Search for Services',
               'tooltip' => 'The title for the popup modal, default: Serach for Services',
-              'classes' => 'requires_modal'
-            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2]
+              'classes' => 'caredove_modal_title',
+            )
           	]
 					), //seccond shortcode 'caredove button'
 					'1' => array (
@@ -258,9 +270,9 @@ class Caredove_Admin {
 
 	//Reference: https://www.sitepoint.com/adding-a-media-button-to-the-content-editor/
 	public function media_button_insert_search_page() {
-		echo '<a href="#" id="insert-caredove-search-page" class="button caredove-admin-button">+Caredove Search Page</a>';
-		echo '<a href="#" id="insert-caredove-button" class="button caredove-admin-button">+Caredove Button</a>';
-		echo '<a href="#" id="insert-caredove-listings" class="button caredove-admin-button">+Caredove Listings</a>';
+		echo '<a href="#" id="insert-caredove-search-page" class="button caredove-admin-button">Add Caredove Search Page</a>';
+		echo '<a href="#" id="insert-caredove-button" class="button caredove-admin-button">Add Caredove Button</a>';
+		echo '<a href="#" id="insert-caredove-listings" class="button caredove-admin-button">Add Caredove Listings</a>';
 	}
 
 	/**
@@ -371,7 +383,7 @@ class Caredove_Admin {
 		echo '<input type="text" name="' . $this->option_name . '_api_org_id' . '" id="' . $this->option_name . '_api_org_id' . '" value="' . $api_org_id . '"> ' . __( 'get your organization ID from caredove.com', 'caredove' );
 	}	
 
-	public function connect_to_api() {
+	static function connect_to_api() {
 
     	$caredove_api = new StdClass;
     	$api_username = get_option('caredove_api_username',array());

@@ -57,12 +57,10 @@
 			// });
 			// closeButton.addEventListener("click", toggleModal);
 			// window.addEventListener("click", windowOnClick);
-
 	 		$(".caredove-iframe-button").modaal({
 				loading_content: 'Loading content, please wait.',
     		type: 'iframe',
     		url_param: '?embed=1',
-    		iframe_title: 'Search for Services',
     		iframe_footer: 'Powered by <a href="https://caredove.com">Caredove.com</a>'
 			});
 
