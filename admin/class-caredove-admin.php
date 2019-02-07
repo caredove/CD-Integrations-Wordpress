@@ -197,7 +197,7 @@ class Caredove_Admin {
 					'0' => array (
 					'shortcode' => 'caredove_search',
 					'title'=> 'Search Page Settings',
-		    	'image' => 'https://via.placeholder.com/350x150',
+		    	'image' => plugins_url("img/search-svg.svg", __FILE__),
 		    	'command' => 'editImage',
 		    	'buttons' => $popup->buttons,
 		    	'popupbody' => [
@@ -239,7 +239,7 @@ class Caredove_Admin {
 					'1' => array (
 						'shortcode' => 'caredove_button',
 						'title' => 'Create a Booking Form Button',
-						'image' => 'https://via.placeholder.com/150x150',
+						'image' => plugins_url("img/missing-field.svg", __FILE__),
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
 		    		'popupbody' => [		
@@ -263,7 +263,7 @@ class Caredove_Admin {
 					'2' => array ( //do we need Category options? 
 						'shortcode' => 'caredove_listings',
 						'title' => 'Display your caredove listings',
-						'image' => 'https://via.placeholder.com/50x150',
+						'image' => plugins_url("img/missing-field.svg", __FILE__),
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
 		    		'popupbody' => [

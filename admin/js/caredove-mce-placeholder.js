@@ -118,6 +118,26 @@
                       },
                       onopen: function( e ) {
                         
+                        $('.mce-optional').each(function( i, obj ) {
+
+                            // console.log(obj);
+                            // var variables = $(this).attr('class').split(' ');
+
+                            // arr = variables.map(function(value) {
+                            //     if( value.indexOf("-hide") > -1 ) {
+                            //         console.log(value);
+                            //         // $('.'+value.replace('-hide','')).parentsUntil('.mce-formitem').hide();
+                            //     }            
+                            //     if( value.indexOf("-show") > -1 ) {
+                            //         console.log(value);
+                            //         // $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
+                            //     }     
+                            // });       
+
+                        });
+                        
+
+                        
                         // console.log($('.mce-caredove_admin_display_options-show').attr('aria-checked'));
                         // if($('.mce-caredove_admin_display_options-hide').attr('aria-checked') == 'true') {
                             // $('.mce-caredove_admin_display_options').parentsUntil('.mce-formitem').hide();
@@ -257,7 +277,29 @@
             var t = this;
             return co.replace( t.regex, function(a,b,c){
                 c = c.replace(/\\([\s\S])|(\/")/, "\\$1$2");
-                return '<img src="'+t.shortcodes[b].image+'" id="vscImage'+(t.counter++)+'-'+b+'" class="mceItem jpbVisualShortcode" title="' + b + tinymce.DOM.encode(c) + '" data-mce-resize="false" data-mce-placeholder="1" data-shortcode="' + t.shortcodes[b].shortcode + '" />';
+                var shortcode_fields = {};
+                c.match(/[\w-]+=(["']).*?\1/g).forEach(function(field) {
+                        field = field.match(/([\w-]+)=(["'])(.*?)\2/);
+                        shortcode_fields[field[1]] = field[3];
+                });
+                if(shortcode_fields.button_text != ''){
+                    shortcode_fields.button_fill = 'none';
+                    shortcode_fields.text_color = 'black';
+                    if(shortcode_fields.button_style == "solid-md" || shortcode_fields.button_style == "solid-lg" || shortcode_fields.button_style == "solid-sm"){
+                        shortcode_fields.button_fill = shortcode_fields.button_color;
+                        shortcode_fields.text_color = 'white';
+                    } else {                        
+                        if(shortcode_fields.button_color !== ''){
+                            shortcode_fields.text_color = shortcode_fields.button_color;                            
+                        }
+                        shortcode_fields.button_color = shortcode_fields.button_color? shortcode_fields.button_color : "black";
+                    }
+                    image = "data:image/svg+xml;utf8,<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='150' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='150' height='50' fill='"+shortcode_fields.button_fill+"' stroke='"+shortcode_fields.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='14' fill='"+shortcode_fields.text_color+"' dominant-baseline='middle' text-anchor='middle'>"+ shortcode_fields.button_text +"</text></g></svg>";    
+                } else {
+                    image = t.shortcodes[b].image;
+                }
+                
+                return '<img src="'+image+'" id="vscImage'+(t.counter++)+'-'+b+'" class="mceItem jpbVisualShortcode" title="' + b + tinymce.DOM.encode(c) + '" data-mce-resize="false" data-mce-placeholder="1" data-shortcode="' + t.shortcodes[b].shortcode + '" />';
                 // return '<div style="background:#000;width:200px;height:40px;" id="vscImage'+(t.counter++)+'-'+b+'" class="mceItem jpbVisualShortcode" title="' + b + tinymce.DOM.encode(c) + '" data-mce-resize="false" data-mce-placeholder="1" data-shortcode="' + t.shortcodes[b].shortcode + '"></div>';
             });
         },

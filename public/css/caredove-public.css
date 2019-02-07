@@ -3,24 +3,24 @@
  * included in this file.
  */
 
-button.caredove-iframe-button, input[type="button"].caredove-iframe-button {
+button.caredove-iframe-button, input[type="button"].caredove-iframe-button, .caredove-iframe-button {
     border-radius:5px;
 }
 button.caredove-iframe-button:hover, input[type="button"].caredove-iframe-button:hover {
     cursor:pointer!important;
 }
-button.caredove-button-sm, input[type="button"].caredove-button-sm {
+button.caredove-button-sm, input[type="button"].caredove-button-sm, .caredove-button-sm {
     padding:5px 10px;
     font-size:.8em;
 }
-button.caredove-button-md, input[type="button"].caredove-button-md {
+button.caredove-button-md, input[type="button"].caredove-button-md, .caredove-button-md {
     padding:10px 15px;
 }
-button.caredove-button-lg, input[type="button"].caredove-button-lg {
+button.caredove-button-lg, input[type="button"].caredove-button-lg, .caredove-button-lg {
     padding:15px 20px;
     font-size:1.25em;
 }
-button.caredove-button-outline, input[type="button"].caredove-button-outline {
+button.caredove-button-outline, input[type="button"].caredove-button-outline, .caredove-button-outline {
     padding:15px 25px;
     border-width:2px;
     border-style:solid;
@@ -28,6 +28,11 @@ button.caredove-button-outline, input[type="button"].caredove-button-outline {
     color:#000;
     background:none!important;
 }
+
+button.caredove-button-solid, input[type="button"].caredove-button-solid, .caredove-button-solid {
+    border-width:0;
+}
+ 
 .caredove-listings {
     margin:10px 0px;
     overflow:hidden;

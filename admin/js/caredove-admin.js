@@ -26,15 +26,15 @@
 
           arr = variables.map(function(value) {
               if( value.indexOf("-hide") > -1 ) {
-                  console.log(value);
-                  $('.'+value.replace('-hide','')).parentsUntil('.mce-formitem').hide();
+                  // console.log(value);
+                  $('.'+value.replace('-hide','')).val("").parentsUntil('.mce-formitem').hide();
               }            
               if( value.indexOf("-show") > -1 ) {
-                  console.log(value);
+                  // console.log(value);
                   $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
               }     
           });       
                    
-        });        
+        });                
 
 })( jQuery );

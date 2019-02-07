@@ -3,8 +3,8 @@ Contributors: steedancrowe, caredove
 Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
-Tested up to: 4.4
-Stable tag: 0.1.15
+Tested up to: 5.3
+Stable tag: 0.1.16
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,10 +38,19 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.1.16 =
+* Added extra padding to modal if admin-bar is pressent
+* Updated 'tested up to' version number to 5.3
+* added 'padding-bottom' and 'margin-bottom' to modal header
+* added additional button styling overrides
+* making it so hidden fields are not vissible when editing existing button
+* fixed disapearing logo on admin buttons
+* added event listener code to close modal when form submitted (not tested)
+
 = 0.1.15 =
 * Adjusted padding on bottom of Modal window
 * Adjusting and sanitizing formatting of modal footer
-* Adjusting and sanitizing fomatting of modal header
+* Adjusting and sanitizing formatting of modal header
 * Added rounded corners to modal
 * Added description and logo to top of TinyMCE Editor popup windows
 

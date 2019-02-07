@@ -52,6 +52,8 @@
 	line-height:40px;
 	font-weight:500;
 	font-family:Roboto, Verdana;
+	margin-bottom:0;
+	padding-bottom:0;
 }
 
 .modaal-overlay {
@@ -733,6 +735,10 @@
 .modaal-inner-wrapper {
 	padding-top: 20px;
 	padding-bottom: 20px;
+}
+
+.admin-bar .modaal-inner-wrapper {
+	padding-top: 50px;
 }
 
 .modaal-instagram iframe {

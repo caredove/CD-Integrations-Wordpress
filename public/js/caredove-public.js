@@ -64,6 +64,21 @@
     		iframe_footer: 'Powered by <a href="https://caredove.com">Caredove.com</a>'
 			});
 
+			// ENABLE SPAWNED IFRAME WINDOW TO CLOSE ITSELF
+			var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+			var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+			window.eventer = window[eventMethod];
+
+			// CLOSE IFRAM WINDOW LOGIC
+			eventer(messageEvent, function (e) {
+			  if (e.origin && typeof e.data!='undefined' && typeof e.data.message!='undefined') {
+			    switch(e.data.message){
+			      case 'close':  // CLOSE IFRAME WINDOW COMMAND
+			      break;
+			    }
+			  }
+			}, false);
+
 	
 		});
 
