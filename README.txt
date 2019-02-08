@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.1.16
+Stable tag: 0.1.17
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,14 +38,19 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.1.17 =
+* Fixed issue that was preventing CSS and JS versioning from working
+* Added custom svg for Caredove Listings in Visual Editor
+
 = 0.1.16 =
-* Added extra padding to modal if admin-bar is pressent
+* Added extra padding to modal if admin-bar is present
 * Updated 'tested up to' version number to 5.3
 * added 'padding-bottom' and 'margin-bottom' to modal header
 * added additional button styling overrides
-* making it so hidden fields are not vissible when editing existing button
-* fixed disapearing logo on admin buttons
+* making it so hidden fields are not visible when editing an existing button
+* fixed disappearing logo on admin buttons
 * added event listener code to close modal when form submitted (not tested)
+* added button styles to Visual admin editor
 
 = 0.1.15 =
 * Adjusted padding on bottom of Modal window

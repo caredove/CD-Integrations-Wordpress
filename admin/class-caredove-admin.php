@@ -263,7 +263,7 @@ class Caredove_Admin {
 					'2' => array ( //do we need Category options? 
 						'shortcode' => 'caredove_listings',
 						'title' => 'Display your caredove listings',
-						'image' => plugins_url("img/missing-field.svg", __FILE__),
+						'image' => plugins_url("img/listing-list.svg", __FILE__),
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
 		    		'popupbody' => [

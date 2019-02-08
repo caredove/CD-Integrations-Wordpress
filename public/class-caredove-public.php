@@ -174,6 +174,51 @@ class Caredove_Public {
 
 	}
 
+	public function caredove_listings_shortcode_old($atts) {
+
+			$a = shortcode_atts( array(
+				'listing_order' => 'ASC',
+				'columns' => '1',
+				'list_style' => 'full_width',
+				'button_text' => 'Book Now',
+				'button_color' => '',
+				'button_style' => 'default',
+				'modal_title' => 'Book an Appointment'
+		), $atts );
+
+			$paged = 'true';
+		  $my_posts_query = get_transient( 'caredove_listings' );
+
+		  if ( $my_posts_query->have_posts() ) :
+
+		    while ( $my_posts_query->have_posts() ) :
+
+		    	print_r($my_posts_query);
+		      $my_posts_query->the_post();
+
+		      // Your loop
+
+		    endwhile;
+
+		    // This is responsible for 1, 2, 3 pagination links. You can easily change this to previous and nexys links.
+		    if ( $my_posts_query->max_num_pages > 1 ) :
+		      $big = 999999999;
+		      echo '<div class="pagination">';
+		      echo paginate_links( array(
+		        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+		        'format' => '?paged=%#%',
+		        'current' => max( 1, get_query_var('paged') ),
+		        'total' => $my_posts_query->max_num_pages
+		      ) );
+		      echo '</div>';
+		    endif;
+
+		  endif;
+
+		  wp_reset_postdata();
+
+
+	}
 	public function caredove_listings_shortcode($atts) {
 		$a = shortcode_atts( array(
 				'listing_order' => 'ASC',
@@ -186,6 +231,7 @@ class Caredove_Public {
 		), $atts );
 
 		    $caredove_api_data = Caredove_Admin::connect_to_api(); 
+
 
 		    if(is_object($caredove_api_data)){
 		    	// print_r($caredove_api_data->data);
