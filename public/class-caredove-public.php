@@ -174,52 +174,8 @@ class Caredove_Public {
 
 	}
 
-	public function caredove_listings_shortcode_old($atts) {
-
-			$a = shortcode_atts( array(
-				'listing_order' => 'ASC',
-				'columns' => '1',
-				'list_style' => 'full_width',
-				'button_text' => 'Book Now',
-				'button_color' => '',
-				'button_style' => 'default',
-				'modal_title' => 'Book an Appointment'
-		), $atts );
-
-			$paged = 'true';
-		  $my_posts_query = get_transient( 'caredove_listings' );
-
-		  if ( $my_posts_query->have_posts() ) :
-
-		    while ( $my_posts_query->have_posts() ) :
-
-		    	print_r($my_posts_query);
-		      $my_posts_query->the_post();
-
-		      // Your loop
-
-		    endwhile;
-
-		    // This is responsible for 1, 2, 3 pagination links. You can easily change this to previous and nexys links.
-		    if ( $my_posts_query->max_num_pages > 1 ) :
-		      $big = 999999999;
-		      echo '<div class="pagination">';
-		      echo paginate_links( array(
-		        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-		        'format' => '?paged=%#%',
-		        'current' => max( 1, get_query_var('paged') ),
-		        'total' => $my_posts_query->max_num_pages
-		      ) );
-		      echo '</div>';
-		    endif;
-
-		  endif;
-
-		  wp_reset_postdata();
-
-
-	}
 	public function caredove_listings_shortcode($atts) {
+
 		$a = shortcode_atts( array(
 				'listing_order' => 'ASC',
 				'columns' => '1',
@@ -227,40 +183,65 @@ class Caredove_Public {
 				'button_text' => 'Book Now',
 				'button_color' => '',
 				'button_style' => 'default',
-				'modal_title' => 'Book an Appointment'
+				'modal_title' => 'Book an Appointment',
+				'listing_categories' => '',
+				'per_page' => '5',
+				'offest' => '0',
 		), $atts );
 
-		    $caredove_api_data = Caredove_Admin::connect_to_api(); 
+    $caredove_api_data = Caredove_Admin::get_api_data(); 
 
+	  if(isset($caredove_api_data)){
+  		$api_object = json_decode($caredove_api_data);
+  	}
 
-		    if(is_object($caredove_api_data)){
-		    	// print_r($caredove_api_data->data);
-		    	$api_object = json_decode($caredove_api_data->data, true);
-		    	
-					ob_start();
-					?> 
-						<div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>">
-							<?php foreach ($api_object['results'] as $result){
-								if (isset($result['eReferral']['formUrl'])){
-								?>
-									<div class="caredove-listing-item">
-										<h3><?php echo $result['name'] ?></h3>
-										<p><?php echo $result['details']['description'] ?></p>
-										<br />
-										<button type="button" class="caredove-iframe-button caredove-button-<?php echo $a['button_style']?>" data-modal-title="<?php echo $a['modal_title']?>" href="<?php echo $result['eReferral']['formUrl']?>" style="background-color:<?php echo $a['button_color']?>;border-color:<?php echo $a['button_color']?>;">
-											<?php echo html_entity_decode($a["button_text"]); ?>
-										</button>
+  	if($a['listing_categories'] != ''){
 
-									</div>
-								<?php
-								}
-							}?>
-						</div>
-					
-					<?php
-					return ob_get_clean();
-		    }
-		    
+  	}
+
+  	if ( isset($api_object->results) ) :
+
+			$max_num_pages = sizeof($api_object->results) / $a['per_page'];
+			$current_page = get_query_var( 'paged' );			
+			$current_offset = $current_page * $a['per_page'] - 5;
+			$current_limit = $current_offset + $a['per_page'] - 1;
+
+			// echo('offset: '. $current_offset.'<br/>');
+			// echo('current limit'.$current_limit);
+			?><div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>"><?php
+			foreach ($api_object->results as $k => $result){
+				if($k >= $current_offset && $k <= $current_limit){
+						?>
+							<div class="caredove-listing-item">
+								<h3><?php echo $result->name ?></h3>
+								<p><?php echo $result->details->description ?></p>
+								<br />
+								<?php $a['page_url'] = $result->eReferral->formUrl; ?>
+								<?php	echo $this->caredove_button($a); ?>										
+							</div>
+						<?php
+				}			
+			}
+			?></div><?php
+
+      // Your loop
+
+    // This is responsible for 1, 2, 3 pagination links. You can easily change this to previous and nexys links.
+    if ( $max_num_pages > 1 ) :
+      $big = 999999999;
+      echo '<div class="pagination">';
+      echo paginate_links( array(
+        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+        'format' => '?paged=%#%',
+        'current' => max( 1, get_query_var('paged') ),
+        'total' => $max_num_pages
+      ) );
+      echo '</div>';
+    endif;
+
+  endif;
+
 	}
 
 }
+

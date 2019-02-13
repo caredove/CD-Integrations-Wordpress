@@ -20,9 +20,8 @@
 
         });
 
-        //controls which fields to show or hide depending on a given dropdown option
-        $(document).on('click', '.mce-optional', function() {
-          var variables = $(this).attr('class').split(' ');
+        function caredove_hide_fields(item){
+          var variables = $(item).attr('class').split(' ');
 
           arr = variables.map(function(value) {
               if( value.indexOf("-hide") > -1 ) {
@@ -34,7 +33,11 @@
                   $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
               }     
           });       
-                   
-        });                
+        }
 
+        //controls which fields to show or hide depending on a given dropdown option
+        $(document).on('click', '.mce-optional', function() {
+          caredove_hide_fields(this);
+        });                
+     
 })( jQuery );

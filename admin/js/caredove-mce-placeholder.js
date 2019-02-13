@@ -69,6 +69,7 @@
 
               ed.addCommand('editImage', function( img, shortcode ) {
                     var attributes = {};
+                    var hide_stuff = '';
 
                     // console.log('shortcode Value: ' + shortcode);                
                     // console.log('this is the img tag: ' + img.length);
@@ -84,7 +85,7 @@
                       img.match(/[\w-]+=(["']).*?\1/g).forEach(function(attribute) {
                         attribute = attribute.match(/([\w-]+)=(["'])(.*?)\2/);
                         attributes[attribute[1]] = attribute[3];
-                      });
+                      });                       
 
                       for(i=0; i < t.shortcodes[shortcode].popupbody.length; i++) {
                         if(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name)){
@@ -95,15 +96,38 @@
                             t.shortcodes[shortcode].popupbody[i].checked = attributes[t.shortcodes[shortcode].popupbody[i].name];
                           }
                           t.shortcodes[shortcode].popupbody[i].value = attributes[t.shortcodes[shortcode].popupbody[i].name];                                          
+                          // console.log(t.shortcodes[shortcode].popupbody[i].value);
+                          if(t.shortcodes[shortcode].popupbody[i].value == 'embedded'){
+                            hide_stuff = 'embedded';
+                          } else if (t.shortcodes[shortcode].popupbody[i].value == 'link') {
+                            hide_stuff = 'link';
+                          }
                         }
                       }
-                    };                                       
+
+                      // classvariables = t.shortcodes[shortcode].popupbody;
+                       // console.log(classvariables);
+                      //  arr = classvariables.map(function(value) {
+                      //     if( value.indexOf("-hide") > -1 ) {
+                      //         console.log(value);
+                      //         // $('.'+value.replace('-hide','')).val("").parentsUntil('.mce-formitem').hide();
+                      //     }            
+                      //     if( value.indexOf("-show") > -1 ) {
+                      //         // console.log(value);
+                      //         // $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
+                      //     }     
+                      // });                      
+                    };
+                                                  
                                         
                     // Open window
                     ed.windowManager.open({
                       title: t.shortcodes[shortcode].title,
                       width: jQuery(window).width() - 500,
-                      height: jQuery(window).height() - 150,
+                      height: (jQuery(window).height() > 500 ? jQuery(window).height() - 150 : 400 ),
+                      resizable : true,
+                      maximizable: true,
+                      inline: true,
                       buttons: t.shortcodes[shortcode].buttons,
                       body: t.shortcodes[shortcode].popupbody,
                       onsubmit: function( e ) {
@@ -111,39 +135,25 @@
                         var placeholder = "";
                         for(var key in popupValues){
                           placeholder = placeholder + ' ' + key + '="' + popupValues[key] + '"';
-                        }
-                          
+                        }                          
                         // placeholder = placeholder + index +'="'+item'"';
                         ed.insertContent( '['+ t.shortcodes[shortcode].shortcode + ' ' + placeholder + ']' );
-                      },
-                      onopen: function( e ) {
+                      }, 
+                      onrepaint: function(e) {
+                        var window_id = this._id;
                         
-                        $('.mce-optional').each(function( i, obj ) {
+                       
+                        if(!$('#' + window_id).hasClass('form-initialized')) {
+                            $('#' + window_id).addClass('form-initialized');
+                            
+                            var inputs = $('#' + window_id + '-body');
 
-                            // console.log(obj);
-                            // var variables = $(this).attr('class').split(' ');
-
-                            // arr = variables.map(function(value) {
-                            //     if( value.indexOf("-hide") > -1 ) {
-                            //         console.log(value);
-                            //         // $('.'+value.replace('-hide','')).parentsUntil('.mce-formitem').hide();
-                            //     }            
-                            //     if( value.indexOf("-show") > -1 ) {
-                            //         console.log(value);
-                            //         // $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
-                            //     }     
-                            // });       
-
-                        });
-                        
-
-                        
-                        // console.log($('.mce-caredove_admin_display_options-show').attr('aria-checked'));
-                        // if($('.mce-caredove_admin_display_options-hide').attr('aria-checked') == 'true') {
-                            // $('.mce-caredove_admin_display_options').parentsUntil('.mce-formitem').hide();
-                        // }
-                   
-                      }
+                            if (hide_stuff !== ''){
+                                inputs.find('.mce-caredove_hide-'+hide_stuff).parentsUntil('.mce-formitem').hide();
+                            }      
+                                                    
+                        }
+                    },                  
                     
                     });
               });
@@ -282,7 +292,7 @@
                         field = field.match(/([\w-]+)=(["'])(.*?)\2/);
                         shortcode_fields[field[1]] = field[3];
                 });
-                if(shortcode_fields.button_text != ''){
+                if(shortcode_fields.button_text != '' && t.shortcodes[b].button != 'false'){
                     shortcode_fields.button_fill = 'none';
                     shortcode_fields.text_color = 'black';
                     if(shortcode_fields.button_style == "solid-md" || shortcode_fields.button_style == "solid-lg" || shortcode_fields.button_style == "solid-sm"){

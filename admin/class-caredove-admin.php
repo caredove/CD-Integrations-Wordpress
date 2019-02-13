@@ -134,12 +134,19 @@ class Caredove_Admin {
 			$popup->buttons = [array ('text' => 'cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit')];
 			
 			$caredove_booking_buttons = [];
+			$caredove_listing_categories = [];
 		  $caredove_api_data = Caredove_Admin::get_api_data();
-		  $api_object = json_decode($caredove_api_data, true);
-		  $caredove_api_categories = $this->get_categories();
+		  $api_listings = json_decode($caredove_api_data, true);
+		  $api_categories = Caredove_Admin::get_categories();
 
-			if(isset($api_object['results'])){
-				foreach ($api_object['results'] as $result){
+			if(isset($api_categories[0])){
+				foreach ($api_categories as $result){
+						$caredove_listing_categories[] = array('text' => $result, 'value' => $result);
+				}	
+			}
+
+			if(isset($api_listings['results'])){
+				foreach ($api_listings['results'] as $result){
 					if (isset($result['eReferral']['formUrl']) && $result['eReferral']['formUrl'] !== '' ){
 						$caredove_booking_buttons[] = array('text' => $result['name'], 'value' => esc_url($result['eReferral']['formUrl']));
 					}
@@ -152,7 +159,7 @@ class Caredove_Admin {
               'name'=> 'button_text',
               'label'=> 'Button Text',
               'tooltip'=> 'This will be used for the button text',
-              'classes' => 'caredove_button_text'
+              'classes' => 'caredove_button_text caredove_hide-embedded'
             );
 		  $popup->button_options[] = array (
               'type'   => 'textbox',
@@ -160,7 +167,7 @@ class Caredove_Admin {
               'label'  => 'Button Color',
               'text'   => '#fff',
               'tooltip'=> 'Please use hex "#" color code',
-              'classes' => 'caredove_button_color'
+              'classes' => 'caredove_button_color caredove_hide-embedded'
 			      );
 			 $popup->button_options[] = array( 
 		    			'type'   => 'listbox',
@@ -175,7 +182,7 @@ class Caredove_Admin {
                   array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md' ),
                   array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg' ),
               ],
-              'classes' => 'caredove_button_style',
+              'classes' => 'caredove_button_style caredove_hide-embedded',
               'value' => 'default'
 			      );
 			 $popup->logo = array(
@@ -211,14 +218,14 @@ class Caredove_Admin {
               'type'=> 'textbox',
               'name'=> 'page_url',
               'label'=> 'Search Page URL',
-              'tooltip'=> 'This is the Caredove URL of your search page'
+              'tooltip'=> 'This is the Caredove URL of your search page',             
             ),
             array (
               'type'   => 'listbox',
               'values'  => [
               	 		array( 'text'=> 'Button opens modal window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_button_style-show' ),
 	                  array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_color-show caredove_button_style-show' ),
-	                  array( 'text'=> 'Embeded in page', 'value'=> 'embeded', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-hide caredove_button_color-hide caredove_button_style-hide' )
+	                  array( 'text'=> 'Embedded in page', 'value'=> 'embedded', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-hide caredove_button_color-hide caredove_button_style-hide' )
               ],
               'name'   => 'display_option',
               'label'  => 'Search Page Display',
@@ -231,7 +238,7 @@ class Caredove_Admin {
               'label'  => 'Modal Title',
               'value'  => 'Search for Services',
               'tooltip' => 'The title for the popup modal, default: Serach for Services',
-              'classes' => 'caredove_modal_title',
+              'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
             ),
             // $popup->button_sample
           	]
@@ -263,11 +270,19 @@ class Caredove_Admin {
 					'2' => array ( //do we need Category options? 
 						'shortcode' => 'caredove_listings',
 						'title' => 'Display your caredove listings',
-						'image' => plugins_url("img/listing-list.svg", __FILE__),
+						'image' => plugins_url("img/listing-lists.svg", __FILE__),
+						'button' => 'false',
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
 		    		'popupbody' => [
 		    			$popup->logo,
+		    				array( 
+		    					'type'   => 'listbox',
+                  'name'   => 'listing_categories',
+                  'label'  => 'Listing Categories',
+                  'values' => $caredove_listing_categories,
+                  'value' => 'none'
+              ),
 			    		array(
 	              'type'   => 'listbox',
 	              'name'   => 'list_style',
@@ -441,10 +456,9 @@ class Caredove_Admin {
 			
 	}
 
-	public function get_api_data() {
+	static function get_api_data() {
 			//https://gist.github.com/leocaseiro/455df1f8e1118cb8a2a2
 			$listings = get_transient('caredove_listings');
-			// echo 'these are the listings: ';
 			// print_r($listings);
 			if(empty($listings)){
 	    		$caredove_api = Caredove_Admin::connect_to_api();
