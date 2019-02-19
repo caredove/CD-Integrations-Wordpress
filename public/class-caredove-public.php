@@ -189,20 +189,22 @@ class Caredove_Public {
 				'offest' => '0',
 		), $atts );
 
-    $caredove_api_data = Caredove_Admin::get_api_data(); 
+   
 
-	  if(isset($caredove_api_data)){
-  		$api_object = json_decode($caredove_api_data);
+  	if($a['listing_categories'] != ''){  		 
+			 $caredove_api_data = Caredove_Admin::get_api_listings($listing_options['category_id'] = $a['listing_categories']); 		  
+  	} else {
+  		 $caredove_api_data = Caredove_Admin::get_api_listings($listing_options = ''); 		  
   	}
 
-  	if($a['listing_categories'] != ''){
-
-  	}
+  	if(isset($caredove_api_data)){
+	  		$api_object = json_decode($caredove_api_data);
+	  	}
 
   	if ( isset($api_object->results) ) :
 
 			$max_num_pages = sizeof($api_object->results) / $a['per_page'];
-			$current_page = get_query_var( 'paged' );			
+			$current_page = (get_query_var( 'paged' ) ? get_query_var( 'paged' ) : "1" );	
 			$current_offset = $current_page * $a['per_page'] - 5;
 			$current_limit = $current_offset + $a['per_page'] - 1;
 
@@ -226,7 +228,7 @@ class Caredove_Public {
 
       // Your loop
 
-    // This is responsible for 1, 2, 3 pagination links. You can easily change this to previous and nexys links.
+    // This is responsible for 1, 2, 3 pagination links. You can easily change this to previous and next links.
     if ( $max_num_pages > 1 ) :
       $big = 999999999;
       echo '<div class="pagination">';

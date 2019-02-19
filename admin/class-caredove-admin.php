@@ -135,13 +135,15 @@ class Caredove_Admin {
 			
 			$caredove_booking_buttons = [];
 			$caredove_listing_categories = [];
-		  $caredove_api_data = Caredove_Admin::get_api_data();
-		  $api_listings = json_decode($caredove_api_data, true);
-		  $api_categories = Caredove_Admin::get_categories();
+		  $caredove_api_listings = Caredove_Admin::get_api_listings($listings_options = '');
+		  $api_listings = json_decode($caredove_api_listings, true);
+		  $caredove_api_categories = Caredove_Admin::get_api_categories();
+		  $api_categories = json_decode($caredove_api_categories, true);
 
-			if(isset($api_categories[0])){
-				foreach ($api_categories as $result){
-						$caredove_listing_categories[] = array('text' => $result, 'value' => $result);
+			if(isset($api_categories['results'])){
+				$caredove_listing_categories[] = array('text' => 'All Categories', 'value' => '');
+				foreach ($api_categories['results'] as $result){
+						$caredove_listing_categories[] = array('text' => $result['display'].'('.$result['service_count'].')', 'value' => $result['id']);
 				}	
 			}
 
@@ -334,7 +336,7 @@ class Caredove_Admin {
 	public function options_page_delete_transients() {
 	  delete_transient( 'caredove_listings' );
 	  // at the end redirect to target page
-	  exit( wp_redirect( admin_url( 'options-general.php?page=caredove' ) ) );
+	  exit( wp_redirect( admin_url( 'options-general.php?page=caredove&cleared=true' ) ) );
 	}
 
 	/**
@@ -418,14 +420,14 @@ class Caredove_Admin {
 		echo '<input type="text" name="' . $this->option_name . '_api_org_id' . '" id="' . $this->option_name . '_api_org_id' . '" value="' . $api_org_id . '"> ' . __( 'get your organization ID from caredove.com', 'caredove' );
 	}	
 
-	static function connect_to_api() {
+	static function connect_to_api($options) {
 
     	$caredove_api = new StdClass;
     	$api_username = get_option('caredove_api_username',array());
     	$api_password = get_option('caredove_api_password',array());
     	$api_org_id = get_option('caredove_api_org_id',array());
     	$api_auth = $api_username . ':' . $api_password;
-			$url = 'https://sandbox.caredove.com/api/native_v1/Service/?organization_id=' . $api_org_id;
+			$url = $options['root_url'] . '?organization_id=' . $api_org_id . '?limit=1000';
 			$args = array(
 	    'headers' => array(
 	        'Authorization' => 'Basic ' . base64_encode($api_auth)
@@ -456,12 +458,23 @@ class Caredove_Admin {
 			
 	}
 
-	static function get_api_data() {
+	static function get_api_listings($listing_options) {
 			//https://gist.github.com/leocaseiro/455df1f8e1118cb8a2a2
 			$listings = get_transient('caredove_listings');
-			// print_r($listings);
-			if(empty($listings)){
-	    		$caredove_api = Caredove_Admin::connect_to_api();
+
+			$options = array();
+			$options['root_url'] = 'https://sandbox.caredove.com/api/native_v1/Service/';
+			$options['category_id'] = '';
+
+			if(!empty($options['category_id'])){
+				$listings = get_transeint('caredove_listings_category_'.$options['category_id']);
+				if(empty($listings)){
+					$caredove_api = Caredove_Admin::connect_to_api($options);
+					set_transient('caredove_listings_category_'.$options['category_id'], $caredove_api->data, 60 * 10);	
+					$listings = $caredove_api->data;
+				}
+			} elseif(empty($listings)){
+	    		$caredove_api = Caredove_Admin::connect_to_api($options);
 					set_transient('caredove_listings', $caredove_api->data, 60 * 10);	
 					$listings = $caredove_api->data;
 	    }
@@ -469,24 +482,20 @@ class Caredove_Admin {
 			return $listings;
 	}
 
-	public function get_categories() {
+	public function get_api_categories() {
 
-		$listing_categories = array();
+		$options = array();
+		$options['root_url'] = 'https://sandbox.caredove.com/api/native_v1/ServiceCategory/';
 
-		$caredove_api_data = Caredove_Admin::get_api_data();
+		$categories = get_transient('caredove_categories');
 
-    $api_object = json_decode($caredove_api_data, true);
-    if(isset($api_object['results'])){
-    	foreach ($api_object['results'] as $result){
-				if (isset($result['category']['display'])){
-					if(!in_array($result['category']['display'], $listing_categories, true)){
-	        	array_push($listing_categories, $result['category']['display']);
-	    		}
-				}
-			}
+		if(empty($categories)){
+    		$caredove_api = Caredove_Admin::connect_to_api($options);
+				set_transient('caredove_categories', $caredove_api->data, 60 * 10);	
+				$categories = $caredove_api->data;
     }
-		
 
-		return $listing_categories;
+		return $categories;
+	
 	}
 }

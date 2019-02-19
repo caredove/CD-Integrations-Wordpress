@@ -83,8 +83,6 @@
 */
 ( function( $ ) {
 
-	var modaal_loading_spinner = '<div class="modaal-loading-spinner"><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>'
-	
 	var Modaal = {
 		init : function(options, elem) {
 			var self = this;
@@ -1153,7 +1151,7 @@
 		after_image_change: function( current_item ) {},
 
 		//Ajax Modal
-		loading_content: modaal_loading_spinner,
+		loading_content: 'Content Loading...',
 		loading_class: 'is_loading',
 		ajax_error_class: 'modaal-error',
 		ajax_success: function(){},

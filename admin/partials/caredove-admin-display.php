@@ -21,8 +21,9 @@
         <?php
             settings_fields( $this->plugin_name );
             do_settings_sections( $this->plugin_name );
-
-            $api_test_results = Caredove_Admin::connect_to_api();
+            $options = array();
+            $options['root_url'] = 'https://sandbox.caredove.com/api/native_v1/Service/';
+            $api_test_results = Caredove_Admin::connect_to_api($options);
 
 						if ($api_test_results->http_code == '200') {
 							echo "<span style='color:green;font-weight:800;'>API Connected</span>";

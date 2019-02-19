@@ -288,9 +288,11 @@
             return co.replace( t.regex, function(a,b,c){
                 c = c.replace(/\\([\s\S])|(\/")/, "\\$1$2");
                 var shortcode_fields = {};
-                c.match(/[\w-]+=(["']).*?\1/g).forEach(function(field) {
-                        field = field.match(/([\w-]+)=(["'])(.*?)\2/);
-                        shortcode_fields[field[1]] = field[3];
+                c.match(/[\w-]+=(["']).*?\1/g).forEach(function(field) {    
+                    field = field.match(/([\w-]+)=(["'])(.*?)\2/);                    
+                    console.log('field ' + field[1] + '=' + field[3]);
+                    shortcode_fields[field[1]] = field[3];    
+                    
                 });
                 if(shortcode_fields.button_text != '' && t.shortcodes[b].button != 'false'){
                     shortcode_fields.button_fill = 'none';

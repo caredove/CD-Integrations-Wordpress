@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.1.18
+Stable tag: 0.1.19
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,8 +38,13 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.1.19 =
+* Fixing issue with paginated lists, where first page wasn't showing on origional page load
+* Added loading animation to modal
+* fixing modal close on form submit
+
 = 0.1.18 =
-* unnecessary fields now hide when editing an existing embeded Search
+* unnecessary fields now hide when editing an existing embedded Search
 * Added more dynamic height calculations to Public Modal
 * Added pagination to lists of listings
 
