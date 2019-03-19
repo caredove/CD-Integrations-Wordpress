@@ -51,9 +51,6 @@ class Caredove_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		add_shortcode('caredove_search', array($this, 'caredove_shortcode'));	
-		add_shortcode('caredove_button', array($this, 'caredove_shortcode'));	
-		add_shortcode('caredove_listings', array($this, 'caredove_listings_shortcode'));	
 	}
 
 	/**
@@ -100,9 +97,22 @@ class Caredove_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/caredove-public.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name . '-modaal', plugin_dir_url( __FILE__ ) . 'js/modaal.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '-modaal', plugin_dir_url( __FILE__ ) . 'js/modaal.js', array( 'jquery' ), $this->version, false );		
 
 	}
+
+  /**
+	 * Regsiter the shortcodes
+	 *
+	 * @since 0.2.0
+	 */
+	public function register_shortcodes() {
+		add_shortcode('caredove_listings', array($this, 'caredove_listings_shortcode'));
+		add_shortcode('caredove_search', array($this, 'caredove_shortcode'));	
+		add_shortcode('caredove_button', array($this, 'caredove_shortcode'));
+	}
+
+
 	public function caredove_modal() {
 		?>
 <!-- 					<div class="caredove-modal">
@@ -244,6 +254,7 @@ class Caredove_Public {
   endif;
 
 	}
+
 
 }
 

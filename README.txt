@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,11 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.2.1 =
+* Fixed issue with more recent versions of WordPress, with Gutenberg editor, lists of listings were being processed on post edit page
+* Added option to swap between www and sandbox for connection
+* Added <br /> break tags to HTML content at top of TinyMCE Editor Popup Descriptions to stop oveflow
 
 = 0.2.0 =
 * Change default button color from theme default to Caredove blue
@@ -140,5 +145,5 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Upgrade Notice ==
 
-= 0.1.11 =
-This is the latest test version 
+= 0.2.1 =
+Please upgrade to the latest release which has better support for the current version of WordPress

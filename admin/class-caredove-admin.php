@@ -213,7 +213,7 @@ class Caredove_Admin {
 		    		$popup->logo,
 		    		array(
 						    'type'=> 'container',
-						    'html'=> '<p><strong>Add a Caredove search page to your website</strong> - These can be network search sites, or your organization\'s search site, or even service listings pages. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
+						    'html'=> '<p><strong>Add a Caredove search page to your website</strong> - These can be network search sites, or your organization\'s search site, <br />or even service listings pages. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
 						    'classes'=> 'caredove-tinymce-description'
 		    		),
             array(
@@ -255,7 +255,7 @@ class Caredove_Admin {
 		    			$popup->logo, 
 		    			array(
 						    'type'=> 'container',
-						    'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong> - Enable submitting secure referrals to a specific service without leaving your website. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
+						    'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong> - Enable submitting secure referrals to a specific service without leaving your website. <br />Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
 						    'classes'=> 'caredove-tinymce-description'
 		    			),   			
 			    		array( 
@@ -394,9 +394,19 @@ class Caredove_Admin {
 			array( 'label_for' => $this->option_name . '_api_org_id' )
 		);
 
-		register_setting( $this->plugin_name, $this->option_name . '_api_username', 'text' );
-		register_setting( $this->plugin_name, $this->option_name . '_api_password', 'text' );
-		register_setting( $this->plugin_name, $this->option_name . '_api_org_id', 'text' );
+		add_settings_field(
+			$this->option_name . '_api_testing',
+			__( 'Testing', 'caredove' ),
+			array( $this, $this->option_name . '_api_testing_field' ),
+			$this->plugin_name,
+			$this->option_name . '_general',
+			array( 'label_for' => $this->option_name . '_api_testing' )
+		);
+
+		register_setting( $this->plugin_name, $this->option_name . '_api_username', 'string' );
+		register_setting( $this->plugin_name, $this->option_name . '_api_password', 'string' );
+		register_setting( $this->plugin_name, $this->option_name . '_api_org_id', 'string' );
+		register_setting( $this->plugin_name, $this->option_name . '_api_testing', 'boolean' );
 	}
 
 	/**
@@ -425,14 +435,33 @@ class Caredove_Admin {
 		echo '<input type="text" name="' . $this->option_name . '_api_org_id' . '" id="' . $this->option_name . '_api_org_id' . '" value="' . $api_org_id . '"> ' . __( 'get your organization ID from caredove.com', 'caredove' );
 	}	
 
+		public function caredove_api_testing_field() {
+		$api_testing = get_option( $this->option_name . '_api_testing' );
+		if ($api_testing == "true"){
+			$api_testing_status = "checked";
+		}else{
+			$api_testing_status = "";
+		} 
+		echo '<input type="checkbox" name="' . $this->option_name . '_api_testing' . '" id="' . $this->option_name . '_api_testing' . '" value="true" ' . $api_testing_status . ' > ' . __( 'Use test connection at sandbox.caredove.com', 'caredove' );
+	}	
+
 	static function connect_to_api($options) {
 
     	$caredove_api = new StdClass;
     	$api_username = get_option('caredove_api_username',array());
     	$api_password = get_option('caredove_api_password',array());
     	$api_org_id = get_option('caredove_api_org_id',array());
+    	$api_testing = get_option('caredove_api_testing',array());
+
     	$api_auth = $api_username . ':' . $api_password;
-			$url = $options['root_url'] . '?organization_id=' . $api_org_id . '?limit=1000';
+
+    	if($api_testing == "true"){
+    		$url_prefix = 'https://sandbox.';
+    	} else {
+    		$url_prefix = 'https://www.';
+    	}
+
+			$url = $url_prefix . $options['root_url'] . '?organization_id=' . $api_org_id . '?limit=1000';
 			$args = array(
 	    'headers' => array(
 	        'Authorization' => 'Basic ' . base64_encode($api_auth)
@@ -468,7 +497,7 @@ class Caredove_Admin {
 			$listings = get_transient('caredove_listings');
 
 			$options = array();
-			$options['root_url'] = 'https://sandbox.caredove.com/api/native_v1/Service/';
+			$options['root_url'] = 'caredove.com/api/native_v1/Service/';
 			$options['category_id'] = '';
 
 			if(!empty($options['category_id'])){
@@ -490,7 +519,7 @@ class Caredove_Admin {
 	public function get_api_categories() {
 
 		$options = array();
-		$options['root_url'] = 'https://sandbox.caredove.com/api/native_v1/ServiceCategory/';
+		$options['root_url'] = 'caredove.com/api/native_v1/ServiceCategory/';
 
 		$categories = get_transient('caredove_categories');
 
