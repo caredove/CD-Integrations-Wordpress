@@ -290,7 +290,7 @@
                 var shortcode_fields = {};
                 c.match(/[\w-]+=(["']).*?\1/g).forEach(function(field) {    
                     field = field.match(/([\w-]+)=(["'])(.*?)\2/);                    
-                    console.log('field ' + field[1] + '=' + field[3]);
+                    // console.log('field ' + field[1] + '=' + field[3]);
                     shortcode_fields[field[1]] = field[3];    
                     
                 });
@@ -306,7 +306,9 @@
                         }
                         shortcode_fields.button_color = shortcode_fields.button_color? shortcode_fields.button_color : "black";
                     }
-                    image = "data:image/svg+xml;utf8,<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='150' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='150' height='50' fill='"+shortcode_fields.button_fill+"' stroke='"+shortcode_fields.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='14' fill='"+shortcode_fields.text_color+"' dominant-baseline='middle' text-anchor='middle'>"+ shortcode_fields.button_text +"</text></g></svg>";    
+                    image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='150' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='150' height='50' fill='"+shortcode_fields.button_fill+"' stroke='"+shortcode_fields.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='14' fill='"+shortcode_fields.text_color+"' dominant-baseline='middle' text-anchor='middle'>"+ shortcode_fields.button_text +"</text></g></svg>";    
+                    image = "data:image/svg+xml;base64," + btoa(image);
+                    console.log(image);
                 } else {
                     image = t.shortcodes[b].image;
                 }

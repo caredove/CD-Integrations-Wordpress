@@ -199,7 +199,7 @@ class Caredove_Public {
 
   	if(isset($caredove_api_data)){
 	  		$api_object = json_decode($caredove_api_data);
-	  	}
+	  }
 
   	if ( isset($api_object->results) ) :
 

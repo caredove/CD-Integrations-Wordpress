@@ -5,6 +5,7 @@
 
 button.caredove-iframe-button, input[type="button"].caredove-iframe-button, .caredove-iframe-button {
     border-radius:5px;
+    background-color:#00A4FF;
 }
 button.caredove-iframe-button:hover, input[type="button"].caredove-iframe-button:hover {
     cursor:pointer!important;

@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.1.19
+Stable tag: 0.1.20
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,8 +38,14 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.1.20 =
+* Change default button color from theme deafult to caredove blue
+* Fixed button breaking in Chrome when adding colour (this was an encoding issue, fixed)
+* Refer Button - Add descriptive text at top of edit window
+* Change "add a..." buttons text and positioning
+
 = 0.1.19 =
-* Fixing issue with paginated lists, where first page wasn't showing on origional page load
+* Fixing issue with paginated lists, where the first page wasn't showing on original page load
 * Added loading animation to modal
 * fixing modal close on form submit
 

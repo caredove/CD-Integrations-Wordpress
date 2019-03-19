@@ -213,7 +213,7 @@ class Caredove_Admin {
 		    		$popup->logo,
 		    		array(
 						    'type'=> 'container',
-						    'html'=> '<p><strong>Add a Caredove search page to your website</strong> - These can be network search sites, or your organization\'s search site, or even service listings pages. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site">the tutorial</a> to learn more.</p>',
+						    'html'=> '<p><strong>Add a Caredove search page to your website</strong> - These can be network search sites, or your organization\'s search site, or even service listings pages. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
 						    'classes'=> 'caredove-tinymce-description'
 		    		),
             array(
@@ -252,7 +252,12 @@ class Caredove_Admin {
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
 		    		'popupbody' => [		
-		    			$popup->logo,    			
+		    			$popup->logo, 
+		    			array(
+						    'type'=> 'container',
+						    'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong> - Enable submitting secure referrals to a specific service without leaving your website. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
+						    'classes'=> 'caredove-tinymce-description'
+		    			),   			
 			    		array( 
 			    					'type'   => 'listbox',
                     'name'   => 'page_url',
@@ -306,10 +311,10 @@ class Caredove_Admin {
 
 
 	//Reference: https://www.sitepoint.com/adding-a-media-button-to-the-content-editor/
-	public function media_button_insert_search_page() {
-		echo '<a href="#" id="insert-caredove-search-page" class="button caredove-admin-button">Add Caredove Search Page</a>';
-		echo '<a href="#" id="insert-caredove-button" class="button caredove-admin-button">Add Caredove Button</a>';
+	public function media_button_insert_search_page() {		
+		echo '<a href="#" id="insert-caredove-button" class="button caredove-admin-button">Add Caredove Refer Button</a>';
 		echo '<a href="#" id="insert-caredove-listings" class="button caredove-admin-button">Add Caredove Listings</a>';
+		echo '<a href="#" id="insert-caredove-search-page" class="button caredove-admin-button">Add Caredove Search Page</a>';
 	}
 
 	/**
@@ -467,8 +472,8 @@ class Caredove_Admin {
 			$options['category_id'] = '';
 
 			if(!empty($options['category_id'])){
-				$listings = get_transeint('caredove_listings_category_'.$options['category_id']);
-				if(empty($listings)){
+				$category_listings = get_transeint('caredove_listings_category_'.$options['category_id']);
+				if(empty($category_listings)){
 					$caredove_api = Caredove_Admin::connect_to_api($options);
 					set_transient('caredove_listings_category_'.$options['category_id'], $caredove_api->data, 60 * 10);	
 					$listings = $caredove_api->data;
