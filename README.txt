@@ -39,9 +39,9 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 == Changelog ==
 
 = 0.1.20 =
-* Change default button color from theme deafult to caredove blue
+* Change default button color from theme default to Caredove blue
 * Fixed button breaking in Chrome when adding colour (this was an encoding issue, fixed)
-* Refer Button - Add descriptive text at top of edit window
+* Refer Button - Add descriptive text at top of the edit window
 * Change "add a..." buttons text and positioning
 
 = 0.1.19 =
