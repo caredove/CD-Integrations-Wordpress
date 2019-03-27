@@ -38,6 +38,12 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.2.2 =
+* Changes to button size styles to match Bootstrap v3.3
+* Refer Button - updated "button color" to not show if default style selected, and moved it below style
+* Changed references of "Modal" to "Popup Window" in editor
+* Added capital letters to buttons and Modal titles where missing
+
 = 0.2.1 =
 * Fixed issue with more recent versions of WordPress, with Gutenberg editor, lists of listings were being processed on post edit page
 * Added option to swap between www and sandbox for connection

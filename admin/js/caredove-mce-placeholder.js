@@ -105,18 +105,6 @@
                         }
                       }
 
-                      // classvariables = t.shortcodes[shortcode].popupbody;
-                       // console.log(classvariables);
-                      //  arr = classvariables.map(function(value) {
-                      //     if( value.indexOf("-hide") > -1 ) {
-                      //         console.log(value);
-                      //         // $('.'+value.replace('-hide','')).val("").parentsUntil('.mce-formitem').hide();
-                      //     }            
-                      //     if( value.indexOf("-show") > -1 ) {
-                      //         // console.log(value);
-                      //         // $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
-                      //     }     
-                      // });                      
                     };
                                                   
                                         
@@ -153,6 +141,11 @@
                             }      
                                                     
                         }
+                        var baseurl = 'https://www.caredove.com/';
+                        var urlfield = $('.mce-caredove-tinymce-page_url');
+                          if (urlfield.value.substring(0, baseurl.length) != baseurl){
+                            urlfield.val(baseurl);
+                          }
                     },                  
                     
                     });

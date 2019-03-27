@@ -131,7 +131,7 @@ class Caredove_Admin {
 	public function shortcode_config($string) {
 			$popup = new stdClass();
 			//Define the standard buttons (these can be overridden for a specific shortcode if desired)
-			$popup->buttons = [array ('text' => 'cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit')];
+			$popup->buttons = [array ('text' => 'Cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit')];
 			
 			$caredove_booking_buttons = [];
 			$caredove_listing_categories = [];
@@ -163,30 +163,30 @@ class Caredove_Admin {
               'tooltip'=> 'This will be used for the button text',
               'classes' => 'caredove_button_text caredove_hide-embedded'
             );
-		  $popup->button_options[] = array (
+			 $popup->button_options[] = array( 
+		    			'type'   => 'listbox',
+              'name'   => 'button_style',
+              'label'  => 'Button Style',
+              'values' => [
+                  array( 'text'=> 'Theme Default', 'value'=> 'default', 'classes'=> 'optional caredove_button_color-hide' ),
+                  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show' ),
+                  array( 'text'=> 'Medium - solid', 'value'=> 'solid-md', 'classes'=> 'optional caredove_button_color-show' ),
+                  array( 'text'=> 'Large - solid', 'value'=> 'solid-lg', 'classes'=> 'optional caredove_button_color-show' ),
+                  array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm', 'classes'=> 'optional caredove_button_color-show' ),
+                  array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md', 'classes'=> 'optional caredove_button_color-show' ),
+                  array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg', 'classes'=> 'optional caredove_button_color-show' ),
+              ],
+              'classes' => 'caredove_button_style caredove_hide-embedded',
+              'value' => 'default'
+			      );
+	  	 $popup->button_options[] = array (
               'type'   => 'textbox',
               'name'   => 'button_color',
               'label'  => 'Button Color',
               'text'   => '#fff',
               'tooltip'=> 'Please use hex "#" color code',
               'classes' => 'caredove_button_color caredove_hide-embedded'
-			      );
-			 $popup->button_options[] = array( 
-		    			'type'   => 'listbox',
-              'name'   => 'button_style',
-              'label'  => 'Button Style',
-              'values' => [
-                  array( 'text'=> 'Theme Default', 'value'=> 'default' ),
-                  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm' ),
-                  array( 'text'=> 'Medium - solid', 'value'=> 'solid-md' ),
-                  array( 'text'=> 'Large - solid', 'value'=> 'solid-lg' ),
-                  array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm' ),
-                  array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md' ),
-                  array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg' ),
-              ],
-              'classes' => 'caredove_button_style caredove_hide-embedded',
-              'value' => 'default'
-			      );
+			      );			 
 			 $popup->logo = array(
 			 				'type'=> 'container',
 			 				'html'=> '<img src="'.plugins_url("img/Caredove-Logo.svg", __FILE__).'" />',
@@ -220,12 +220,13 @@ class Caredove_Admin {
               'type'=> 'textbox',
               'name'=> 'page_url',
               'label'=> 'Search Page URL',
-              'tooltip'=> 'This is the Caredove URL of your search page',             
+              'tooltip'=> 'This is the Caredove URL of your search page',
+              'classes'=> 'caredove-tinymce-page_url'             
             ),
             array (
               'type'   => 'listbox',
               'values'  => [
-              	 		array( 'text'=> 'Button opens modal window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_button_style-show' ),
+              	 		array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_button_style-show' ),
 	                  array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_color-show caredove_button_style-show' ),
 	                  array( 'text'=> 'Embedded in page', 'value'=> 'embedded', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-hide caredove_button_color-hide caredove_button_style-hide' )
               ],
@@ -237,9 +238,9 @@ class Caredove_Admin {
             array (
               'type'   => 'textbox',
               'name'   => 'modal_title',
-              'label'  => 'Modal Title',
+              'label'  => 'Popup Window Title',
               'value'  => 'Search for Services',
-              'tooltip' => 'The title for the popup modal, default: Serach for Services',
+              'tooltip' => 'The title for the popup window, default: Serach for Services',
               'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
             ),
             // $popup->button_sample
@@ -268,15 +269,15 @@ class Caredove_Admin {
 	            array (
 	              'type'   => 'textbox',
 	              'name'   => 'modal_title',
-	              'label'  => 'Modal Title',
+	              'label'  => 'Popup Window Title',
 	              'value'  => 'Book an Appointment',
-	              'tooltip' => 'The title for the popup modal, default: Book an Appointment',
+	              'tooltip' => 'The title for the popup window, default: Book an Appointment',
 	            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2]
 			    	]
 					), //third shortcode 'caredove listings'
 					'2' => array ( //do we need Category options? 
 						'shortcode' => 'caredove_listings',
-						'title' => 'Display your caredove listings',
+						'title' => 'Display Your Caredove Listings',
 						'image' => plugins_url("img/listing-lists.svg", __FILE__),
 						'button' => 'false',
 		    		'command' => 'editImage',

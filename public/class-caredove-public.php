@@ -143,12 +143,20 @@ class Caredove_Public {
 
 				}
 			}
-			
-		ob_start();
-						?> 
-		<button type="button" class="caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
-		<?php
-		return ob_get_clean();
+		
+		if($a['display_option'] == 'link'){
+		 		ob_start();
+				?> 
+					<a href="<?php echo $a['page_url']; ?>" class="caredove-inline-link caredove-iframe-button <?php echo $style_name ?>"><?php echo $a['button_text']; ?></a>
+				<?php
+				return ob_get_clean();
+		} else {
+				ob_start();
+								?> 
+				<button type="button" class="caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+				<?php
+				return ob_get_clean();
+		}
 	}
 
 	public function caredove_shortcode($atts) {
@@ -159,24 +167,15 @@ class Caredove_Public {
 						'button_color' => '',
 						'button_style' => 'default',
 						'modal_title' => 'Search for Services',
-						'link_text' => 'Click Here'
 				), $atts );
 
 			 $iframe = '<iframe id="caredove-iframe" scrolling="yes" src="'.$a['page_url'].'?embed=1"></iframe>';
 
-			 if($a['display_option'] == 'modal' || $a['display_option'] == 'false'){
-						// ob_start();
+			 if($a['display_option'] == 'modal' || $a['display_option'] == 'false' || $a['display_option'] == 'link'){
 						
 						return $this->caredove_button($a);
 						
-						// return ob_get_clean();
-			 } elseif($a['display_option'] == 'link'){
-				 		ob_start();
-						?> 
-							<a href="<?php echo $a['page_url']; ?>" class="caredove-inline-link"><?php echo $a['link_text']; ?></a>
-						<?php
-						return ob_get_clean();
-			 }else {
+			 } else {
 			 		ob_start();
 					echo $iframe;
 					return ob_get_clean();	

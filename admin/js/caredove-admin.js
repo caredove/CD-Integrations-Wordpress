@@ -16,8 +16,7 @@
             	 var ed = tinyMCE.activeEditor;
             	 //format:: ed.execCommand('tinyMceCommand', 'image values', 'shortcode_code');
             	 ed.execCommand('editImage', '', 'caredove_listings');
-          	});            
-
+          	}); 
         });
 
         function caredove_hide_fields(item){

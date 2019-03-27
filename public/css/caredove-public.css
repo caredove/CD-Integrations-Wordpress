@@ -3,34 +3,66 @@
  * included in this file.
  */
 
-button.caredove-iframe-button, input[type="button"].caredove-iframe-button, .caredove-iframe-button {
+.entry-content a.caredove-iframe-button, a.caredove-iframe-button {
+    border-bottom:0;
+    padding:0;
+    text-decoration: none;
+    color: initial;
+}
+
+button.caredove-iframe-button, input[type="button"].caredove-iframe-button, .caredove-iframe-button, a.caredove-iframe-button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
     border-radius:5px;
     background-color:#00A4FF;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 2px solid transparent;
+    border-radius: 4px;
 }
 button.caredove-iframe-button:hover, input[type="button"].caredove-iframe-button:hover {
     cursor:pointer!important;
 }
-button.caredove-button-sm, input[type="button"].caredove-button-sm, .caredove-button-sm {
-    padding:5px 10px;
-    font-size:.8em;
+button.caredove-button-sm, input[type="button"].caredove-button-sm, .caredove-button-sm, a.caredove-button-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
 }
 button.caredove-button-md, input[type="button"].caredove-button-md, .caredove-button-md {
-    padding:10px 15px;
+    /*height: 32px;
+    font-size:14px;
+    line-height:32px;
+    padding:0 16px;*/
 }
-button.caredove-button-lg, input[type="button"].caredove-button-lg, .caredove-button-lg {
-    padding:15px 20px;
-    font-size:1.25em;
+button.caredove-button-lg, input[type="button"].caredove-button-lg, .caredove-button-lg, a.caredove-button-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
 }
-button.caredove-button-outline, input[type="button"].caredove-button-outline, .caredove-button-outline {
-    padding:15px 25px;
+button.caredove-button-outline, input[type="button"].caredove-button-outline, .caredove-button-outline, a.caredove-button-outline {
     border-width:2px;
     border-style:solid;
-    border-color:#000;
+    border-color:#00A4FF;
     color:#000;
     background:none!important;
 }
 
-button.caredove-button-solid, input[type="button"].caredove-button-solid, .caredove-button-solid {
+button.caredove-button-solid, input[type="button"].caredove-button-solid, .caredove-button-solid, a.caredove-button-solid {
     border-width:0;
 }
  
