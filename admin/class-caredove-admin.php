@@ -510,8 +510,11 @@ class Caredove_Admin {
 				}
 			} elseif(empty($listings)){
 	    		$caredove_api = Caredove_Admin::connect_to_api($options);
-					set_transient('caredove_listings', $caredove_api->data, 60 * 10);	
-					$listings = $caredove_api->data;
+	    		if(!empty($caredove_api->data)){
+	    			set_transient('caredove_listings', $caredove_api->data, 60 * 10);	
+						$listings = $caredove_api->data;	
+	    		}
+					
 	    }
 
 			return $listings;
