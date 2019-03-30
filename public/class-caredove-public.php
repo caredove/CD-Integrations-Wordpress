@@ -219,6 +219,7 @@ class Caredove_Public {
 
 			// echo('offset: '. $current_offset.'<br/>');
 			// echo('current limit'.$current_limit);
+			ob_start();
 			?><div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>"><?php
 			foreach ($api_object->results as $k => $result){
 				if($k >= $current_offset && $k <= $current_limit){
@@ -234,6 +235,7 @@ class Caredove_Public {
 				}			
 			}
 			?></div><?php
+			return ob_get_clean();
 
       // Your loop
 

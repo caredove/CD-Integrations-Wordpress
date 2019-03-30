@@ -43,6 +43,7 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 * Refer Button - updated "button color" to not show if default style selected, and moved it below style
 * Changed references of "Modal" to "Popup Window" in editor
 * Added capital letters to buttons and Modal titles where missing
+* Fixed listings shortcode output not showing in right order when with other shortcodes
 
 = 0.2.1 =
 * Fixed issue with more recent versions of WordPress, with Gutenberg editor, lists of listings were being processed on post edit page
