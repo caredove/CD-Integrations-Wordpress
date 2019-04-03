@@ -101,6 +101,8 @@
                             hide_stuff = 'embedded';
                           } else if (t.shortcodes[shortcode].popupbody[i].value == 'link') {
                             hide_stuff = 'link';
+                          } else if (t.shortcodes[shortcode].popupbody[i].value == 'default') {
+                            hide_stuff = 'default';
                           }
                         }
                       }
@@ -138,7 +140,10 @@
 
                             if (hide_stuff !== ''){
                                 inputs.find('.mce-caredove_hide-'+hide_stuff).parentsUntil('.mce-formitem').hide();
-                            }      
+                            }   
+                            
+                            $(".mce-caredove-tinymce-page_url").prefix('https://www.caredove.com/');
+                            $(".mce-caredove-tinymce-page_url").val('https://www.caredove.com/');
                                                     
                         }
                         var baseurl = 'https://www.caredove.com/';
@@ -301,7 +306,7 @@
                     }
                     image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='150' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='150' height='50' fill='"+shortcode_fields.button_fill+"' stroke='"+shortcode_fields.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='14' fill='"+shortcode_fields.text_color+"' dominant-baseline='middle' text-anchor='middle'>"+ shortcode_fields.button_text +"</text></g></svg>";    
                     image = "data:image/svg+xml;base64," + btoa(image);
-                    console.log(image);
+                    // console.log(image);
                 } else {
                     image = t.shortcodes[b].image;
                 }

@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.2.2
+Stable tag: 0.2.3
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,15 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.2.3 =
+* Fixed typo on search modal title field tool tip
+* Added ability to specify number of listings per page
+* Fixed bug where pages navigation for listings wasn't showing after last update
+* Fixed issue where button colour wasn't hiding when editing buttons with default style, only when clicking default style from dropdown options
+* Added Prefill of "https://www.caredove.com/" in Search Page Settings URL
+* Fixed Typo on Modal Title tool tip on Search Page Settings
+* Temporarily disabled Tutorial links
 
 = 0.2.2 =
 * Changes to button size styles to match Bootstrap v3.3

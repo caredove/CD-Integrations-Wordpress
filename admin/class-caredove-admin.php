@@ -68,8 +68,8 @@ class Caredove_Admin {
 	 */
 
 	public function visual_shortcode($options) {
-		
-		
+
+
 		return $options;
 	}
 
@@ -102,16 +102,16 @@ class Caredove_Admin {
 	 * @since    0.1.0
 	 */
 	public function enqueue_scripts() {
-
+		wp_enqueue_script( $this->plugin_name.'-prefix-input', plugin_dir_url( __FILE__ ) . 'js/prefix-input.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/caredove-admin.js', array( 'jquery' ), $this->version, false );
 	}
 
 	/**
 	 * Registers the shortcode images script as a tinyMCE plugin.
-	 * 
+	 *
 	 * @since 0.1.0
 	 * @param array $plugins An associative array of plugins
-	 * @return array 
+	 * @return array
 	 */
 
 	public function tmce_plugin($plugins) {
@@ -122,7 +122,7 @@ class Caredove_Admin {
 
 	/**
 	 * Registers the vars for our caredove-mce-placeholder.js file.
-	 * 
+	 *
 	 *
 	 * @since 0.1.0
 	 * @param array $langs An associative array of objects
@@ -132,7 +132,7 @@ class Caredove_Admin {
 			$popup = new stdClass();
 			//Define the standard buttons (these can be overridden for a specific shortcode if desired)
 			$popup->buttons = [array ('text' => 'Cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit')];
-			
+
 			$caredove_booking_buttons = [];
 			$caredove_listing_categories = [];
 		  $caredove_api_listings = Caredove_Admin::get_api_listings($listings_options = '');
@@ -144,7 +144,7 @@ class Caredove_Admin {
 				$caredove_listing_categories[] = array('text' => 'All Categories', 'value' => '');
 				foreach ($api_categories['results'] as $result){
 						$caredove_listing_categories[] = array('text' => $result['display'].'('.$result['service_count'].')', 'value' => $result['id']);
-				}	
+				}
 			}
 
 			if(isset($api_listings['results'])){
@@ -152,7 +152,7 @@ class Caredove_Admin {
 					if (isset($result['eReferral']['formUrl']) && $result['eReferral']['formUrl'] !== '' ){
 						$caredove_booking_buttons[] = array('text' => $result['name'], 'value' => esc_url($result['eReferral']['formUrl']));
 					}
-				}	
+				}
 			}
 
 			//these are the defaults for button_options we want included whenever there is buttons available
@@ -163,7 +163,7 @@ class Caredove_Admin {
               'tooltip'=> 'This will be used for the button text',
               'classes' => 'caredove_button_text caredove_hide-embedded'
             );
-			 $popup->button_options[] = array( 
+			 $popup->button_options[] = array(
 		    			'type'   => 'listbox',
               'name'   => 'button_style',
               'label'  => 'Button Style',
@@ -176,7 +176,7 @@ class Caredove_Admin {
                   array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md', 'classes'=> 'optional caredove_button_color-show' ),
                   array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg', 'classes'=> 'optional caredove_button_color-show' ),
               ],
-              'classes' => 'caredove_button_style caredove_hide-embedded',
+              'classes' => 'caredove_button_style caredove_hide-embedded optional-control',
               'value' => 'default'
 			      );
 	  	 $popup->button_options[] = array (
@@ -185,8 +185,9 @@ class Caredove_Admin {
               'label'  => 'Button Color',
               'text'   => '#fff',
               'tooltip'=> 'Please use hex "#" color code',
-              'classes' => 'caredove_button_color caredove_hide-embedded'
-			      );			 
+              'classes' => 'caredove_button_color caredove_hide-default',
+              'placeholder' => 'Please use "#", i.e. #55555'
+			      );
 			 $popup->logo = array(
 			 				'type'=> 'container',
 			 				'html'=> '<img src="'.plugins_url("img/Caredove-Logo.svg", __FILE__).'" />',
@@ -198,8 +199,8 @@ class Caredove_Admin {
 			 				'classes'=> 'caredove-sample-button-wrapper'
 			 			);
 
-		
-		  
+
+
 		  //string is the array of shortcode options for the TinyMCE editor popup
 			$string = array(
 					//first shortcode 'caredove search'
@@ -213,7 +214,7 @@ class Caredove_Admin {
 		    		$popup->logo,
 		    		array(
 						    'type'=> 'container',
-						    'html'=> '<p><strong>Add a Caredove search page to your website</strong> - These can be network search sites, or your organization\'s search site, <br />or even service listings pages. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
+						    'html'=> '<p><strong>Add a Caredove search page to your website</strong> - These can be network search sites, or your organization\'s search site, <br />or even service listings pages. <!-- Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.--></p>',
 						    'classes'=> 'caredove-tinymce-description'
 		    		),
             array(
@@ -221,7 +222,8 @@ class Caredove_Admin {
               'name'=> 'page_url',
               'label'=> 'Search Page URL',
               'tooltip'=> 'This is the Caredove URL of your search page',
-              'classes'=> 'caredove-tinymce-page_url'             
+              'classes'=> 'caredove-tinymce-page_url',
+              'placeholder'=> 'https://www.caredove.com/'
             ),
             array (
               'type'   => 'listbox',
@@ -233,14 +235,14 @@ class Caredove_Admin {
               'name'   => 'display_option',
               'label'  => 'Search Page Display',
               'classes' => 'optional-control',
-							'value' => 'none'							
+							'value' => 'none'
             ),$popup->button_options[0],$popup->button_options[1],$popup->button_options[2],
             array (
               'type'   => 'textbox',
               'name'   => 'modal_title',
               'label'  => 'Popup Window Title',
               'value'  => 'Search for Services',
-              'tooltip' => 'The title for the popup window, default: Serach for Services',
+              'tooltip' => 'The title for the popup window, default: Search for Services',
               'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
             ),
             // $popup->button_sample
@@ -252,14 +254,14 @@ class Caredove_Admin {
 						'image' => plugins_url("img/missing-field.svg", __FILE__),
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
-		    		'popupbody' => [		
-		    			$popup->logo, 
+		    		'popupbody' => [
+		    			$popup->logo,
 		    			array(
 						    'type'=> 'container',
-						    'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong> - Enable submitting secure referrals to a specific service without leaving your website. <br />Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
+						    'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong> - Enable submitting secure referrals to a specific service without leaving your website. <!--<br />Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.--></p>',
 						    'classes'=> 'caredove-tinymce-description'
-		    			),   			
-			    		array( 
+		    			),
+			    		array(
 			    					'type'   => 'listbox',
                     'name'   => 'page_url',
                     'label'  => 'Booking Form',
@@ -275,7 +277,7 @@ class Caredove_Admin {
 	            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2]
 			    	]
 					), //third shortcode 'caredove listings'
-					'2' => array ( //do we need Category options? 
+					'2' => array ( //do we need Category options?
 						'shortcode' => 'caredove_listings',
 						'title' => 'Display Your Caredove Listings',
 						'image' => plugins_url("img/listing-lists.svg", __FILE__),
@@ -284,7 +286,7 @@ class Caredove_Admin {
 		    		'buttons' => $popup->buttons,
 		    		'popupbody' => [
 		    			$popup->logo,
-		    				array( 
+		    				array(
 		    					'type'   => 'listbox',
                   'name'   => 'listing_categories',
                   'label'  => 'Listing Categories',
@@ -301,9 +303,16 @@ class Caredove_Admin {
 	                  array( 'text'=> '3 Column', 'value'=> '3-column' )
 	              ],
 	              'value' => 'full_width'
-	            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2]
+	            ),
+							array(
+								'type' 	=> 'textbox',
+								'name'	=> 'listings_per_page',
+								'label' => 'Listings Per Page',
+								'value' => ''
+							),
+							$popup->button_options[0],$popup->button_options[1],$popup->button_options[2]
 			    	]
-					) 
+					)
 
 				);
 
@@ -312,7 +321,7 @@ class Caredove_Admin {
 
 
 	//Reference: https://www.sitepoint.com/adding-a-media-button-to-the-content-editor/
-	public function media_button_insert_search_page() {		
+	public function media_button_insert_search_page() {
 		echo '<a href="#" id="insert-caredove-button" class="button caredove-admin-button">Add Caredove Refer Button</a>';
 		echo '<a href="#" id="insert-caredove-listings" class="button caredove-admin-button">Add Caredove Listings</a>';
 		echo '<a href="#" id="insert-caredove-search-page" class="button caredove-admin-button">Add Caredove Search Page</a>';
@@ -335,7 +344,7 @@ class Caredove_Admin {
 
 	}
 
-	/** 
+	/**
 	 * Add ability to clear transients from option page
 	 * @ since 0.1.10
 	 */
@@ -434,7 +443,7 @@ class Caredove_Admin {
 	public function caredove_api_org_id_field() {
 		$api_org_id = get_option( $this->option_name . '_api_org_id' );
 		echo '<input type="text" name="' . $this->option_name . '_api_org_id' . '" id="' . $this->option_name . '_api_org_id' . '" value="' . $api_org_id . '"> ' . __( 'get your organization ID from caredove.com', 'caredove' );
-	}	
+	}
 
 		public function caredove_api_testing_field() {
 		$api_testing = get_option( $this->option_name . '_api_testing' );
@@ -442,9 +451,9 @@ class Caredove_Admin {
 			$api_testing_status = "checked";
 		}else{
 			$api_testing_status = "";
-		} 
+		}
 		echo '<input type="checkbox" name="' . $this->option_name . '_api_testing' . '" id="' . $this->option_name . '_api_testing' . '" value="true" ' . $api_testing_status . ' > ' . __( 'Use test connection at sandbox.caredove.com', 'caredove' );
-	}	
+	}
 
 	static function connect_to_api($options) {
 
@@ -480,17 +489,17 @@ class Caredove_Admin {
 
 				if($http_code == '200'){
 					//if connection is good, get and set the data
-					$caredove_api->data = wp_remote_retrieve_body( $response );	
+					$caredove_api->data = wp_remote_retrieve_body( $response );
 					$caredove_api->http_code = $http_code;
 				} else {
 					//if connection is bad, send error response to admin page
 					$caredove_api->http_code = "something went wrong: " . $http_code . ' - ' . wp_remote_retrieve_response_message( $response );
 					$caredove_api->response = $response;
-				}			
+				}
 			}
 
 			return $caredove_api;
-			
+
 	}
 
 	static function get_api_listings($listing_options) {
@@ -505,16 +514,16 @@ class Caredove_Admin {
 				$category_listings = get_transeint('caredove_listings_category_'.$options['category_id']);
 				if(empty($category_listings)){
 					$caredove_api = Caredove_Admin::connect_to_api($options);
-					set_transient('caredove_listings_category_'.$options['category_id'], $caredove_api->data, 60 * 10);	
+					set_transient('caredove_listings_category_'.$options['category_id'], $caredove_api->data, 60 * 10);
 					$listings = $caredove_api->data;
 				}
 			} elseif(empty($listings)){
 	    		$caredove_api = Caredove_Admin::connect_to_api($options);
 	    		if(!empty($caredove_api->data)){
-	    			set_transient('caredove_listings', $caredove_api->data, 60 * 10);	
-						$listings = $caredove_api->data;	
+	    			set_transient('caredove_listings', $caredove_api->data, 60 * 10);
+						$listings = $caredove_api->data;
 	    		}
-					
+
 	    }
 
 			return $listings;
@@ -529,11 +538,11 @@ class Caredove_Admin {
 
 		if(empty($categories)){
     		$caredove_api = Caredove_Admin::connect_to_api($options);
-				set_transient('caredove_categories', $caredove_api->data, 60 * 10);	
+				set_transient('caredove_categories', $caredove_api->data, 60 * 10);
 				$categories = $caredove_api->data;
     }
 
 		return $categories;
-	
+
 	}
 }

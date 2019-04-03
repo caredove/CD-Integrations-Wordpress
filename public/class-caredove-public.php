@@ -97,7 +97,7 @@ class Caredove_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/caredove-public.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name . '-modaal', plugin_dir_url( __FILE__ ) . 'js/modaal.js', array( 'jquery' ), $this->version, false );		
+		wp_enqueue_script( $this->plugin_name . '-modaal', plugin_dir_url( __FILE__ ) . 'js/modaal.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -108,7 +108,7 @@ class Caredove_Public {
 	 */
 	public function register_shortcodes() {
 		add_shortcode('caredove_listings', array($this, 'caredove_listings_shortcode'));
-		add_shortcode('caredove_search', array($this, 'caredove_shortcode'));	
+		add_shortcode('caredove_search', array($this, 'caredove_shortcode'));
 		add_shortcode('caredove_button', array($this, 'caredove_shortcode'));
 	}
 
@@ -121,7 +121,7 @@ class Caredove_Public {
 				        	<iframe id="caredove-iframe" scrolling="yes" src=""></iframe>
 				    </div>
 					</div> -->
-		<?php	
+		<?php
 	}
 
 	//make the button function available, since it's used in more than one plance
@@ -143,16 +143,15 @@ class Caredove_Public {
 
 				}
 			}
-		
 		if($a['display_option'] == 'link'){
 		 		ob_start();
-				?> 
+				?>
 					<a href="<?php echo $a['page_url']; ?>" class="caredove-inline-link caredove-iframe-button <?php echo $style_name ?>"><?php echo $a['button_text']; ?></a>
 				<?php
 				return ob_get_clean();
 		} else {
 				ob_start();
-								?> 
+								?>
 				<button type="button" class="caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
 				<?php
 				return ob_get_clean();
@@ -172,13 +171,13 @@ class Caredove_Public {
 			 $iframe = '<iframe id="caredove-iframe" scrolling="yes" src="'.$a['page_url'].'?embed=1"></iframe>';
 
 			 if($a['display_option'] == 'modal' || $a['display_option'] == 'false' || $a['display_option'] == 'link'){
-						
+
 						return $this->caredove_button($a);
-						
+
 			 } else {
 			 		ob_start();
 					echo $iframe;
-					return ob_get_clean();	
+					return ob_get_clean();
 			 }
 
 	}
@@ -194,16 +193,17 @@ class Caredove_Public {
 				'button_style' => 'default',
 				'modal_title' => 'Book an Appointment',
 				'listing_categories' => '',
-				'per_page' => '5',
+				'listings_per_page' => '5',
 				'offest' => '0',
+				'display_option' => 'false',
 		), $atts );
 
-   
 
-  	if($a['listing_categories'] != ''){  		 
-			 $caredove_api_data = Caredove_Admin::get_api_listings($listing_options['category_id'] = $a['listing_categories']); 		  
+
+  	if($a['listing_categories'] != ''){
+			 $caredove_api_data = Caredove_Admin::get_api_listings($listing_options['category_id'] = $a['listing_categories']);
   	} else {
-  		 $caredove_api_data = Caredove_Admin::get_api_listings($listing_options = ''); 		  
+  		 $caredove_api_data = Caredove_Admin::get_api_listings($listing_options = '');
   	}
 
   	if(isset($caredove_api_data)){
@@ -212,11 +212,11 @@ class Caredove_Public {
 
   	if ( isset($api_object->results) ) :
 
-			$max_num_pages = sizeof($api_object->results) / $a['per_page'];
-			$current_page = (get_query_var( 'paged' ) ? get_query_var( 'paged' ) : "1" );	
-			$current_offset = $current_page * $a['per_page'] - 5;
-			$current_limit = $current_offset + $a['per_page'] - 1;
-
+			$max_num_pages = ceil(sizeof($api_object->results) / $a['listings_per_page']);
+			$current_page = (get_query_var( 'paged' ) ? get_query_var( 'paged' ) : "1" );
+			$current_offset = $current_page * $a['listings_per_page'] - $a['listings_per_page'];
+			$current_limit = $current_offset + $a['listings_per_page'] - 1;
+			// echo('max pages: '. $max_num_pages.'<br/>');
 			// echo('offset: '. $current_offset.'<br/>');
 			// echo('current limit'.$current_limit);
 			ob_start();
@@ -229,13 +229,13 @@ class Caredove_Public {
 								<p><?php echo $result->details->description ?></p>
 								<br />
 								<?php $a['page_url'] = $result->eReferral->formUrl; ?>
-								<?php	echo $this->caredove_button($a); ?>										
+								<?php	echo $this->caredove_button($a); ?>
 							</div>
 						<?php
-				}			
+				}
 			}
 			?></div><?php
-			return ob_get_clean();
+
 
       // Your loop
 
@@ -251,6 +251,7 @@ class Caredove_Public {
       ) );
       echo '</div>';
     endif;
+		return ob_get_clean();
 
   endif;
 
@@ -258,4 +259,3 @@ class Caredove_Public {
 
 
 }
-
