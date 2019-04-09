@@ -22,7 +22,7 @@
         function caredove_hide_fields(item){
           var variables = $(item).attr('class').split(' ');
 
-          arr = variables.map(function(value) {
+          variables.map(function(value) {
               if( value.indexOf("-hide") > -1 ) {
                   // console.log(value);
                   $('.'+value.replace('-hide','')).val("").parentsUntil('.mce-formitem').hide();
@@ -34,9 +34,17 @@
           });       
         }
 
+        // $(".caredove-admin-button").on('click', function() {
+        //   caredove_hide_fields('.mce-caredove_button_style');
+        // });
         //controls which fields to show or hide depending on a given dropdown option
         $(document).on('click', '.mce-optional', function() {
           caredove_hide_fields(this);
         });                
-     
+        $(document).on('click', '.mce-caredove-sample-button-wrapper-show', function() {
+          $('.mce-caredove-sample-button-wrapper').show();
+        });
+        $(document).on('click', '.mce-caredove-style-default', function() {
+          $('.mce-caredove-sample-button-wrapper').hide();
+        });
 })( jQuery );

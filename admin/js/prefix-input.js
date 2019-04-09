@@ -3,6 +3,7 @@
  * Coded by Ican Bachors 2015.
  * http://ibacor.com/labs/jquery-prefix-input/
  * Updates will be posted to this site.
+ * also see: https://codepen.io/bachors/pen/yeJOrg
  ***********************************************/
 
 $.fn.prefix = function(prefix) {

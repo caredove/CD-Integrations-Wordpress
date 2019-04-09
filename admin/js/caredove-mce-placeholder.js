@@ -108,16 +108,38 @@
                       }
 
                     };
-                                                  
-                                        
+                    //dynamically update the button preview                                  
+                    $(document).on('click', '.mce-optional', function() {
+                        console.log('a click');
+                        var buttonDetails = {};
+                        buttonDetails.button_text = 'Button Preview';
+                        var button_style = $(this).attr('class').split(' ');
+                        console.log(button_style);
+                        if($('.mce-caredove_button_color').val().length > 0){
+                            buttonDetails.button_color = $('.mce-caredove_button_color').val();
+                        }
+                        const thestyles = button_style.map(function(value) {
+                            if( value.indexOf("mce-caredove-style-") > -1 ) {
+                                buttonDetails.button_style = value.replace('mce-caredove-style-','');
+                                console.log(buttonDetails.button_style)
+                            } else {
+                            }
+                        })
+                        Promise.all(thestyles).then(() => {
+                            sampleButton = t._doButton(buttonDetails);
+                            $('.mce-caredove-sample-button-wrapper').html('<img src="'+image+'" />');
+                        });
+                    })                    
                     // Open window
                     ed.windowManager.open({
                       title: t.shortcodes[shortcode].title,
                       width: jQuery(window).width() - 500,
-                      height: (jQuery(window).height() > 500 ? jQuery(window).height() - 150 : 400 ),
+                      height: (jQuery(window).height() > 500 ? jQuery(window).height() - 150 : jQuery(window).height() - 100 ),
                       resizable : true,
                       maximizable: true,
                       inline: true,
+                      autoScroll: true, 
+                      scrollbars: true,
                       buttons: t.shortcodes[shortcode].buttons,
                       body: t.shortcodes[shortcode].popupbody,
                       onsubmit: function( e ) {
@@ -140,7 +162,12 @@
 
                             if (hide_stuff !== ''){
                                 inputs.find('.mce-caredove_hide-'+hide_stuff).parentsUntil('.mce-formitem').hide();
-                            }   
+                                inputs.find('.mce-caredove_hide-sample').hide();
+                            } else if(img.length == 0){
+                                //hide stuff when this is a new item we're adding
+                                inputs.find('.mce-caredove_hide-default').parentsUntil('.mce-formitem').hide();
+                                inputs.find('.mce-caredove_hide-sample').hide();
+                            }
                             
                             $(".mce-caredove-tinymce-page_url").prefix('https://www.caredove.com/');
                             $(".mce-caredove-tinymce-page_url").val('https://www.caredove.com/');
@@ -151,6 +178,7 @@
                           if (urlfield.value.substring(0, baseurl.length) != baseurl){
                             urlfield.val(baseurl);
                           }
+
                     },                  
                     
                     });
@@ -261,6 +289,29 @@
 
         },
 
+        _doButton: function( bc ){
+            var t = this;
+
+            bc.button_fill = 'none';
+            bc.text_color = 'black';
+            if(bc.button_style == "solid-md" || bc.button_style == "solid-lg" || bc.button_style == "solid-sm"){
+                bc.button_fill = bc.button_color;
+                bc.text_color = 'white';
+            } else {                        
+                if(bc.button_color !== ''){
+                    bc.text_color = bc.button_color;                            
+                }
+                bc.button_color = bc.button_color? bc.button_color : "black";
+            }
+
+            var fontSize = 14;
+            var buttonWidth = bc.button_text.length * fontSize/2 + 30;                    
+
+            image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='"+buttonWidth+"' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='"+buttonWidth+"' height='50' fill='"+bc.button_fill+"' stroke='"+bc.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='"+fontSize+"' fill='"+bc.text_color+"' dominant-baseline='middle' text-anchor='middle'>"+ bc.button_text +"</text></g></svg>";    
+            image = "data:image/svg+xml;base64," + btoa(image);
+
+            return image;
+        },
         /*
          * Replace shortcodes with their respective images.
          * 
@@ -293,19 +344,7 @@
                     
                 });
                 if(shortcode_fields.button_text != '' && t.shortcodes[b].button != 'false'){
-                    shortcode_fields.button_fill = 'none';
-                    shortcode_fields.text_color = 'black';
-                    if(shortcode_fields.button_style == "solid-md" || shortcode_fields.button_style == "solid-lg" || shortcode_fields.button_style == "solid-sm"){
-                        shortcode_fields.button_fill = shortcode_fields.button_color;
-                        shortcode_fields.text_color = 'white';
-                    } else {                        
-                        if(shortcode_fields.button_color !== ''){
-                            shortcode_fields.text_color = shortcode_fields.button_color;                            
-                        }
-                        shortcode_fields.button_color = shortcode_fields.button_color? shortcode_fields.button_color : "black";
-                    }
-                    image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='150' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='150' height='50' fill='"+shortcode_fields.button_fill+"' stroke='"+shortcode_fields.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='14' fill='"+shortcode_fields.text_color+"' dominant-baseline='middle' text-anchor='middle'>"+ shortcode_fields.button_text +"</text></g></svg>";    
-                    image = "data:image/svg+xml;base64," + btoa(image);
+                   image = t._doButton(shortcode_fields);
                     // console.log(image);
                 } else {
                     image = t.shortcodes[b].image;

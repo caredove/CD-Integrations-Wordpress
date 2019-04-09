@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.2.3
+Stable tag: 0.2.4
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,14 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+= 0.2.4 =
+* Fixed issue causing Search popup loading animation not to appear
+* Converted list of listings per page to be dropdown instead of textbox
+* Fixed issue causing button color field to show when creating a new listings section
+* Fixed In the wordpress Editor, Button width is now dynamic and expands with text
+* Fixed issue with TinyMCE popup on small screens where content wasn't scrollable
+* Added Button preview in TinyMCE popup
+
 
 = 0.2.3 =
 * Fixed typo on search modal title field tool tip

@@ -168,13 +168,13 @@ class Caredove_Admin {
               'name'   => 'button_style',
               'label'  => 'Button Style',
               'values' => [
-                  array( 'text'=> 'Theme Default', 'value'=> 'default', 'classes'=> 'optional caredove_button_color-hide' ),
-                  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show' ),
-                  array( 'text'=> 'Medium - solid', 'value'=> 'solid-md', 'classes'=> 'optional caredove_button_color-show' ),
-                  array( 'text'=> 'Large - solid', 'value'=> 'solid-lg', 'classes'=> 'optional caredove_button_color-show' ),
-                  array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm', 'classes'=> 'optional caredove_button_color-show' ),
-                  array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md', 'classes'=> 'optional caredove_button_color-show' ),
-                  array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg', 'classes'=> 'optional caredove_button_color-show' ),
+                  array( 'text'=> 'Theme Default', 'value'=> 'default', 'classes'=> 'optional caredove_button_color-hide caredove-style-default' ),
+                  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm' ),
+                  array( 'text'=> 'Medium - solid', 'value'=> 'solid-md', 'classes'=> 'optional caredove_button_color-show caredove-sample-button-wrapper-show caredove-style-solid-md' ),
+                  array( 'text'=> 'Large - solid', 'value'=> 'solid-lg', 'classes'=> 'optional caredove_button_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg' ),
+                  array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm', 'classes'=> 'optional caredove_button_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm' ),
+                  array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md', 'classes'=> 'optional caredove_button_color-show caredove-sample-button-wrapper-show caredove-style-outline-md' ),
+                  array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg', 'classes'=> 'optional caredove_button_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg' ),
               ],
               'classes' => 'caredove_button_style caredove_hide-embedded optional-control',
               'value' => 'default'
@@ -196,7 +196,7 @@ class Caredove_Admin {
 			 $popup->button_sample = array(
 			 				'type'=> 'container',
 			 				'html'=> '<button class="caredove-sample-button caredove-iframe-button">Button Preview</button>',
-			 				'classes'=> 'caredove-sample-button-wrapper'
+			 				'classes'=> 'caredove-sample-button-wrapper caredove_hide-sample'
 			 			);
 
 
@@ -245,7 +245,7 @@ class Caredove_Admin {
               'tooltip' => 'The title for the popup window, default: Search for Services',
               'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
             ),
-            // $popup->button_sample
+            $popup->button_sample
           	]
 					), //seccond shortcode 'caredove button'
 					'1' => array (
@@ -274,7 +274,7 @@ class Caredove_Admin {
 	              'label'  => 'Popup Window Title',
 	              'value'  => 'Book an Appointment',
 	              'tooltip' => 'The title for the popup window, default: Book an Appointment',
-	            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2]
+	            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2],$popup->button_sample
 			    	]
 					), //third shortcode 'caredove listings'
 					'2' => array ( //do we need Category options?
@@ -305,12 +305,17 @@ class Caredove_Admin {
 	              'value' => 'full_width'
 	            ),
 							array(
-								'type' 	=> 'textbox',
+								'type' 	=> 'listbox',
 								'name'	=> 'listings_per_page',
 								'label' => 'Listings Per Page',
-								'value' => ''
+								'values' => [
+									array( 'text'=> '10', 'value'=>'10'),
+									array( 'text'=> '25', 'value'=>'25'),
+									array( 'text'=> '50', 'value'=>'50'),
+									array( 'text'=> '100', 'value'=>'100'),
+								]
 							),
-							$popup->button_options[0],$popup->button_options[1],$popup->button_options[2]
+							$popup->button_options[0],$popup->button_options[1],$popup->button_options[2],$popup->button_sample
 			    	]
 					)
 
@@ -538,8 +543,11 @@ class Caredove_Admin {
 
 		if(empty($categories)){
     		$caredove_api = Caredove_Admin::connect_to_api($options);
-				set_transient('caredove_categories', $caredove_api->data, 60 * 10);
-				$categories = $caredove_api->data;
+    		if(!empty($caredove_api->data)){
+    			set_transient('caredove_categories', $caredove_api->data, 60 * 10);
+					$categories = $caredove_api->data;	
+    		}
+				
     }
 
 		return $categories;
