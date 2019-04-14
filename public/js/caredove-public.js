@@ -63,7 +63,6 @@
     		url_param: '?embed=1',
     		iframe_footer: 'Powered by <a href="https://caredove.com">Caredove.com</a>'
 			});
-
 	 		
 			// ENABLE SPAWNED IFRAME WINDOW TO CLOSE ITSELF
 			var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";

@@ -3,14 +3,14 @@
  * included in this file.
  */
 
-.entry-content a.caredove-iframe-button, a.caredove-iframe-button {
+.entry-content a.caredove-styled-button, a.caredove-styled-button {
     border-bottom:0;
     padding:0;
     text-decoration: none;
     color: initial;
 }
 
-button.caredove-iframe-button, input[type="button"].caredove-iframe-button, .caredove-iframe-button, a.caredove-iframe-button {
+button.caredove-styled-button, input[type="button"].caredove-styled-button, .caredove-styled-button, a.caredove-styled-button {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
@@ -33,7 +33,7 @@ button.caredove-iframe-button, input[type="button"].caredove-iframe-button, .car
     border: 2px solid transparent;
     border-radius: 4px;
 }
-button.caredove-iframe-button:hover, input[type="button"].caredove-iframe-button:hover {
+button.caredove-styled-button:hover, input[type="button"].caredove-styled-button:hover {
     cursor:pointer!important;
 }
 button.caredove-button-sm, input[type="button"].caredove-button-sm, .caredove-button-sm, a.caredove-button-sm {

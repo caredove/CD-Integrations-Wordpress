@@ -99,3 +99,71 @@
 .mce-container button.caredove-button-solid {
     border-width:0;
 }
+
+
+.entry-content a.caredove-styled-button, a.caredove-styled-button {
+    border-bottom:0;
+    padding:0;
+    text-decoration: none;
+    color: initial;
+}
+
+/*-----
+    Styling to match the public facing styling of buttons, this is for preview in the TinyMCE popup
+----*/
+
+button.caredove-styled-button, input[type="button"].caredove-styled-button, .caredove-styled-button, a.caredove-styled-button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    border-radius:5px;
+    background-color:#00A4FF;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+button.caredove-styled-button:hover, input[type="button"].caredove-styled-button:hover {
+    cursor:pointer!important;
+}
+button.caredove-button-sm, input[type="button"].caredove-button-sm, .caredove-button-sm, a.caredove-button-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+button.caredove-button-md, input[type="button"].caredove-button-md, .caredove-button-md {
+    /*height: 32px;
+    font-size:14px;
+    line-height:32px;
+    padding:0 16px;*/
+}
+button.caredove-button-lg, input[type="button"].caredove-button-lg, .caredove-button-lg, a.caredove-button-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+button.caredove-button-outline, input[type="button"].caredove-button-outline, .caredove-button-outline, a.caredove-button-outline {
+    border-width:2px;
+    border-style:solid;
+    border-color:#00A4FF;
+    color:#000;
+    background:none!important;
+}
+
+button.caredove-button-solid, input[type="button"].caredove-button-solid, .caredove-button-solid, a.caredove-button-solid {
+    border-width:0;
+}

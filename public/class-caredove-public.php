@@ -135,10 +135,11 @@ class Caredove_Public {
 				switch($value){
 					case 'outline':
 						$style_inline = 'border-color:'.$a['button_color'].';';
-						$style_inline .= 'color:'.$a['button_color'].';';
+						$style_inline .= 'color:'.$a['text_color'].';';
 						break;
 					case 'solid':
 						$style_inline = 'background-color:'.$a['button_color'].';';
+						$style_inline .= 'color:'.$a['text_color'].';';
 						break;
 
 				}
@@ -146,13 +147,13 @@ class Caredove_Public {
 		if($a['display_option'] == 'link'){
 		 		ob_start();
 				?>
-					<a href="<?php echo $a['page_url']; ?>" class="caredove-inline-link caredove-iframe-button <?php echo $style_name ?>"><?php echo $a['button_text']; ?></a>
+					<button type="button" onclick="window.open('<?php echo $a['page_url']; ?>','_blank');" class="caredove-inline-link caredove-styled-button <?php echo $style_name ?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
 				<?php
 				return ob_get_clean();
 		} else {
 				ob_start();
 								?>
-				<button type="button" class="caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+				<button type="button" class="caredove-styled-button caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
 				<?php
 				return ob_get_clean();
 		}
@@ -164,6 +165,7 @@ class Caredove_Public {
 						'display_option' => 'false',
 						'button_text' => 'Open Search',
 						'button_color' => '',
+						'text_color' => '',
 						'button_style' => 'default',
 						'modal_title' => 'Search for Services',
 				), $atts );
@@ -191,6 +193,7 @@ class Caredove_Public {
 				'button_text' => 'Book Now',
 				'button_color' => '',
 				'button_style' => 'default',
+				'text_color' => '',
 				'modal_title' => 'Book an Appointment',
 				'listing_categories' => '',
 				'listings_per_page' => '5',

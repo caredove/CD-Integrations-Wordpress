@@ -110,24 +110,26 @@
                     };
                     //dynamically update the button preview                                  
                     $(document).on('click', '.mce-optional', function() {
-                        console.log('a click');
                         var buttonDetails = {};
                         buttonDetails.button_text = 'Button Preview';
                         var button_style = $(this).attr('class').split(' ');
-                        console.log(button_style);
+
                         if($('.mce-caredove_button_color').val().length > 0){
                             buttonDetails.button_color = $('.mce-caredove_button_color').val();
                         }
+                        if($('.mce-caredove_text_color').val().length > 0){
+                            buttonDetails.text_color = $('.mce-caredove_text_color').val();
+                        }
                         const thestyles = button_style.map(function(value) {
                             if( value.indexOf("mce-caredove-style-") > -1 ) {
-                                buttonDetails.button_style = value.replace('mce-caredove-style-','');
-                                console.log(buttonDetails.button_style)
-                            } else {
+                                buttonDetails.button_style = value.replace('mce-caredove-style-','');                                
+                                buttonDetails.button_style = buttonDetails.button_style.split('-');
+                                // console.log('buttonDeatils.button_style ' + buttonDetails.button_style)
                             }
                         })
                         Promise.all(thestyles).then(() => {
-                            sampleButton = t._doButton(buttonDetails);
-                            $('.mce-caredove-sample-button-wrapper').html('<img src="'+image+'" />');
+                            sampleButton = t._doStyledButton(buttonDetails);
+                            $('.mce-caredove-sample-button-wrapper').html(sampleButton);
                         });
                     })                    
                     // Open window
@@ -175,9 +177,11 @@
                         }
                         var baseurl = 'https://www.caredove.com/';
                         var urlfield = $('.mce-caredove-tinymce-page_url');
-                          if (urlfield.value.substring(0, baseurl.length) != baseurl){
-                            urlfield.val(baseurl);
-                          }
+                        if(urlfield.length > 0){
+                            if (urlfield.value.substring(0, baseurl.length) != baseurl){
+                              urlfield.val(baseurl);
+                            }
+                        }
 
                     },                  
                     
@@ -288,29 +292,46 @@
             });
 
         },
+        _doStyledButton: function( bc ){
+             var t = this;
+             var style_name = '';
+
+             bc.button_style.forEach(function (value, i){
+                style_name += 'caredove-button-'+value+' ';
+                switch(value){
+                    case 'outline':
+                        style_inline = 'border-color:'+bc.button_color+';'+'color:'+bc.text_color+';';
+                        break;
+                    case 'solid':
+                        style_inline = 'background-color:'+bc.button_color+';'+'color:'+bc.text_color+';';
+                        break;
+                }
+            });
+
+            var button = '<button type="button" class="caredove-inline-link caredove-styled-button '+style_name+'" style="'+style_inline+'">'+bc.button_text+'</button>';
+            return button;
+        },
 
         _doButton: function( bc ){
             var t = this;
 
             bc.button_fill = 'none';
-            bc.text_color = 'black';
+            bc.font_color = 'black';
+
             if(bc.button_style == "solid-md" || bc.button_style == "solid-lg" || bc.button_style == "solid-sm"){
-                bc.button_fill = bc.button_color;
-                bc.text_color = 'white';
-            } else {                        
-                if(bc.button_color !== ''){
-                    bc.text_color = bc.button_color;                            
-                }
-                bc.button_color = bc.button_color? bc.button_color : "black";
+                bc.button_fill = bc.button_color;                       
+            }
+            if(bc.text_color !== ''){
+                bc.font_color = bc.text_color;  
             }
 
             var fontSize = 14;
             var buttonWidth = bc.button_text.length * fontSize/2 + 30;                    
 
-            image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='"+buttonWidth+"' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='"+buttonWidth+"' height='50' fill='"+bc.button_fill+"' stroke='"+bc.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='"+fontSize+"' fill='"+bc.text_color+"' dominant-baseline='middle' text-anchor='middle'>"+ bc.button_text +"</text></g></svg>";    
+            image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='"+buttonWidth+"' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='"+buttonWidth+"' height='50' fill='"+bc.button_fill+"' stroke='"+bc.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='"+fontSize+"' fill='"+bc.font_color+"' dominant-baseline='middle' text-anchor='middle'>"+ bc.button_text +"</text></g></svg>";    
             image = "data:image/svg+xml;base64," + btoa(image);
 
-            return image;
+            return image;           
         },
         /*
          * Replace shortcodes with their respective images.

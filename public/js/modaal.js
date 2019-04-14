@@ -890,22 +890,41 @@
 			} else {
 				custom_iframe_title = self.options.iframe_title;
 			}
+		
+			const theUrl = url + self.options.url_param;
 
-			if ( self.options.width !== null || self.options.width !== undefined || self.options.height !== null || self.options.height !== undefined ) {
+			var testCall = $.ajax({
+						url: theUrl,
+						type: "GET",
+						dataType: "html",
+						timeout: 5000,
+			}).success(function(msg){
 				// iframe markup
 				content = 
 									'<div class="modaal-content-header"><h3 id="modaal-title">' + custom_iframe_title + '</h3></div>' +
 									'<div class="modaal-content-container' + ( self.options.loading_class != '' ? ' ' + self.options.loading_class : '' ) + '">' + 
-										'<iframe src="' + url + self.options.url_param + '" class="modaal-iframe-elem" frameborder="0" allowfullscreen></iframe>' + 
+										'<iframe src="' + theUrl + '" class="modaal-iframe-elem" frameborder="0" allowfullscreen></iframe>' +
 									'</div>' +
-									'<div class="modaal-content-footer"><p>' + self.options.iframe_footer + '</p></div>';
+									'<div class="modaal-content-footer"><p>' + self.options.iframe_footer + '</p></div>';		
 
-			} else {
-				content = '<div class="modaal-content-container">Please specify a width and height for your iframe</div>';
-			}
+									// now push content into markup
+				self.build_modal(content);	
 
-			// now push content into markup
-			self.build_modal(content);
+				
+			}).fail(function(xhr, status, errorThrown){	
+				content = 
+							'<div class="modaal-content-header"><h3 id="modaal-title">' + custom_iframe_title + '</h3></div>' +
+							'<div class="modaal-content-container' + ( self.options.loading_class != '' ? ' ' + self.options.loading_class : '' ) + '">' + 
+								'<div style="text-align:center;margin-top:200px;"><p>We\'re sorry, but there\'s been an error trying to process your request</p><p>' +  xhr.status + '-' + xhr.responseText + '</p></div>' +
+							'</div>' +
+							'<div class="modaal-content-footer"><p>' + self.options.iframe_footer + '</p></div>';
+
+							// now push content into markup
+				self.build_modal(content);
+			});
+			
+
+				
 		},
 
 		// Open Modaal

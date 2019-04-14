@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.2.4
+Stable tag: 0.2.5
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,14 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+= 0.2.5 =
+* Fixed bug with URL Field prefix on search page popup (admin side)
+* Finished updating styling on 'direct link' buttons to match other buttons
+* Updated tinyMCE popup button previews to better match front-end button styles
+* Added font color option for buttons
+* Added error handling to modaal popup on front-end
+
+
 = 0.2.4 =
 * Fixed issue causing Search popup loading animation not to appear
 * Converted list of listings per page to be dropdown instead of textbox
