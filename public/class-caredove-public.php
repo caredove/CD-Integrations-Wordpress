@@ -161,7 +161,7 @@ class Caredove_Public {
 
 	public function caredove_shortcode($atts) {
 				$a = shortcode_atts( array(
-						'page_url' => 'https://macrumors.com',
+						'page_url' => '',
 						'display_option' => 'false',
 						'button_text' => 'Open Search',
 						'button_color' => '',
@@ -169,8 +169,8 @@ class Caredove_Public {
 						'button_style' => 'default',
 						'modal_title' => 'Search for Services',
 				), $atts );
-
-			 $iframe = '<iframe id="caredove-iframe" scrolling="yes" src="'.$a['page_url'].'?embed=1"></iframe>';
+			//in the future, we should strip out any unwanted characters, i.e. an extra forward slash that might be in the page_url value
+			 $iframe = '<iframe id="caredove-iframe" scrolling="yes" src="https://www.caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
 
 			 if($a['display_option'] == 'modal' || $a['display_option'] == 'false' || $a['display_option'] == 'link'){
 

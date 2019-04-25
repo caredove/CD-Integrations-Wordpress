@@ -169,7 +169,7 @@ class Caredove_Admin {
               'label'  => 'Button Style',
               'values' => [
                   array( 'text'=> 'Theme Default', 'value'=> 'default', 'classes'=> 'optional caredove_button_color-hide caredove_text_color-hide caredove-style-default' ),
-                  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm' ),
+                  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'),
                   array( 'text'=> 'Medium - solid', 'value'=> 'solid-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md' ),
                   array( 'text'=> 'Large - solid', 'value'=> 'solid-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg' ),
                   array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm' ),
@@ -203,13 +203,12 @@ class Caredove_Admin {
 			 				'classes'=> 'caredove-tinymce-logo'
 			 			);
 			 $popup->button_sample = array(
-			 				'type'=> 'container',
+							'type'=> 'container',
+							'name'=> 'sample_button',
 			 				'html'=> '<button class="caredove-sample-button caredove-iframe-button">Button Preview</button>',
 			 				'classes'=> 'caredove-sample-button-wrapper caredove_hide-sample'
-			 			);
-
-
-
+						 );
+						 
 		  //string is the array of shortcode options for the TinyMCE editor popup
 			$string = array(
 					//first shortcode 'caredove search'
@@ -232,7 +231,7 @@ class Caredove_Admin {
               'label'=> 'Search Page URL',
               'tooltip'=> 'This is the Caredove URL of your search page',
               'classes'=> 'caredove-tinymce-page_url',
-              'placeholder'=> 'https://www.caredove.com/'
+              'placeholder'=> ''
             ),
             array (
               'type'   => 'listbox',
@@ -250,7 +249,8 @@ class Caredove_Admin {
               'type'   => 'textbox',
               'name'   => 'modal_title',
               'label'  => 'Popup Window Title',
-              'value'  => 'Search for Services',
+							'value'  => 'Search for Services',
+							'placeholder' => 'Search for Services',
               'tooltip' => 'The title for the popup window, default: Search for Services',
               'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
             ),
@@ -276,13 +276,27 @@ class Caredove_Admin {
                     'label'  => 'Booking Form',
                     'values' => $caredove_booking_buttons,
                     'value' => 'none'
-              ),
+							),
+							array (
+								'type'   => 'listbox',
+								'values'  => [
+											 array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
+											array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
+								],
+								'name'   => 'display_option',
+								'label'  => 'Button Type',
+								'classes' => 'optional-control',
+								'value' => 'none',
+								'disabled' => 'true'
+							),
 	            array (
 	              'type'   => 'textbox',
 	              'name'   => 'modal_title',
 	              'label'  => 'Popup Window Title',
 	              'value'  => 'Book an Appointment',
-	              'tooltip' => 'The title for the popup window, default: Book an Appointment',
+								'tooltip' => 'The title for the popup window, default: Book an Appointment',
+								'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
+								'disabled' => 'true'
 	            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_sample
 			    	]
 					), //third shortcode 'caredove listings'

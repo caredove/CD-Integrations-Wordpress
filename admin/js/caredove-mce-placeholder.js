@@ -5,7 +5,7 @@
      * See http://www.tinymce.com/wiki.php/Creating_a_plugin for more information
      * on how to create TinyMCE plugins.
      */
-
+    
     tinymce.create( 'tinymce.plugins.visualShortcodes', {
         
         /*
@@ -95,43 +95,29 @@
                           if(t.shortcodes[shortcode].popupbody[i].hasOwnProperty('checked')){
                             t.shortcodes[shortcode].popupbody[i].checked = attributes[t.shortcodes[shortcode].popupbody[i].name];
                           }
-                          t.shortcodes[shortcode].popupbody[i].value = attributes[t.shortcodes[shortcode].popupbody[i].name];                                          
-                          // console.log(t.shortcodes[shortcode].popupbody[i].value);
+                          t.shortcodes[shortcode].popupbody[i].value = attributes[t.shortcodes[shortcode].popupbody[i].name];                                                                   
+                          //   console.log(t.shortcodes[shortcode].popupbody[i].name);                 
                           if(t.shortcodes[shortcode].popupbody[i].value == 'embedded'){
                             hide_stuff = 'embedded';
                           } else if (t.shortcodes[shortcode].popupbody[i].value == 'link') {
                             hide_stuff = 'link';
                           } else if (t.shortcodes[shortcode].popupbody[i].value == 'default') {
                             hide_stuff = 'default';
-                          }
+                          }                          
                         }
-                      }
-
-                    };
-                    //dynamically update the button preview                                  
+                      }                     
+                    };       
+                    //dynamically update the button preview  
+                    button_styles = attributes['button_style'];                    
                     $(document).on('click', '.mce-optional', function() {
-                        var buttonDetails = {};
-                        buttonDetails.button_text = 'Button Preview';
-                        var button_style = $(this).attr('class').split(' ');
-
-                        if($('.mce-caredove_button_color').val().length > 0){
-                            buttonDetails.button_color = $('.mce-caredove_button_color').val();
-                        }
-                        if($('.mce-caredove_text_color').val().length > 0){
-                            buttonDetails.text_color = $('.mce-caredove_text_color').val();
-                        }
-                        const thestyles = button_style.map(function(value) {
-                            if( value.indexOf("mce-caredove-style-") > -1 ) {
-                                buttonDetails.button_style = value.replace('mce-caredove-style-','');                                
-                                buttonDetails.button_style = buttonDetails.button_style.split('-');
-                                // console.log('buttonDeatils.button_style ' + buttonDetails.button_style)
-                            }
-                        })
-                        Promise.all(thestyles).then(() => {
-                            sampleButton = t._doStyledButton(buttonDetails);
-                            $('.mce-caredove-sample-button-wrapper').html(sampleButton);
-                        });
-                    })                    
+                        button_styles = '';
+                        t._getButtonStyles('');
+                    });
+                
+                    $(document).on('change, keyup, input', '.mce-caredove_button_text, .mce-caredove_button_color, .mce-caredove_text_color', function() {
+                        t._getButtonStyles(button_styles);
+                    });                  
+                    
                     // Open window
                     ed.windowManager.open({
                       title: t.shortcodes[shortcode].title,
@@ -152,11 +138,13 @@
                         }                          
                         // placeholder = placeholder + index +'="'+item'"';
                         ed.insertContent( '['+ t.shortcodes[shortcode].shortcode + ' ' + placeholder + ']' );
-                      }, 
+                      },
                       onrepaint: function(e) {
                         var window_id = this._id;
                         
-                       
+                        $('.mce-caredove-tinymce-page_url').before($('<span style="left:162px;position:absolute;padding-top:6px;">https://www.caredove.com/</span>'));
+                        $('.mce-caredove-tinymce-page_url').css({'left': '+=180','width': '-=180'});                        
+
                         if(!$('#' + window_id).hasClass('form-initialized')) {
                             $('#' + window_id).addClass('form-initialized');
                             
@@ -171,24 +159,23 @@
                                 inputs.find('.mce-caredove_hide-sample').hide();
                             }
                             
-                            $(".mce-caredove-tinymce-page_url").prefix('https://www.caredove.com/');
-                            $(".mce-caredove-tinymce-page_url").val('https://www.caredove.com/');
+                        //     $(".mce-caredove-tinymce-page_url").prefix('https://www.caredove.com/');
+                        //     $(".mce-caredove-tinymce-page_url").val('https://www.caredove.com/');
                                                     
-                        }
-                        var baseurl = 'https://www.caredove.com/';
-                        var urlfield = $('.mce-caredove-tinymce-page_url');
-                        if(urlfield.length > 0){
-                            if (urlfield.value.substring(0, baseurl.length) != baseurl){
-                              urlfield.val(baseurl);
-                            }
-                        }
+                        // }
+                        // var baseurl = 'https://www.caredove.com/';
+                        // var urlfield = $('.mce-caredove-tinymce-page_url');
+                        // if(urlfield.length > 0){
+                        //     if (urlfield.value.substring(0, baseurl.length) != baseurl){
+                        //       urlfield.val(baseurl);
+                        //     }
+                        // }                                                           
 
                     },                  
                     
                     });
               });
             };
-
             ed.on( 'DblClick', function( e ) {
                 var image,
                 node = e.target,
@@ -199,20 +186,20 @@
                 if ( e.target.nodeName == 'IMG' && e.target.className.indexOf('jpbVisualShortcode') > -1 ) {
                   var image = e.target.attributes['title'].value;
                   var shortcode = e.target.attributes['data-shortcode'].value;
-                  ed.execCommand('editImage', image, shortcode);
+                  ed.execCommand('editImage', image, shortcode);                  
                   // ed.windowManager.setParams({params:e.target.attributes});
                   // console.log(ed.windowManager.getParams());
-                  // console.log(ed.dom);
+                  // console.log(ed.dom);                  
                 }
             });
               
 
-              // This might not be needed, not sure what it does.
-              ed.on( 'PostProcess', function( event ) {
-                if ( event.get ) {
-                  event.content = event.content.replace( / data-wp-chartselect="1"/g, '' );
-                }
-              });
+            // This fires as the content is turned into an HTML string
+            ed.on( 'PostProcess', function( event ) {
+            if ( event.get ) {
+                event.content = event.content.replace( / data-wp-chartselect="1"/g, '' );
+            }
+            });
 
             /*
              * Add an event handler for our plugin on the editor's 'change' event. This function
@@ -296,8 +283,11 @@
              var t = this;
              var style_name = '';
 
-             bc.button_style.forEach(function (value, i){
+            console.log('bc.button_style '+bc.button_style) ;
+            
+            bc.button_style.forEach(function (value){
                 style_name += 'caredove-button-'+value+' ';
+                console.log('value: '+value);
                 switch(value){
                     case 'outline':
                         style_inline = 'border-color:'+bc.button_color+';'+'color:'+bc.text_color+';';
@@ -306,10 +296,54 @@
                         style_inline = 'background-color:'+bc.button_color+';'+'color:'+bc.text_color+';';
                         break;
                 }
-            });
+            });                
 
+            
             var button = '<button type="button" class="caredove-inline-link caredove-styled-button '+style_name+'" style="'+style_inline+'">'+bc.button_text+'</button>';
-            return button;
+            return button;            
+        },
+
+        _getButtonStyles: function ( supplied ) {
+            var t = this;
+            var buttonDetails = {};
+            var button_style = [];
+            var sampleButton = '';
+
+            buttonDetails.button_text = $('.mce-caredove_button_text').val();
+
+            if($('.mce-caredove_button_color').val().length > 0){
+                buttonDetails.button_color = $('.mce-caredove_button_color').val();
+            }
+            if($('.mce-caredove_text_color').val().length > 0){
+                buttonDetails.text_color = $('.mce-caredove_text_color').val();
+            }
+           
+            // const thestyles = function() {
+                if(supplied.length) {
+                    button_style = [supplied];
+                    button_style.map(function(value) {
+                        buttonDetails.button_style = value.split('-');
+                    })                
+                    return buttonDetails.buttonStyle;
+                } else {
+                    button_style = $('.mce-optional.mce-active').attr('class').split(' ');
+                    console.log('getting existing style');
+                    button_style.map(function(value) {
+                        // console.log('value: ' + value);
+                        if( value.indexOf("mce-caredove-style-") > -1 ) {
+                            buttonDetails.button_style = value.replace('mce-caredove-style-','');                                                    
+                            buttonDetails.button_style = buttonDetails.button_style.split('-');
+                            return buttonDetails.buttonStyle;
+                        }               
+                    })
+                }                
+            // }
+           
+            // $.when(thestyles()).done(() => {
+                console.log('thestyles is done');
+                sampleButton = t._doStyledButton(buttonDetails);
+                $('.mce-caredove-sample-button-wrapper').html(sampleButton);
+            // });
         },
 
         _doButton: function( bc ){
