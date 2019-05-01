@@ -169,7 +169,7 @@
                         //     if (urlfield.value.substring(0, baseurl.length) != baseurl){
                         //       urlfield.val(baseurl);
                         //     }
-                        // }                                                           
+                        }                                                           
 
                     },                  
                     
