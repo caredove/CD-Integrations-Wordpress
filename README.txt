@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.2.7
+Stable tag: 0.2.8
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,14 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.2.8 =
+* Updateed placeholder text for button colours
+* Made modal config titles match button text
+* Wraped text on Editor popup modal Descriptions
+* Added back tutorial links
+* Changed the text for the dipslay option dropdown label in both widgets that use it to 'Display Style'
+
 = 0.2.7 =
 * hotfix, admin area wasn't working
 

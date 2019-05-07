@@ -121,7 +121,7 @@
                     // Open window
                     ed.windowManager.open({
                       title: t.shortcodes[shortcode].title,
-                      width: jQuery(window).width() - 500,
+                      width: jQuery(window).width() - 500 > 800 ? jQuery(window).width() - 500 : jQuery(window).width() - 40,
                       height: (jQuery(window).height() > 500 ? jQuery(window).height() - 150 : jQuery(window).height() - 100 ),
                       resizable : true,
                       maximizable: true,
@@ -141,9 +141,13 @@
                       },
                       onrepaint: function(e) {
                         var window_id = this._id;
+
+                        e.execCommand('mceAutoResize');
                         
                         $('.mce-caredove-tinymce-page_url').before($('<span style="left:162px;position:absolute;padding-top:6px;">https://www.caredove.com/</span>'));
                         $('.mce-caredove-tinymce-page_url').css({'left': '+=180','width': '-=180'});                        
+                        
+                        // $('.mce-caredove-tinymce-description').css({'width': '-=400'});
 
                         if(!$('#' + window_id).hasClass('form-initialized')) {
                             $('#' + window_id).addClass('form-initialized');

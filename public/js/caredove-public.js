@@ -56,7 +56,8 @@
 			// // 	toggleModal();
 			// });
 			// closeButton.addEventListener("click", toggleModal);
-			// window.addEventListener("click", windowOnClick);
+			// window.addEventListener("click", windowOnClick);			
+			
 	 		$(".caredove-iframe-button").modaal({
 				loading_content: 'Loading content, please wait.',
     		type: 'iframe',

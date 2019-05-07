@@ -26,10 +26,14 @@
               if( value.indexOf("-hide") > -1 ) {
                   // console.log(value);
                   $('.'+value.replace('-hide','')).val("").parentsUntil('.mce-formitem').hide();
+                  // $('.'+value.replace('-hide','')).val("").attr("disabled", true);
+                  // $('.'+value.replace('-hide','')).val("").addClass("mce-disabled");
               }            
               if( value.indexOf("-show") > -1 ) {
                   // console.log(value);
                   $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
+                  // $('.'+value.replace('-hide','')).val("").removeClass("mce-disabled");
+                  // $('.'+value.replace('-hide','')).val("").removeAttr("disabled");
               }     
           });       
         }

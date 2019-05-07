@@ -183,19 +183,19 @@ class Caredove_Admin {
               'type'   => 'textbox',
               'name'   => 'button_color',
               'label'  => 'Button Color',
-              'text'   => '#fff',
+              'text'   => '#00A4FF',
               'tooltip'=> 'Please use hex "#" color code',
               'classes' => 'caredove_button_color caredove_hide-default',
-              'placeholder' => 'Please use "#", i.e. #55555'
+              'placeholder' => 'Enter Hex Code e.g., #00A4FF'
 			      );
 	  	 $popup->button_options[] = array (
               'type'   => 'textbox',
               'name'   => 'text_color',
               'label'  => 'Text Color',
-              'text'   => '#fff',
+              'text'   => '#FFF',
               'tooltip'=> 'Please use hex "#" color code',
               'classes' => 'caredove_text_color caredove_hide-default',
-              'placeholder' => 'Please use "#", i.e. #55555'
+              'placeholder' => 'Enter Hex Code e.g., #FFF'
 			      );	  	 
 			 $popup->logo = array(
 			 				'type'=> 'container',
@@ -214,7 +214,7 @@ class Caredove_Admin {
 					//first shortcode 'caredove search'
 					'0' => array (
 					'shortcode' => 'caredove_search',
-					'title'=> 'Search Page Settings',
+					'title'=> 'Add a Caredove Search Page',
 		    	'image' => plugins_url("img/search-svg.svg", __FILE__),
 		    	'command' => 'editImage',
 		    	'buttons' => $popup->buttons,
@@ -222,7 +222,7 @@ class Caredove_Admin {
 		    		$popup->logo,
 		    		array(
 						    'type'=> 'container',
-						    'html'=> '<p><strong>Add a Caredove search page to your website</strong> - These can be network search sites, or your organization\'s search site, <br />or even service listings pages. <!-- Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.--></p>',
+						    'html'=> '<p><strong>Add a Caredove search page to your website</strong><br /> These can be network search sites, or your organization\'s search site, <br />or even service listings pages. Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
 						    'classes'=> 'caredove-tinymce-description'
 		    		),
             array(
@@ -241,7 +241,7 @@ class Caredove_Admin {
 	                  array( 'text'=> 'Embedded in page', 'value'=> 'embedded', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-hide caredove_button_color-hide caredove_text_color-hide caredove_button_style-hide' )
               ],
               'name'   => 'display_option',
-              'label'  => 'Search Page Display',
+              'label'  => 'Display Style',
               'classes' => 'optional-control',
 							'value' => 'none'
             ),$popup->button_options[0],$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],
@@ -259,7 +259,7 @@ class Caredove_Admin {
 					), //seccond shortcode 'caredove button'
 					'1' => array (
 						'shortcode' => 'caredove_button',
-						'title' => 'Create a Booking Form Button',
+						'title' => 'Add a Caredove Refer Button',
 						'image' => plugins_url("img/missing-field.svg", __FILE__),
 		    		'command' => 'editImage',
 		    		'buttons' => $popup->buttons,
@@ -267,7 +267,7 @@ class Caredove_Admin {
 		    			$popup->logo,
 		    			array(
 						    'type'=> 'container',
-						    'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong> - Enable submitting secure referrals to a specific service without leaving your website. <!--<br />Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.--></p>',
+						    'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong><br /> Enable submitting secure referrals to a specific service without leaving your website. <br />Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
 						    'classes'=> 'caredove-tinymce-description'
 		    			),
 			    		array(
@@ -284,10 +284,9 @@ class Caredove_Admin {
 											array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
 								],
 								'name'   => 'display_option',
-								'label'  => 'Button Type',
+								'label'  => 'Display Style',
 								'classes' => 'optional-control',
 								'value' => 'none',
-								'disabled' => 'true'
 							),
 	            array (
 	              'type'   => 'textbox',
@@ -296,13 +295,12 @@ class Caredove_Admin {
 	              'value'  => 'Book an Appointment',
 								'tooltip' => 'The title for the popup window, default: Book an Appointment',
 								'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
-								'disabled' => 'true'
 	            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_sample
 			    	]
 					), //third shortcode 'caredove listings'
 					'2' => array ( //do we need Category options?
 						'shortcode' => 'caredove_listings',
-						'title' => 'Display Your Caredove Listings',
+						'title' => 'Add Caredove Listings',
 						'image' => plugins_url("img/listing-lists.svg", __FILE__),
 						'button' => 'false',
 		    		'command' => 'editImage',
