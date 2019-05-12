@@ -183,19 +183,17 @@ class Caredove_Admin {
               'type'   => 'textbox',
               'name'   => 'button_color',
               'label'  => 'Button Color',
-              'text'   => '#00A4FF',
               'tooltip'=> 'Please use hex "#" color code',
               'classes' => 'caredove_button_color caredove_hide-default',
-              'placeholder' => 'Enter Hex Code e.g., #00A4FF'
+              'placeholder' => 'Enter Hex Code e.g., #00A4FF (default)'
 			      );
 	  	 $popup->button_options[] = array (
               'type'   => 'textbox',
               'name'   => 'text_color',
               'label'  => 'Text Color',
-              'text'   => '#FFF',
               'tooltip'=> 'Please use hex "#" color code',
               'classes' => 'caredove_text_color caredove_hide-default',
-              'placeholder' => 'Enter Hex Code e.g., #FFF'
+              'placeholder' => 'Enter Hex Code e.g., #FFFFFF (default)'
 			      );	  	 
 			 $popup->logo = array(
 			 				'type'=> 'container',
@@ -244,7 +242,15 @@ class Caredove_Admin {
               'label'  => 'Display Style',
               'classes' => 'optional-control',
 							'value' => 'none'
-            ),$popup->button_options[0],$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],
+						),
+						array(
+              'type'=> 'textbox',
+              'name'=> 'button_text',
+							'label'=> 'Button Text',
+							'value'=> 'Search',
+              'tooltip'=> 'This will be used for the button text',
+              'classes' => 'caredove_button_text caredove_hide-embedded'
+            ),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],
             array (
               'type'   => 'textbox',
               'name'   => 'modal_title',
@@ -280,7 +286,7 @@ class Caredove_Admin {
 							array (
 								'type'   => 'listbox',
 								'values'  => [
-											 array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
+											array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
 											array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
 								],
 								'name'   => 'display_option',
