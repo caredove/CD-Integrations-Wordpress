@@ -156,11 +156,15 @@
                             var inputs = $('#' + window_id + '-body');
 
                             if (hide_stuff !== ''){
-                                inputs.find('.mce-caredove_hide-'+hide_stuff).parentsUntil('.mce-formitem').hide();
+                                inputs.find('.mce-caredove_hide-'+hide_stuff).attr("disabled", true);
+                                inputs.find('.mce-caredove_hide-'+hide_stuff).addClass("mce-disabled");
+                                inputs.find('.mce-caredove_hide-'+hide_stuff).siblings(".mce-label").addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-sample').hide();
                             } else if(img.length == 0){
                                 //hide stuff when this is a new item we're adding
-                                inputs.find('.mce-caredove_hide-default').parentsUntil('.mce-formitem').hide();
+                                inputs.find('.mce-caredove_hide-default').attr("disabled", true);
+                                inputs.find('.mce-caredove_hide-default').addClass("mce-disabled");
+                                inputs.find('.mce-caredove_hide-default').singlings(".mce-label").addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-sample').hide();
                             }
                             

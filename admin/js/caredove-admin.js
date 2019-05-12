@@ -25,18 +25,25 @@
           variables.map(function(value) {
               if( value.indexOf("-hide") > -1 ) {
                   // console.log(value);
-                  $('.'+value.replace('-hide','')).val("").parentsUntil('.mce-formitem').hide();
-                  // $('.'+value.replace('-hide','')).val("").attr("disabled", true);
-                  // $('.'+value.replace('-hide','')).val("").addClass("mce-disabled");
+                  // $('.'+value.replace('-hide','')).val("").parentsUntil('.mce-formitem').hide();
+                  $('.'+value.replace('-hide','')).val("").attr("disabled", true);
+                  $('.'+value.replace('-hide','')).val("").addClass("mce-disabled");
+                  $('.'+value.replace('-hide','')).val("").siblings(".mce-label").addClass("mce-disabled");
               }            
               if( value.indexOf("-show") > -1 ) {
                   // console.log(value);
-                  $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
-                  // $('.'+value.replace('-hide','')).val("").removeClass("mce-disabled");
-                  // $('.'+value.replace('-hide','')).val("").removeAttr("disabled");
+                  // $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
+                  $('.'+value.replace('-show','')).val("").removeAttr("disabled");
+                  $('.'+value.replace('-show','')).val("").removeClass("mce-disabled");
+                  $('.'+value.replace('-show','')).val("").siblings(".mce-label").removeClass("mce-disabled");
+                  
               }     
           });       
         }
+
+        $(document).on('click', '.mce-optional', function() {
+          caredove_hide_fields(this);
+        });
         
         //updates the button preview in the popup when editing
         // $(document).on('change, keyup, input', '.mce-caredove_button_text, .mce-caredove_button_color, .mce-caredove_text_color', function() {
@@ -90,9 +97,7 @@
         //   caredove_hide_fields('.mce-caredove_button_style');
         // });
         //controls which fields to show or hide depending on a given dropdown option
-        $(document).on('click', '.mce-optional', function() {
-          caredove_hide_fields(this);
-        });                
+                        
         $(document).on('click', '.mce-caredove-sample-button-wrapper-show', function() {
           $('.mce-caredove-sample-button-wrapper').show();
         });

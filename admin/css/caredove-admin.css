@@ -25,6 +25,24 @@
  	background-position: 5px center;
  }
 
+ .mce-textbox.mce-disabled {
+    /* background: #dddddd; */
+    color:#dddddd;
+}
+
+  .mce-textbox.mce-disabled::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #cdcdcdcd;
+    opacity: 1; /* Firefox */
+  }
+  
+  .mce-textbox.mce-disabled:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #cdcdcdcd;
+  }
+  
+  .mce-textbox.mce-disabled::-ms-input-placeholder { /* Microsoft Edge */
+    color: #cdcdcdcd;
+  }
+
 .mce-caredove-tinymce-logo img{
  	max-width:200px;
  	width:200px;

@@ -234,8 +234,8 @@ class Caredove_Admin {
             array (
               'type'   => 'listbox',
               'values'  => [
-              	 		array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
-	                  array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
+              	 		array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_style-show' ),
+	                  array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_style-show' ),
 	                  array( 'text'=> 'Embedded in page', 'value'=> 'embedded', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-hide caredove_button_color-hide caredove_text_color-hide caredove_button_style-hide' )
               ],
               'name'   => 'display_option',
@@ -256,7 +256,7 @@ class Caredove_Admin {
               'name'   => 'modal_title',
               'label'  => 'Popup Window Title',
 							'value'  => 'Search for Services',
-							'placeholder' => 'Search for Services',
+							// 'placeholder' => 'Search for Services',
               'tooltip' => 'The title for the popup window, default: Search for Services',
               'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
             ),
@@ -286,8 +286,8 @@ class Caredove_Admin {
 							array (
 								'type'   => 'listbox',
 								'values'  => [
-											array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
-											array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_color-show caredove_text_color-show caredove_button_style-show' ),
+											array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_style-show' ),
+											array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_style-show' ),
 								],
 								'name'   => 'display_option',
 								'label'  => 'Display Style',
