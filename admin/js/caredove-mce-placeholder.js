@@ -164,7 +164,7 @@
                                 //hide stuff when this is a new item we're adding
                                 inputs.find('.mce-caredove_hide-default').attr("disabled", true);
                                 inputs.find('.mce-caredove_hide-default').addClass("mce-disabled");
-                                inputs.find('.mce-caredove_hide-default').singlings(".mce-label").addClass("mce-disabled");
+                                inputs.find('.mce-caredove_hide-default').siblings(".mce-label").addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-sample').hide();
                             }
                             
