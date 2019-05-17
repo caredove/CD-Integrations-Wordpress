@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.3.2
+Stable tag: 0.3.3
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,11 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.3.3 =
+* added (default) to placeholder text for button field
+* added function to remove trailing slashes on seach page URL field
+* blank fields in admin popup, no longer show as params in shortcodes
 
 = 0.3.2 =
 * Fixed small error in disable field code

@@ -92,11 +92,12 @@
                             //show the class of the field if set
                             // console.log('class = ' + t.shortcodes[shortcode].popupbody[i].classes);
                             // console.log(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name));
+                          
                           if(t.shortcodes[shortcode].popupbody[i].hasOwnProperty('checked')){
                             t.shortcodes[shortcode].popupbody[i].checked = attributes[t.shortcodes[shortcode].popupbody[i].name];
                           }
                           t.shortcodes[shortcode].popupbody[i].value = attributes[t.shortcodes[shortcode].popupbody[i].name];                                                                   
-                          //   console.log(t.shortcodes[shortcode].popupbody[i].name);                 
+                            // console.log(t.shortcodes[shortcode].popupbody[i].name);                                                                                     
                           if(t.shortcodes[shortcode].popupbody[i].value == 'embedded'){
                             hide_stuff = 'embedded';
                           } else if (t.shortcodes[shortcode].popupbody[i].value == 'link') {
@@ -136,8 +137,18 @@
                       onsubmit: function( e ) {
                         var popupValues = e.data;
                         var placeholder = "";
+                        
                         for(var key in popupValues){
-                          placeholder = placeholder + ' ' + key + '="' + popupValues[key] + '"';
+                            
+                            if(key == 'page_url'){
+                                popupValues[key] = popupValues[key].replace(/(\/#|\/|#)$/, '');
+                            }
+                            if(popupValues[key] == ''){
+                                //don't add the shortcode param, if it's blank
+                            } else {
+                                placeholder = placeholder + ' ' + key + '="' + popupValues[key] + '"';
+                            }
+                          
                         }                          
                         // placeholder = placeholder + index +'="'+item'"';
                         ed.insertContent( '['+ t.shortcodes[shortcode].shortcode + ' ' + placeholder + ']' );
@@ -369,7 +380,14 @@
             }
 
             var fontSize = 14;
+            if(typeof bc.button_text !== 'undefined'){
+                
+            } else {
+                bc.button_text = 'default';
+            }
+            
             var buttonWidth = bc.button_text.length * fontSize/2 + 30;                    
+            
 
             image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='"+buttonWidth+"' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='"+buttonWidth+"' height='50' fill='"+bc.button_fill+"' stroke='"+bc.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='"+fontSize+"' fill='"+bc.font_color+"' dominant-baseline='middle' text-anchor='middle'>"+ bc.button_text +"</text></g></svg>";    
             image = "data:image/svg+xml;base64," + btoa(image);

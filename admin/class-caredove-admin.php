@@ -247,7 +247,7 @@ class Caredove_Admin {
               'type'=> 'textbox',
               'name'=> 'button_text',
 							'label'=> 'Button Text',
-							'value'=> 'Search',
+							'placeholder'=> 'Search (default)',
               'tooltip'=> 'This will be used for the button text',
               'classes' => 'caredove_button_text caredove_hide-embedded'
             ),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],
@@ -255,8 +255,7 @@ class Caredove_Admin {
               'type'   => 'textbox',
               'name'   => 'modal_title',
               'label'  => 'Popup Window Title',
-							'value'  => 'Search for Services',
-							// 'placeholder' => 'Search for Services',
+							'placeholder' => 'Search for Services (default)',
               'tooltip' => 'The title for the popup window, default: Search for Services',
               'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
             ),
@@ -298,10 +297,17 @@ class Caredove_Admin {
 	              'type'   => 'textbox',
 	              'name'   => 'modal_title',
 	              'label'  => 'Popup Window Title',
-	              'value'  => 'Book an Appointment',
+	              'placeholder'  => 'Book an Appointment (default)',
 								'tooltip' => 'The title for the popup window, default: Book an Appointment',
 								'classes' => 'caredove_modal_title caredove_hide-embedded caredove_hide-link',
-	            ), $popup->button_options[0],$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_sample
+	            ), array(
+								'type'=> 'textbox',
+								'name'=> 'button_text',
+								'label'=> 'Button Text',
+								'placeholder'=> 'Book Now (default)',
+								'tooltip'=> 'This will be used for the button text',
+								'classes' => 'caredove_button_text caredove_hide-embedded'
+							),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_sample
 			    	]
 					), //third shortcode 'caredove listings'
 					'2' => array ( //do we need Category options?
@@ -342,7 +348,14 @@ class Caredove_Admin {
 									array( 'text'=> '100', 'value'=>'100'),
 								]
 							),
-							$popup->button_options[0],$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_sample
+							array(
+								'type'=> 'textbox',
+								'name'=> 'button_text',
+								'label'=> 'Button Text',
+								'tooltip'=> 'This will be used for the button text',
+								'placeholder'=> 'Book Now (default)',
+								'classes' => 'caredove_button_text caredove_hide-embedded'
+							),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_sample
 			    	]
 					)
 
