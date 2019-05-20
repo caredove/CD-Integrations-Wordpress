@@ -64,6 +64,9 @@ button.caredove-button-outline, input[type="button"].caredove-button-outline, .c
 
 button.caredove-button-solid, input[type="button"].caredove-button-solid, .caredove-button-solid, a.caredove-button-solid {
     border-width:0;
+    border-width:2px;
+    border-style:solid;
+    border-color:#00A4FF;
 }
  
 .caredove-listings {

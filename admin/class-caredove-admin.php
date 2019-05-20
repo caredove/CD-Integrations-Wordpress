@@ -178,7 +178,7 @@ class Caredove_Admin {
               ],
               'classes' => 'caredove_button_style caredove_hide-embedded optional-control',
               'value' => 'default'
-			      );
+						);						
 	  	 $popup->button_options[] = array (
               'type'   => 'textbox',
               'name'   => 'button_color',
@@ -194,7 +194,23 @@ class Caredove_Admin {
               'tooltip'=> 'Please use hex "#" color code',
               'classes' => 'caredove_text_color caredove_hide-default',
               'placeholder' => 'Enter Hex Code e.g., #FFFFFF (default)'
-			      );	  	 
+						);	
+				$popup->button_options[] = array(
+					'type'   => 'container',
+					'name'   => 'button_style_hidden',
+					'label'  => '',
+					'html' => "<select class='caredove_button_style caredove_hide-embedded optional-control'>
+							<option value='default' class='optional caredove_button_color-hide caredove_text_color-hide caredove-style-default'>Theme Default</option>
+							<option value='solid-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'>Small - solid</option>
+							<option value='solid-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md'>Medium - solid</option>
+							<option value='solid-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg'>Large - solid</option>
+							<option value='outline-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm'>Small - outlined</option>
+							<option value='outline-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md'>Medium - outlined</option>
+							<option value='outline-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg'>Large - outlined</option>
+					</select>",
+					'hidden' => 'true',
+					'classes' => ''
+				);						  	 
 			 $popup->logo = array(
 			 				'type'=> 'container',
 			 				'html'=> '<img src="'.plugins_url("img/Caredove-Logo.svg", __FILE__).'" />',
@@ -250,7 +266,7 @@ class Caredove_Admin {
 							'placeholder'=> 'Search (default)',
               'tooltip'=> 'This will be used for the button text',
               'classes' => 'caredove_button_text caredove_hide-embedded'
-            ),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],
+            ),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_options[4],
             array (
               'type'   => 'textbox',
               'name'   => 'modal_title',
@@ -307,7 +323,7 @@ class Caredove_Admin {
 								'placeholder'=> 'Book Now (default)',
 								'tooltip'=> 'This will be used for the button text',
 								'classes' => 'caredove_button_text caredove_hide-embedded'
-							),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_sample
+							),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_options[4],$popup->button_sample
 			    	]
 					), //third shortcode 'caredove listings'
 					'2' => array ( //do we need Category options?
@@ -355,7 +371,7 @@ class Caredove_Admin {
 								'tooltip'=> 'This will be used for the button text',
 								'placeholder'=> 'Book Now (default)',
 								'classes' => 'caredove_button_text caredove_hide-embedded'
-							),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_sample
+							),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_options[4],$popup->button_sample
 			    	]
 					)
 

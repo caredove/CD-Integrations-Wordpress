@@ -26,76 +26,87 @@
               if( value.indexOf("-hide") > -1 ) {
                   // console.log(value);
                   // $('.'+value.replace('-hide','')).val("").parentsUntil('.mce-formitem').hide();
-                  $('.'+value.replace('-hide','')).val("").attr("disabled", true);
-                  $('.'+value.replace('-hide','')).val("").addClass("mce-disabled");
-                  $('.'+value.replace('-hide','')).val("").siblings(".mce-label").addClass("mce-disabled");
+                  $('.'+value.replace('-hide','')).attr("disabled", true);
+                  $('.'+value.replace('-hide','')).addClass("mce-disabled");
+                  $('.'+value.replace('-hide','')).siblings(".mce-label").addClass("mce-disabled");
               }            
               if( value.indexOf("-show") > -1 ) {
                   // console.log(value);
                   // $('.'+value.replace('-show', '')).parentsUntil('.mce-formitem').show();
-                  $('.'+value.replace('-show','')).val("").removeAttr("disabled");
-                  $('.'+value.replace('-show','')).val("").removeClass("mce-disabled");
-                  $('.'+value.replace('-show','')).val("").siblings(".mce-label").removeClass("mce-disabled");
+                  $('.'+value.replace('-show','')).removeAttr("disabled");
+                  $('.'+value.replace('-show','')).removeClass("mce-disabled");
+                  $('.'+value.replace('-show','')).siblings(".mce-label").removeClass("mce-disabled");
                   
               }     
           });       
         }
 
         $(document).on('click', '.mce-optional', function() {
+          //when changing the button style options, hide necesarry fields
           caredove_hide_fields(this);
+
+          // Copy the button style dropdown value to a hidden select field
+          var variables = $(this).attr('class').split(' ');
+          var button_style = '';
+
+          variables.map(function(value) {
+              if( value.indexOf("mce-caredove-style-") > -1 ) {
+                  
+                  var button_style = value.replace('mce-caredove-style-','');
+                  // console.log('new style - ' + button_style);
+                  $('select.caredove_button_style').val(button_style).change();
+              }                          
+          });                           
         });
-        
-        //updates the button preview in the popup when editing
-        // $(document).on('change, keyup, input', '.mce-caredove_button_text, .mce-caredove_button_color, .mce-caredove_text_color', function() {
-        //     console.log('input happening');
-        //     var buttonDetails = {};
-        //     var button_style = '';
-            
-        //     buttonDetails.button_text = $('.mce-caredove_button_text').val();
-        //     button_style = $('.mce-optional.mce-active').attr('class').split(' ');
 
-        //     console.log('button style = ' + button_style);
+        $(document).on('change', 'select.caredove_button_style', function() {
+          do_button_style();
+        });
 
-        //     if($('.mce-caredove_button_color').val().length > 0){
-        //         buttonDetails.button_color = $('.mce-caredove_button_color').val();
-        //     }
-        //     if($('.mce-caredove_text_color').val().length > 0){
-        //         buttonDetails.text_color = $('.mce-caredove_text_color').val();
-        //     }
-        //     const thestyles = button_style.map(function(value) {
-        //         if( value.indexOf("mce-caredove-style-") > -1 ) {
-        //             buttonDetails.button_style = value.replace('mce-caredove-style-','');                                
-        //             buttonDetails.button_style = buttonDetails.button_style.split('-');
-        //         }
-        //     })
-        //     Promise.all(thestyles).then(() => {
-        //         sampleButton = doStyledButton(buttonDetails);
-        //         $('.mce-caredove-sample-button-wrapper').html(sampleButton);
-        //     });
-        // });  
-        
-        // function doStyledButton( bc ){
-        //   var style_name = '';
+        $(document).on('keyup, input', '.mce-caredove_button_text, .mce-caredove_button_color, .mce-caredove_text_color', function() {                         
+          do_button_style();
+        });        
 
-        //   bc.button_style.forEach(function (value, i){
-        //      style_name += 'caredove-button-'+value+' ';
-        //      switch(value){
-        //          case 'outline':
-        //              style_inline = 'border-color:'+bc.button_color+';'+'color:'+bc.text_color+';';
-        //              break;
-        //          case 'solid':
-        //              style_inline = 'background-color:'+bc.button_color+';'+'color:'+bc.text_color+';';
-        //              break;
-        //      }
-        //  });
+        function do_button_style() {
+          var style_name = "";
+          var button_color = "";
+          var text_color = "";
+          var button_text = "";
+          var style_inline = "";
+          var thestyles = $('select.caredove_button_style').val().split('-');
 
-        //  var button = '<button type="button" class="caredove-inline-link caredove-styled-button '+style_name+'" style="'+style_inline+'">'+bc.button_text+'</button>';
-        //  return button;
-        // }
+          if($('.mce-caredove_button_text').val().length > 0){
+            button_text = $('.mce-caredove_button_text').val();
+          }else {
+            button_text = $('.mce-caredove_button_text').attr('placeholder');
+          }
+          
+          if($('.mce-caredove_button_color').val().length > 0){
+              console.log('button color is filled');
+              button_color = $('.mce-caredove_button_color').val();
+          } else {
+              button_color = "#00A4FF";
+          }
+          if($('.mce-caredove_text_color').val().length > 0){
+              text_color = $('.mce-caredove_text_color').val();
+          } else {
+              text_color = "#ffffff";
+          }
 
-        // $(".caredove-admin-button").on('click', function() {
-        //   caredove_hide_fields('.mce-caredove_button_style');
-        // });
+          style_name += 'caredove-button-'+thestyles[0]+' ';
+          style_name += 'caredove-button-'+thestyles[1]+' ';
+          
+          if(thestyles[0] == 'solid'){
+            style_inline = 'background-color:'+button_color+';'+'color:'+text_color+';';
+          } else {
+            style_inline = 'border-color:'+button_color+';'+'color:'+text_color+';';
+          };
+          
+          var button = '<button type="button" class="caredove-inline-link caredove-styled-button '+style_name+'" style="'+style_inline+'">'+button_text+'</button>';
+          $('.mce-caredove-sample-button-wrapper').html(button);
+
+        };
+      
         //controls which fields to show or hide depending on a given dropdown option
                         
         $(document).on('click', '.mce-caredove-sample-button-wrapper-show', function() {

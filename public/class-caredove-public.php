@@ -128,6 +128,7 @@ class Caredove_Public {
 	public function caredove_button($a) {
 			$style_name = '';
 			$style_inline = '';
+			$style_class = '';
 
 			$button_style = explode('-', $a['button_style']);
 			foreach ($button_style as $value){
@@ -136,24 +137,26 @@ class Caredove_Public {
 					case 'outline':
 						$style_inline = 'border-color:'.$a['button_color'].';';
 						$style_inline .= 'color:'.$a['text_color'].';';
+						$style_class = 'caredove-styled-button';
 						break;
 					case 'solid':
 						$style_inline = 'background-color:'.$a['button_color'].';';
+						$style_inline .= 'border-color:'.$a['button_color'].';';
 						$style_inline .= 'color:'.$a['text_color'].';';
+						$style_class = 'caredove-styled-button';
 						break;
-
 				}
 			}
 		if($a['display_option'] == 'link'){
 		 		ob_start();
 				?>
-					<button type="button" onclick="window.open('<?php echo $a['page_url']; ?>','_blank');" class="caredove-inline-link caredove-styled-button <?php echo $style_name ?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+					<button type="button" onclick="window.open('<?php echo $a['page_url']; ?>','_blank');" class="caredove-inline-link <?php echo $style_class?> <?php echo $style_name ?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
 				<?php
 				return ob_get_clean();
 		} else {
 				ob_start();
 								?>
-				<button type="button" class="caredove-styled-button caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+				<button type="button" class="<?php echo $style_class?> caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
 				<?php
 				return ob_get_clean();
 		}
