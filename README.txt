@@ -40,6 +40,7 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 = 0.3.5 =
 * Updated iFrame base URL for search popup to: https://www.caredove.com/
+* also updated for Button/Link
 
 = 0.3.4 =
 * Finished implementing new instant button preview in backend editor

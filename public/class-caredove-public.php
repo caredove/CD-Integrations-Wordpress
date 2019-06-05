@@ -147,10 +147,12 @@ class Caredove_Public {
 						break;
 				}
 			}
+			$full_url = "https://www.caredove.com/".$a['page_url'];
+
 		if($a['display_option'] == 'link'){
 		 		ob_start();
 				?>
-					<button type="button" onclick="window.open('<?php echo $a['page_url']; ?>','_blank');" class="caredove-inline-link <?php echo $style_class?> <?php echo $style_name ?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+					<button type="button" onclick="window.open('<?php echo $full_url; ?>','_blank');" class="caredove-inline-link <?php echo $style_class?> <?php echo $style_name ?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
 				<?php
 				return ob_get_clean();
 		} else {
