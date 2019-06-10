@@ -106,6 +106,8 @@
                           } else if (t.shortcodes[shortcode].popupbody[i].value == 'default') {
                             hide_stuff = 'default';
                           }                          
+                        } else {
+                            t.shortcodes[shortcode].popupbody[i].value = '';
                         }
                       }                     
                     };                             
@@ -148,10 +150,11 @@
                         $('.mce-caredove-tinymce-page_url').css({'left': '+=180','width': '-=180'});                        
                         
                         button_styles = attributes['button_style']; 
-                        console.log(button_styles);
+                        // console.log(button_styles);
                         $('select.caredove_button_style').val(button_styles).change();
 
-                        do_button_style();
+                        //moved this function to the caredove-admin.js file
+                        // do_button_style();
 
                         // $('.mce-caredove-tinymce-description').css({'width': '-=400'});       
 

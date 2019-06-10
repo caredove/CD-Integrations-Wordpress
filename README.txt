@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.3.5
+Stable tag: 0.3.6
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,11 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.3.6 =
+* Made embeded iFrame for Search page min-height 900px;
+* Fixed issue where button colour/text colour files are not greying out on TinyMCE editor load
+* Fixed issue where editing a button that hand blank field values whould show in TinyMCE editor
 
 = 0.3.5 =
 * Updated iFrame base URL for search popup to: https://www.caredove.com/

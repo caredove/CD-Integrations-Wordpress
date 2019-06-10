@@ -94,7 +94,7 @@ button.caredove-button-solid, input[type="button"].caredove-button-solid, .cared
 }
  #caredove-iframe, .modaal-iframe-elem {
     width:100%;
-    min-height:300px;
+    min-height:900px;
     height:100%;
     border:0;
     overflow-x:hidden; overflow-y:auto;
