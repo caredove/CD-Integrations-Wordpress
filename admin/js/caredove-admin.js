@@ -67,44 +67,56 @@
           do_button_style();
         });        
 
-        function do_button_style() {
-          var style_name = "";
-          var button_color = "";
-          var text_color = "";
-          var button_text = "";
-          var style_inline = "";
-          var thestyles = $('select.caredove_button_style').val().split('-');
+        function do_button_style() {          
+            var style_name = "";
+            var button_color = "";
+            var text_color = "#ffffff";
+            var button_text = "";
+            var style_inline = "";
+            var thestyles = $('select.caredove_button_style').val();
 
-          if($('.mce-caredove_button_text').val().length > 0){
-            button_text = $('.mce-caredove_button_text').val();
-          }else {
-            button_text = $('.mce-caredove_button_text').attr('placeholder');
-          }
-          
-          if($('.mce-caredove_button_color').val().length > 0){
-              console.log('button color is filled');
-              button_color = $('.mce-caredove_button_color').val();
-          } else {
-              button_color = "#00A4FF";
-          }
-          if($('.mce-caredove_text_color').val().length > 0){
-              text_color = $('.mce-caredove_text_color').val();
-          } else {
-              text_color = "#ffffff";
-          }
+            if($('.mce-caredove_button_text').val().length > 0){
+              button_text = $('.mce-caredove_button_text').val();
+            }else {
+              button_text = $('.mce-caredove_button_text').attr('placeholder');
+            }
+            
+            if($('.mce-caredove_button_color').val().length > 0){
+                console.log('button color is filled');
+                button_color = $('.mce-caredove_button_color').val();
+            } else {
+                button_color = "#00A4FF";
+            }
 
-          style_name += 'caredove-button-'+thestyles[0]+' ';
-          style_name += 'caredove-button-'+thestyles[1]+' ';
-          
-          if(thestyles[0] == 'solid'){
-            style_inline = 'background-color:'+button_color+';'+'color:'+text_color+';';
-          } else {
-            style_inline = 'border-color:'+button_color+';'+'color:'+text_color+';';
-          };
-          
-          var button = '<button type="button" class="caredove-inline-link caredove-styled-button '+style_name+'" style="'+style_inline+'">'+button_text+'</button>';
-          $('.mce-caredove-sample-button-wrapper').html(button);
 
+            thestyles = thestyles.split('-');
+
+            if($('.mce-caredove_text_color').val().length > 0){
+                text_color = $('.mce-caredove_text_color').val();
+            } else if(button_color == '#00A4FF' && thestyles[0] == 'outline') {
+                text_color = "#00A4FF";
+            }
+
+            
+            if(thestyles != null){
+              if(thestyles == 'default') {
+                $('.mce-caredove_button_color').val('');
+                $('.mce-caredove_text_color').val('');
+              }
+              
+              style_name += 'caredove-button-'+thestyles[0]+' ';
+              style_name += 'caredove-button-'+thestyles[1]+' ';
+              
+              if(thestyles[0] == 'solid'){
+                style_inline = 'background-color:'+button_color+';'+'color:'+text_color+';';
+              } else {
+                style_inline = 'border-color:'+button_color+';'+'color:'+text_color+';';
+              };
+              
+              var button = '<button type="button" class="caredove-inline-link caredove-styled-button '+style_name+'" style="'+style_inline+'">'+button_text+'</button>';
+              $('.mce-caredove-sample-button-wrapper').html(button);
+            }
+            
         };
       
         //controls which fields to show or hide depending on a given dropdown option

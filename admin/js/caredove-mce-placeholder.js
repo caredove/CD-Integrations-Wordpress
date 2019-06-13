@@ -299,30 +299,57 @@
 
         },
 
-        _doButton: function( bc ){
+        _doButton: function( bc, co ){
             var t = this;
-
-            bc.button_fill = 'none';
-            bc.font_color = 'black';
-
+            // console.log('co: ' + JSON.stringify(co));
+            
+            button_fill = '#00A4FF';
+            button_border = '#00A4FF';
+            font_color = '#FFFFFF';
+            button_text = 'Book Now (default)';
+                        
             if(bc.button_style == "solid-md" || bc.button_style == "solid-lg" || bc.button_style == "solid-sm"){
-                bc.button_fill = bc.button_color;                       
+                if(typeof bc.button_color !== 'undefined'){
+                    button_fill = bc.button_color;
+                    button_border = bc.button_color;
+                }
+                if(typeof bc.text_color !== 'undefined'){
+                    font_color= bc.text_color;                   
+                } 
+
+            } else if(bc.button_style == "outline-md" || bc.button_style == "outline-lg" || bc.button_style == "outline-sm") {
+                button_fill = 'transparent';
+                if(typeof bc.button_color !== 'undefined'){
+                    button_border = bc.button_color;
+                }
+                if(typeof bc.text_color !== 'undefined'){
+                    font_color= bc.text_color;                   
+                } 
+            } else {
+                font_color = '#FFFFFF';
+                button_fill = '#000000';
+                button_border = '#000000';
             }
-            if(bc.text_color !== ''){
-                bc.font_color = bc.text_color;  
-            }
+        
+            if(button_fill == 'transparent' && font_color == '#FFFFFF'){
+                font_color = '#00A4FF';
+            }            
 
             var fontSize = 14;
+
             if(typeof bc.button_text !== 'undefined'){
-                
+                button_text = bc.button_text
             } else {
-                bc.button_text = 'default';
+                if(co.includes('caredove_search')){
+                    button_text = 'Search (default)';
+                }
             }
+
             
-            var buttonWidth = bc.button_text.length * fontSize/2 + 30;                    
+            var buttonWidth = button_text.length * fontSize/2 + 30;                    
             
 
-            image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='"+buttonWidth+"' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='"+buttonWidth+"' height='50' fill='"+bc.button_fill+"' stroke='"+bc.button_color+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='"+fontSize+"' fill='"+bc.font_color+"' dominant-baseline='middle' text-anchor='middle'>"+ bc.button_text +"</text></g></svg>";    
+            image = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='"+buttonWidth+"' height='50'><title>Placeholder Button</title><g><rect x='0' y='0' width='"+buttonWidth+"' height='50' fill='"+button_fill+"' stroke='"+button_border+"' stroke-width='4'></rect><text x='50%' y='50%' font-family='Verdana' font-size='"+fontSize+"' fill='"+font_color+"' dominant-baseline='middle' text-anchor='middle'>"+ button_text +"</text></g></svg>";    
             image = "data:image/svg+xml;base64," + btoa(image);
 
             return image;           
@@ -359,7 +386,7 @@
                     
                 });
                 if(shortcode_fields.button_text != '' && t.shortcodes[b].button != 'false'){
-                   image = t._doButton(shortcode_fields);
+                   image = t._doButton(shortcode_fields, co);
                     // console.log(image);
                 } else {
                     image = t.shortcodes[b].image;

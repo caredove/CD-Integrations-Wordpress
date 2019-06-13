@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.3.6
+Stable tag: 0.3.7
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,10 +38,17 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.3.7 =
+* Fixing JS issues with button style dropdown caused when null - this was stopping the Fields from beign disabled when default style was chosen
+* Fixed issue where button colours wouldn't clear if switching back to default button style
+* Fixed colour issues with SVG placeholder button image
+* Fixed button text issues with SVG placeholder button image
+* Fixed Button preview sometimes showing white text on white background
+
 = 0.3.6 =
-* Made embeded iFrame for Search page min-height 900px;
+* Made embedded iFrame for Search page min-height 900px;
 * Fixed issue where button colour/text colour files are not greying out on TinyMCE editor load
-* Fixed issue where editing a button that hand blank field values whould show in TinyMCE editor
+* Fixed issue where editing a button that hand blank field values would show in TinyMCE editor
 
 = 0.3.5 =
 * Updated iFrame base URL for search popup to: https://www.caredove.com/
