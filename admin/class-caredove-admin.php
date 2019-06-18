@@ -135,10 +135,10 @@ class Caredove_Admin {
 
 			$caredove_booking_buttons = [];
 			$caredove_listing_categories = [];
-		  $caredove_api_listings = Caredove_Admin::get_api_listings($listings_options = '');
-		  $api_listings = json_decode($caredove_api_listings, true);
-		  $caredove_api_categories = Caredove_Admin::get_api_categories();
-		  $api_categories = json_decode($caredove_api_categories, true);
+			$caredove_api_listings = Caredove_Admin::get_api_listings($listings_options = '');
+			$api_listings = json_decode($caredove_api_listings, true);
+			$caredove_api_categories = Caredove_Admin::get_api_categories();
+			$api_categories = json_decode($caredove_api_categories, true);
 
 			if(isset($api_categories['results'])){
 				$caredove_listing_categories[] = array('text' => 'All Categories', 'value' => '');
@@ -156,61 +156,61 @@ class Caredove_Admin {
 			}
 
 			//these are the defaults for button_options we want included whenever there is buttons available
-		  $popup->button_options[] = array(
+		    $popup->button_options[] = array(
               'type'=> 'textbox',
               'name'=> 'button_text',
               'label'=> 'Button Text',
               'tooltip'=> 'This will be used for the button text',
               'classes' => 'caredove_button_text caredove_hide-embedded'
             );
-			 $popup->button_options[] = array(
-		    			'type'   => 'listbox',
-              'name'   => 'button_style',
-              'label'  => 'Button Style',
-              'values' => [
-                  array( 'text'=> 'Theme Default', 'value'=> 'default', 'classes'=> 'optional caredove_button_color-hide caredove_text_color-hide caredove-style-default' ),
-                  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'),
-                  array( 'text'=> 'Medium - solid', 'value'=> 'solid-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md' ),
-                  array( 'text'=> 'Large - solid', 'value'=> 'solid-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg' ),
-                  array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm' ),
-                  array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md' ),
-                  array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg' ),
-              ],
-              'classes' => 'caredove_button_style caredove_hide-embedded optional-control',
-              'value' => 'default'
-						);						
-	  	 $popup->button_options[] = array (
-              'type'   => 'textbox',
-              'name'   => 'button_color',
-              'label'  => 'Button Color',
-              'tooltip'=> 'Please use hex "#" color code',
-              'classes' => 'caredove_button_color caredove_hide-default',
-              'placeholder' => 'Enter Hex Code e.g., #00A4FF (default)'
-			      );
-	  	 $popup->button_options[] = array (
-              'type'   => 'textbox',
-              'name'   => 'text_color',
-              'label'  => 'Text Color',
-              'tooltip'=> 'Please use hex "#" color code',
-              'classes' => 'caredove_text_color caredove_hide-default',
-              'placeholder' => 'Enter Hex Code e.g., #FFFFFF (default)'
-						);	
-				$popup->button_options[] = array(
-					'type'   => 'container',
-					'name'   => 'button_style_hidden',
-					'label'  => '',
-					'html' => "<select class='caredove_button_style caredove_hide-embedded optional-control'>
-							<option value='default' class='optional caredove_button_color-hide caredove_text_color-hide caredove-style-default'>Theme Default</option>
-							<option value='solid-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'>Small - solid</option>
-							<option value='solid-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md'>Medium - solid</option>
-							<option value='solid-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg'>Large - solid</option>
-							<option value='outline-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm'>Small - outlined</option>
-							<option value='outline-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md'>Medium - outlined</option>
-							<option value='outline-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg'>Large - outlined</option>
-					</select>",
-					'hidden' => 'true',
-					'classes' => ''
-				);						  	 
+			$popup->button_options[] = array(
+		    	'type'   => 'listbox',
+				'name'   => 'button_style',
+				'label'  => 'Button Style',
+				'values' => [
+					array( 'text'=> 'Theme Default', 'value'=> 'default', 'classes'=> 'optional caredove_button_color-hide caredove_text_color-hide caredove-style-default' ),
+					array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'),
+					array( 'text'=> 'Medium - solid', 'value'=> 'solid-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md' ),
+					array( 'text'=> 'Large - solid', 'value'=> 'solid-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg' ),
+					array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm' ),
+					array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md' ),
+					array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg' ),
+				],
+				'classes' => 'caredove_button_style caredove_hide-embedded optional-control',
+				'value' => 'default'
+			);						
+			$popup->button_options[] = array (
+				'type'   => 'textbox',
+				'name'   => 'button_color',
+				'label'  => 'Button Color',
+				'tooltip'=> 'Please use hex "#" color code',
+				'classes' => 'caredove_button_color caredove_hide-default',
+				'placeholder' => 'Enter Hex Code e.g., #00A4FF (default)'
+					);
+			$popup->button_options[] = array (
+				'type'   => 'textbox',
+				'name'   => 'text_color',
+				'label'  => 'Text Color',
+				'tooltip'=> 'Please use hex "#" color code',
+				'classes' => 'caredove_text_color caredove_hide-default',
+				'placeholder' => 'Enter Hex Code e.g., #FFFFFF (default)'
+							);	
+			$popup->button_options[] = array(
+				'type'   => 'container',
+				'name'   => 'button_style_hidden',
+				'label'  => '',
+				'html' => "<select class='caredove_button_style caredove_hide-embedded optional-control'>
+						<option value='default' class='optional caredove_button_color-hide caredove_text_color-hide caredove-style-default'>Theme Default</option>
+						<option value='solid-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'>Small - solid</option>
+						<option value='solid-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md'>Medium - solid</option>
+						<option value='solid-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg'>Large - solid</option>
+						<option value='outline-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm'>Small - outlined</option>
+						<option value='outline-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md'>Medium - outlined</option>
+						<option value='outline-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg'>Large - outlined</option>
+				</select>",
+				'hidden' => 'true',
+				'classes' => ''
+			);						  	 
 			 $popup->logo = array(
 			 				'type'=> 'container',
 			 				'html'=> '<img src="'.plugins_url("img/Caredove-Logo.svg", __FILE__).'" />',
@@ -282,21 +282,27 @@ class Caredove_Admin {
 						'shortcode' => 'caredove_button',
 						'title' => 'Add a Caredove Refer Button',
 						'image' => plugins_url("img/missing-field.svg", __FILE__),
-		    		'command' => 'editImage',
-		    		'buttons' => $popup->buttons,
-		    		'popupbody' => [
-		    			$popup->logo,
-		    			array(
-						    'type'=> 'container',
-						    'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong><br /> Enable submitting secure referrals to a specific service without leaving your website. <br />Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
-						    'classes'=> 'caredove-tinymce-description'
-		    			),
-			    		array(
-			    					'type'   => 'listbox',
-                    'name'   => 'page_url',
-                    'label'  => 'Booking Form',
-                    'values' => $caredove_booking_buttons,
-                    'value' => 'none'
+						'command' => 'editImage',
+						'buttons' => $popup->buttons,
+						'popupbody' => [
+							$popup->logo,
+							array(
+								'type'=> 'container',
+								'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong><br /> Enable submitting secure referrals to a specific service without leaving your website. <br />Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
+								'classes'=> 'caredove-tinymce-description'
+							),
+							// array(
+							// 	'type'=> 'container',
+							// 	'name'=> 'sample_view_link',
+							// 	'html'=> '<a href="#">view page</a>',
+							// 	'classes'=> 'caredove-sample-view-link'
+							// ),
+							array(
+								'type'   => 'listbox',
+								'name'   => 'page_url',
+								'label'  => 'Booking Form',
+								'values' => $caredove_booking_buttons,
+								'value' => 'none'
 							),
 							array (
 								'type'   => 'listbox',

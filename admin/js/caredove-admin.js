@@ -86,19 +86,18 @@
                 button_color = $('.mce-caredove_button_color').val();
             } else {
                 button_color = "#00A4FF";
-            }
-
-
-            thestyles = thestyles.split('-');
-
-            if($('.mce-caredove_text_color').val().length > 0){
-                text_color = $('.mce-caredove_text_color').val();
-            } else if(button_color == '#00A4FF' && thestyles[0] == 'outline') {
-                text_color = "#00A4FF";
-            }
-
+            }          
             
             if(thestyles != null){
+
+              thestyles = thestyles.split('-');
+
+              if($('.mce-caredove_text_color').val().length > 0){
+                  text_color = $('.mce-caredove_text_color').val();
+              } else if(button_color == '#00A4FF' && thestyles[0] == 'outline') {
+                  text_color = "#00A4FF";
+              }
+              
               if(thestyles == 'default') {
                 $('.mce-caredove_button_color').val('');
                 $('.mce-caredove_text_color').val('');

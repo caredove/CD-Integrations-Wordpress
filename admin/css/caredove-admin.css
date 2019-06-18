@@ -192,3 +192,8 @@ button.caredove-button-outline, input[type="button"].caredove-button-outline, .c
 button.caredove-button-solid, input[type="button"].caredove-button-solid, .caredove-button-solid, a.caredove-button-solid {
     border-width:0;
 }
+
+
+.mce-caredove-sample-view-link a {
+    float:right;
+}

@@ -110,7 +110,8 @@
                             t.shortcodes[shortcode].popupbody[i].value = '';
                         }
                       }                     
-                    };                             
+                    };
+                                                           
                     
                     // Open window
                     ed.windowManager.open({
@@ -144,22 +145,21 @@
                         ed.insertContent( '['+ t.shortcodes[shortcode].shortcode + ' ' + placeholder + ']' );
                       },
                       onrepaint: function(e) {
-                        var window_id = this._id;
-                        
-                        $('.mce-caredove-tinymce-page_url').before($('<span style="left:162px;position:absolute;padding-top:6px;">https://www.caredove.com/</span>'));
-                        $('.mce-caredove-tinymce-page_url').css({'left': '+=180','width': '-=180'});                        
-                        
+                        var window_id = this._id;                                                                                        
+
                         button_styles = attributes['button_style']; 
                         // console.log(button_styles);
                         $('select.caredove_button_style').val(button_styles).change();
-
+                                                     
                         //moved this function to the caredove-admin.js file
                         // do_button_style();
 
-                        // $('.mce-caredove-tinymce-description').css({'width': '-=400'});       
+                        if(!$('#' + window_id).hasClass('form-initialized')) {                                 
 
-                        if(!$('#' + window_id).hasClass('form-initialized')) {
                             $('#' + window_id).addClass('form-initialized');
+                            textboxwidth = $('#' + window_id).width() - 380 + 'px';
+                            $('.mce-caredove-tinymce-page_url').before($('<span style="left:162px;position:absolute;padding-top:6px;">https://www.caredove.com/</span>'));
+                            $('.mce-caredove-tinymce-page_url').css({'left': '340px','width': textboxwidth});                            
                             
                             var inputs = $('#' + window_id + '-body');
 
@@ -174,21 +174,7 @@
                                 inputs.find('.mce-caredove_hide-default').addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-default').siblings(".mce-label").addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-sample').hide();
-                            }
-                            
-                            
-                            
-                            // t._getButtonStyles();
-                        //     $(".mce-caredove-tinymce-page_url").prefix('https://www.caredove.com/');
-                        //     $(".mce-caredove-tinymce-page_url").val('https://www.caredove.com/');
-                                                    
-                        // }
-                        // var baseurl = 'https://www.caredove.com/';
-                        // var urlfield = $('.mce-caredove-tinymce-page_url');
-                        // if(urlfield.length > 0){
-                        //     if (urlfield.value.substring(0, baseurl.length) != baseurl){
-                        //       urlfield.val(baseurl);
-                        //     }
+                            }                           
                         }                                                           
                     },                  
                     

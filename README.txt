@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.3.7
+Stable tag: 0.3.8
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,8 +38,11 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.3.8 =
+* Fixed issue with search page TinyMCE editor, where URL textbox would flow off of popup window when resizing page. 
+
 = 0.3.7 =
-* Fixing JS issues with button style dropdown caused when null - this was stopping the Fields from beign disabled when default style was chosen
+* Fixing JS issues with button style dropdown caused when null - this was stopping the Fields from being disabled when default style was chosen
 * Fixed issue where button colours wouldn't clear if switching back to default button style
 * Fixed colour issues with SVG placeholder button image
 * Fixed button text issues with SVG placeholder button image
