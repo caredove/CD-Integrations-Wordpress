@@ -291,18 +291,19 @@ class Caredove_Admin {
 								'html'=> '<p><strong>Add a Caredove refer/book button to your page</strong><br /> Enable submitting secure referrals to a specific service without leaving your website. <br />Read <a href="http://help.caredove.com/developer-integrations/add-caredove-to-your-wordpress-site" target="_blank">the tutorial</a> to learn more.</p>',
 								'classes'=> 'caredove-tinymce-description'
 							),
-							// array(
-							// 	'type'=> 'container',
-							// 	'name'=> 'sample_view_link',
-							// 	'html'=> '<a href="#">view page</a>',
-							// 	'classes'=> 'caredove-sample-view-link'
-							// ),
+							array(
+								'type'=> 'container',
+								'name'=> 'sample_view_link',
+								'html'=> '<a href="#" target="_blank" class="caredove-sample-view-link">view page</a>',
+								'classes'=> 'caredove-sample-view-link'
+							),
 							array(
 								'type'   => 'listbox',
 								'name'   => 'page_url',
 								'label'  => 'Booking Form',
 								'values' => $caredove_booking_buttons,
-								'value' => 'none'
+								'value' => 'none',
+								'classes' => 'caredove-booking-button-link'
 							),
 							array (
 								'type'   => 'listbox',

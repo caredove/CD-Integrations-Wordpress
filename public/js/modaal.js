@@ -933,6 +933,12 @@
 
 									// now push content into markup
 				self.build_modal(content);	
+
+			setTimeout(
+				function() {
+					$('.modaal-iframe-elem').css('background', 'url("/wp-content/plugins/caredove/public/img/error-svg.svg") center center no-repeat');
+				}, 10000);
+			
 			
 
 				
