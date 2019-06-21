@@ -150,7 +150,7 @@ class Caredove_Admin {
 			if(isset($api_listings['results'])){
 				foreach ($api_listings['results'] as $result){
 					if (isset($result['eReferral']['formUrl']) && $result['eReferral']['formUrl'] !== '' ){
-						$caredove_booking_buttons[] = array('text' => $result['name'], 'value' => esc_url($result['eReferral']['formUrl']));
+						$caredove_booking_buttons[] = array('text' => $result['name'], 'value' => esc_url($result['eReferral']['formUrl']), 'classes' => 'caredove-booking-button-link ' . esc_url($result['eReferral']['formUrl']));
 					}
 				}
 			}
@@ -294,7 +294,7 @@ class Caredove_Admin {
 							array(
 								'type'=> 'container',
 								'name'=> 'sample_view_link',
-								'html'=> '<a href="#" target="_blank" class="caredove-sample-view-link">view page</a>',
+								'html'=> '<a href="'.$caredove_booking_buttons[0]['value'].'" target="_blank" class="caredove-sample-view-link">view page</a>',
 								'classes'=> 'caredove-sample-view-link'
 							),
 							array(
@@ -302,8 +302,7 @@ class Caredove_Admin {
 								'name'   => 'page_url',
 								'label'  => 'Booking Form',
 								'values' => $caredove_booking_buttons,
-								'value' => 'none',
-								'classes' => 'caredove-booking-button-link'
+								'value' => 'none'
 							),
 							array (
 								'type'   => 'listbox',

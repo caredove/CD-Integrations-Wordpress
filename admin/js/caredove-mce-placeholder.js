@@ -161,6 +161,8 @@
                             $('.mce-caredove-tinymce-page_url').before($('<span style="left:162px;position:absolute;padding-top:6px;">https://www.caredove.com/</span>'));
                             $('.mce-caredove-tinymce-page_url').css({'left': '340px','width': textboxwidth});                            
                             
+                            $('.caredove-sample-view-link').attr('href', attributes['page_url']);
+
                             var inputs = $('#' + window_id + '-body');
 
                             if (hide_stuff !== ''){

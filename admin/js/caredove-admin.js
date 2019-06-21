@@ -41,23 +41,23 @@
           });       
         }
 
-        $(document).on('click', '.caredove-booking-button-link', function() {
-          //when changing the button style options, hide necesarry fields
-          // caredove_hide_fields(this);
+        $(document).on('click', '.mce-caredove-booking-button-link', function() {
 
           // Copy the button style dropdown value to a hidden select field
           // var links = $(this).attr('class').split(' ');
 
-          // $('.caredove-sample-view-link').prop('href', 'http://www.chocolate.com');
+          var variables = $(this).attr('class').split(' ');
+          var preview_link = '';
 
-          // variables.map(function(value) {
-          //     if( value.indexOf("mce-caredove-style-") > -1 ) {
-                  
-          //         var button_style = value.replace('mce-caredove-style-','');
-          //         // console.log('new style - ' + button_style);
-          //         $('select.caredove_button_style').val(button_style).change();
-          //     }                          
-          // });                           
+
+          variables.map(function(value) {
+              if( value.indexOf("mce-http") > -1 ) {
+                  console.log(variables);        
+                  var preview_link = value.replace('mce-','');
+                  console.log(preview_link);
+                  $('.caredove-sample-view-link').attr('href', preview_link);
+              }                          
+          });                           
         });
 
         $(document).on('click', '.mce-optional', function() {
