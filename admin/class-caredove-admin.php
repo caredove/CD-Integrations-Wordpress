@@ -101,8 +101,7 @@ class Caredove_Admin {
 	 *
 	 * @since    0.1.0
 	 */
-	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name.'-prefix-input', plugin_dir_url( __FILE__ ) . 'js/prefix-input.js', array( 'jquery' ), $this->version, false );
+	public function enqueue_scripts() {		
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/caredove-admin.js', array( 'jquery' ), $this->version, false );
 	}
 

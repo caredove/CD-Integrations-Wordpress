@@ -927,7 +927,7 @@
 			content = 
 									'<div class="modaal-content-header"><h3 id="modaal-title">' + custom_iframe_title + '</h3></div>' +
 									'<div class="modaal-content-container' + ( self.options.loading_class != '' ? ' ' + self.options.loading_class : '' ) + '">' + 
-										'<iframe src="https://www.caredove.com/' + theUrl + '" class="modaal-iframe-elem" frameborder="0" allowfullscreen></iframe>' +
+										'<iframe src="' + theUrl + '" class="modaal-iframe-elem" frameborder="0" allowfullscreen></iframe>' +
 									'</div>' +
 									'<div class="modaal-content-footer"><p>' + self.options.iframe_footer + '</p></div>';		
 
