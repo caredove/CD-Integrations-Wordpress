@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.4.1
+Stable tag: 0.4.2
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,9 +37,12 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+= 0.4.2 =
+* made only modaal scrollable when open
+
 = 0.4.1 =
 * Fixed modaal load error, where caredove.com was preffacing all URLs
-• Removed unnecessary prefix JS
+* Removed unnecessary prefix JS
 
 = 0.4.0 =
 * Added and connected view page preview button for services button popup
