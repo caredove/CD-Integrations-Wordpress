@@ -130,9 +130,10 @@ class Caredove_Admin {
 	public function shortcode_config($string) {
 			$popup = new stdClass();
 			//Define the standard buttons (these can be overridden for a specific shortcode if desired)
-			$popup->buttons = [array ('text' => 'Cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit')];
+			$popup->buttons = array(array ('text' => 'Cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit'));
 
 			$caredove_booking_buttons = [];
+			$caredove_booking_buttons[0]['value'] = '';
 			$caredove_listing_categories = [];
 			$caredove_api_listings = Caredove_Admin::get_api_listings($listings_options = '');
 			$api_listings = json_decode($caredove_api_listings, true);
