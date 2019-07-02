@@ -47,7 +47,7 @@
 
 		<?php 
 
-		// print_r(get_transient('caredove_listings')); 
+		// print_r(get_transient('caredove_listings', true)); 
 
 		?>
 

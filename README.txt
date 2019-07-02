@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.4.3
+Stable tag: 0.4.4
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.4.4 =
+* fixed issues causing only first 10 results to show for listings dropdown, this was also causing issues with categories
+
 = 0.4.3 =
 * fixed an error that was stopping the plugin from being activated
 

@@ -538,7 +538,7 @@ class Caredove_Admin {
     		$url_prefix = 'https://www.';
     	}
 
-			$url = $url_prefix . $options['root_url'] . '?organization_id=' . $api_org_id . '?limit=1000';
+			$url = $url_prefix . $options['root_url'] . '?organization_id=' . $api_org_id . '&limit=1000';
 			$args = array(
 	    'headers' => array(
 	        'Authorization' => 'Basic ' . base64_encode($api_auth)
