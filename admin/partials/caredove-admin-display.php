@@ -26,11 +26,13 @@
             $api_test_results = Caredove_Admin::connect_to_api($options);
 
 						if ($api_test_results->http_code == '200') {
-							echo "<span style='color:green;font-weight:800;'>API Connected</span>";
+							echo "<span style='color:green;font-weight:800;'>API Connected Successfully</span>";
+						} elseif($api_test_results->http_code == '401'){
+							echo "<span style='color:red;font-weight:600;'>API username or password is incorrect";
 						} else {
 							echo "<span style='color:red;font-weight:600;'>Connection Error: ";
 							print_r($api_test_results->http_code);
-							print_r($api_test_results->response);
+							// print_r($api_test_results->response);
 							echo "<span>";
 						}
 

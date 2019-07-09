@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.4.5
+Stable tag: 0.4.6
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,11 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.4.6 =
+* updated plugin 'visit plugin site' url to https://about.caredove.com/wp-plugin
+* Added active=true filter, reduced limit from 1000 to 100
+* Adjustments to settings page - better error messages, text formatting
 
 = 0.4.5 =
 * turned off auto scroll on TinyMCE - This fixes dropdowns that wouldn't scroll

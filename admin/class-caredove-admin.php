@@ -455,7 +455,7 @@ class Caredove_Admin {
 
 		add_settings_field(
 			$this->option_name . '_api_password',
-			__( 'API password', 'caredove' ),
+			__( 'API Password', 'caredove' ),
 			array( $this, $this->option_name . '_api_password_field' ),
 			$this->plugin_name,
 			$this->option_name . '_general',
