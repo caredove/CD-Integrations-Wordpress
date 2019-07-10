@@ -132,7 +132,8 @@
                         for(var key in popupValues){
                             
                             if(key == 'page_url'){
-                                popupValues[key] = popupValues[key].replace(/(\/#|\/|#)$/, '');
+                                popupValues[key] = popupValues[key].replace(/(\/#|\/|#)$/, ''); //removes trailing slash
+                                popupValues[key] = popupValues[key].replace(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/, ''); //removes any http and base url
                             }
                             if(popupValues[key] == ''){
                                 //don't add the shortcode param, if it's blank

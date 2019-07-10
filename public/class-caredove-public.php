@@ -101,6 +101,8 @@ class Caredove_Public {
 
 	}
 
+
+
   /**
 	 * Regsiter the shortcodes
 	 *
@@ -110,6 +112,11 @@ class Caredove_Public {
 		add_shortcode('caredove_listings', array($this, 'caredove_listings_shortcode'));
 		add_shortcode('caredove_search', array($this, 'caredove_search_shortcode'));
 		add_shortcode('caredove_button', array($this, 'caredove_button_shortcode'));
+
+		wp_localize_script('jquery', 'customvars', array(
+			'pluginurl' => plugin_dir_url( __FILE__ ),
+		));
+
 	}
 
 
@@ -147,7 +154,17 @@ class Caredove_Public {
 						break;
 				}
 			}
-			$full_url = "https://www.caredove.com/".$a['page_url'];
+
+			$api_testing = get_option('caredove_api_testing',array());
+
+			if($api_testing == "true"){
+				$url_prefix = 'https://sandbox.';
+			} else {
+				$url_prefix = 'https://www.';
+			}
+			$pattern = '/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/';
+			$page_url = preg_replace($pattern, '', $a['page_url'] );
+			$full_url = $url_prefix."caredove.com/".$page_url;
 
 		if($a['display_option'] == 'link'){
 		 		ob_start();
@@ -158,7 +175,7 @@ class Caredove_Public {
 		} else {
 				ob_start();
 								?>
-				<button type="button" class="<?php echo $style_class?> caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $a["page_url"]?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+				<button type="button" class="<?php echo $style_class?> caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $full_url?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
 				<?php
 				return ob_get_clean();
 		}

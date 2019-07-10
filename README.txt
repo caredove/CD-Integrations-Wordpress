@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.4.6
+Stable tag: 0.4.7
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.4.7 =
+* added dynamic URL for iFrame error message svg
+* Added better URL handling for buttons. Now references plugin status (sandbox, vs. live) and auto updates urls. Respects old embeded URLs and rewrites them on the fly
 
 = 0.4.6 =
 * updated plugin 'visit plugin site' url to https://about.caredove.com/wp-plugin
