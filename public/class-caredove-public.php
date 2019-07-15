@@ -231,6 +231,21 @@ class Caredove_Public {
 
 	}
 
+	public function caredove_listings($api_object, $current_offset, $current_limit, $a){
+		foreach ($api_object->results as $k => $result){
+			if($k >= $current_offset && $k <= $current_limit){							
+					?>
+						<div class="caredove-listing-item">
+							<h3><?php echo $result->name; ?></h3>
+							<p><?php echo $result->details->description; ?></p>
+							<?php $a['page_url'] = $result->eReferral->formUrl; ?>
+							<?php echo $this->caredove_button($a); ?>
+						</div>
+					<?php
+			}
+		}
+	}
+
 	public function caredove_listings_shortcode($atts) {
 
 		$a = shortcode_atts( array(
@@ -258,7 +273,7 @@ class Caredove_Public {
 
   	if(isset($caredove_api_data)){
 	  		$api_object = json_decode($caredove_api_data);
-	  }
+	}
 
   	if ( isset($api_object->results) ) :
 
@@ -266,25 +281,29 @@ class Caredove_Public {
 			$current_page = (get_query_var( 'paged' ) ? get_query_var( 'paged' ) : "1" );
 			$current_offset = $current_page * $a['listings_per_page'] - $a['listings_per_page'];
 			$current_limit = $current_offset + $a['listings_per_page'] - 1;
+			$two_column_offset = $current_page * $a['listings_per_page']/2 - $a['listings_per_page']/2;
+			$two_column_limit = $two_column_offset + $a['listings_per_page']/2 - 1;
+			$two_column_offset_2 = $current_page * $a['listings_per_page'] - $a['listings_per_page'];
+			$two_column_limit_2 = $two_column_offset + $a['listings_per_page']/2 - 1;
 			// echo('max pages: '. $max_num_pages.'<br/>');
 			// echo('offset: '. $current_offset.'<br/>');
 			// echo('current limit'.$current_limit);
 			ob_start();
-			?><div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>"><?php
-			foreach ($api_object->results as $k => $result){
-				if($k >= $current_offset && $k <= $current_limit){
-						?>
-							<div class="caredove-listing-item">
-								<h3><?php echo $result->name ?></h3>
-								<p><?php echo $result->details->description ?></p>
-								<br />
-								<?php $a['page_url'] = $result->eReferral->formUrl; ?>
-								<?php	echo $this->caredove_button($a); ?>
-							</div>
-						<?php
-				}
-			}
-			?></div><?php
+			?><div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>">
+					<?php if($a['list_style'] == 'full-width'): ?>
+						<div class="caredove-listings-column">
+							<?php $this->caredove_listings($api_object, $current_offset, $current_limit, $a); ?>
+						</div>
+					<?php endif; ?>
+					<?php if($a['list_style'] == '2-column'): ?>
+						<div class="caredove-listings-column">
+							<?php $this->caredove_listings($api_object, $two_column_offset, $two_column_limit, $a); ?>
+						</div>
+						<div class="caredove-listings-column">	
+							<?php $this->caredove_listings($api_object, $two_column_offset_2, $two_column_limit_2, $a);?>
+						</div>
+	  				<?php endif;?>
+			</div><?php
 
 
       // Your loop
