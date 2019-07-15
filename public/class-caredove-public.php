@@ -282,8 +282,8 @@ class Caredove_Public {
 			$current_offset = $current_page * $a['listings_per_page'] - $a['listings_per_page'];
 			$current_limit = $current_offset + $a['listings_per_page'] - 1;
 			$two_column_offset = $current_page * $a['listings_per_page'] - $a['listings_per_page'];
-			$two_column_limit = $two_column_offset + $a['listings_per_page']/2 - 1;
-			$two_column_offset_2 = $current_page * $a['listings_per_page'] - $a['listings_per_page'] + $two_column_limit + 1;
+			$two_column_limit = $two_column_offset + $a['listings_per_page'] - 1;
+			$two_column_offset_2 = $current_page * $a['listings_per_page'] - $a['listings_per_page'];
 			$two_column_limit_2 = $two_column_offset + $a['listings_per_page']- 1;
 			// echo('max pages: '. $max_num_pages.'<br/>');
 			// echo('offset: '. $current_offset.'<br/>');

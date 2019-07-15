@@ -88,9 +88,11 @@ button.caredove-button-solid, input[type="button"].caredove-button-solid, .cared
 .caredove-listings-full-width .caredove-listing-item {
     width:100%;
 }
+.caredove-listings-2-column .caredove-listings-column{
+    flex:50%;
+}
 .caredove-listings-2-column .caredove-listing-item {
-    width:50%;
-    flex: 2 50%;
+    /* width:50%; */
 }
 .caredove-listings-3-column .caredove-listing-item {
     width:33.33%;
