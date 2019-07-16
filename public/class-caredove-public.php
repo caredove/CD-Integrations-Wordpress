@@ -231,18 +231,34 @@ class Caredove_Public {
 
 	}
 
-	public function caredove_listings($api_object, $current_offset, $current_limit, $a){
+	public function caredove_listings($api_object, $current_offset, $current_limit, $a, $columns){
 		foreach ($api_object->results as $k => $result){
-			if($k >= $current_offset && $k <= $current_limit){							
+			if($k >= $current_offset && $k <= $current_limit){
+			 	if($k % $columns == 0){
 					?>
+					<div class="caredove-listings-column-1">
 						<div class="caredove-listing-item">
 							<h3><?php echo $result->name; ?></h3>
 							<p><?php echo $result->details->description; ?></p>
 							<?php $a['page_url'] = $result->eReferral->formUrl; ?>
 							<?php echo $this->caredove_button($a); ?>
 						</div>
+					</div>
 					<?php
-			}
+				}
+				if($k %columns !== 0) {
+					?>
+					<div class="caredove-listings-column-2">
+						<div class="caredove-listing-item">
+							<h3><?php echo $result->name; ?></h3>
+							<p><?php echo $result->details->description; ?></p>
+							<?php $a['page_url'] = $result->eReferral->formUrl; ?>
+							<?php echo $this->caredove_button($a); ?>
+						</div>
+					
+					<?php
+				 }
+			} 
 		}
 	}
 
