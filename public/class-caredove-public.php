@@ -191,8 +191,16 @@ class Caredove_Public {
 						'button_style' => 'default',
 						'modal_title' => 'Search for Services',
 				), $atts );
-			//in the future, we should strip out any unwanted characters, i.e. an extra forward slash that might be in the page_url value
-			 $iframe = '<iframe id="caredove-iframe" scrolling="yes" src="https://www.caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
+			 //in the future, we should strip out any unwanted characters, i.e. an extra forward slash that might be in the page_url value
+			$api_testing = get_option('caredove_api_testing',array());
+
+			if($api_testing == "true"){
+				$url_prefix = 'https://sandbox.';
+			} else {
+				$url_prefix = 'https://www.';
+			}
+
+			 $iframe = '<iframe id="caredove-iframe" scrolling="yes" src="'.$url_prefix.'caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
 
 			 if($a['display_option'] == 'modal' || $a['display_option'] == 'false' || $a['display_option'] == 'link'){
 
@@ -231,6 +239,21 @@ class Caredove_Public {
 
 	}
 
+	public function caredove_listings($api_object, $current_offset, $current_limit, $a){
+		foreach ($api_object->results as $k => $result){
+			if($k >= $current_offset && $k <= $current_limit){							
+					?>
+						<div class="caredove-listing-item <?php echo ($result->details->description == null ? '1row' : '2row' ) ?>">
+							<h3><?php echo $result->name; ?></h3>
+							<p><?php echo $result->details->description; ?></p>
+							<?php $a['page_url'] = $result->eReferral->formUrl; ?>
+							<?php echo $this->caredove_button($a); ?>
+						</div>
+					<?php
+			}
+		}
+	}
+
 	public function caredove_listings_shortcode($atts) {
 
 		$a = shortcode_atts( array(
@@ -258,7 +281,7 @@ class Caredove_Public {
 
   	if(isset($caredove_api_data)){
 	  		$api_object = json_decode($caredove_api_data);
-	  }
+	}
 
   	if ( isset($api_object->results) ) :
 
@@ -270,21 +293,9 @@ class Caredove_Public {
 			// echo('offset: '. $current_offset.'<br/>');
 			// echo('current limit'.$current_limit);
 			ob_start();
-			?><div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>"><?php
-			foreach ($api_object->results as $k => $result){
-				if($k >= $current_offset && $k <= $current_limit){
-						?>
-							<div class="caredove-listing-item">
-								<h3><?php echo $result->name ?></h3>
-								<p><?php echo $result->details->description ?></p>
-								<br />
-								<?php $a['page_url'] = $result->eReferral->formUrl; ?>
-								<?php	echo $this->caredove_button($a); ?>
-							</div>
-						<?php
-				}
-			}
-			?></div><?php
+			?><div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>">
+					<?php $this->caredove_listings($api_object, $current_offset, $current_limit, $a); ?>					
+			</div><?php
 
 
       // Your loop

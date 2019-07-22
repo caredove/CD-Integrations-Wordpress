@@ -300,7 +300,7 @@ class Caredove_Admin {
 							array(
 								'type'   => 'listbox',
 								'name'   => 'page_url',
-								'label'  => 'Booking Form',
+								'label'  => 'Service Listing',
 								'values' => $caredove_booking_buttons,
 								'value' => 'none'
 							),
