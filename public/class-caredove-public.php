@@ -245,7 +245,9 @@ class Caredove_Public {
 					?>
 						<div class="caredove-listing-item <?php echo ($result->details->description == null ? '1row' : '2row' ) ?>">
 							<h3><?php echo $result->name; ?></h3>
-							<p><?php echo $result->details->description; ?></p>
+							<?php if($a['hide_description'] !== 'true'){ ?>
+								<p><?php echo $result->details->description; ?></p>
+							<?php } ?>							
 							<?php $a['page_url'] = $result->eReferral->formUrl; ?>
 							<?php echo $this->caredove_button($a); ?>
 						</div>
@@ -266,6 +268,7 @@ class Caredove_Public {
 				'text_color' => '',
 				'modal_title' => 'Book an Appointment',
 				'listing_categories' => '',
+				'hide_description' => '',
 				'listings_per_page' => '5',
 				'offest' => '0',
 				'display_option' => 'false',

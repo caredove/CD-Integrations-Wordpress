@@ -133,7 +133,7 @@ class Caredove_Admin {
 			$popup->buttons = array(array ('text' => 'Cancel','onclick' => 'close'), array ('text' => 'Insert','onclick' => 'submit'));
 
 			$caredove_booking_buttons = [];
-			$caredove_booking_buttons[0]['value'] = '';
+			// $caredove_booking_buttons[0]['value'] = '';//when enabled, gives a blank option as first option in dropdown
 			$caredove_listing_categories = [];
 			$caredove_api_listings = Caredove_Admin::get_api_listings($listings_options = '');
 			$api_listings = json_decode($caredove_api_listings, true);
@@ -369,6 +369,12 @@ class Caredove_Admin {
 									array( 'text'=> '50', 'value'=>'50'),
 									array( 'text'=> '100', 'value'=>'100'),
 								]
+							),
+							array(
+								'type' 	=> 'checkbox',
+								'name'	=> 'hide_description',
+								'label' => 'Hide Listing Description',
+								'checked' => ''
 							),
 							array(
 								'type'=> 'textbox',

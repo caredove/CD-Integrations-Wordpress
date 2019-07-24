@@ -42,6 +42,8 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 * Slightly improved the way Lists of listings were generated, now using Flexbox
 * Changed "booking form" to "Service Listing" on Add a caredove refer button TinyMCE Editor
 * Fixed an issue where Search Page would not show embeded into page. Issue was caused by url not respecting 'sandbox' opiton. Updated URL pattern to switch depending on sandbox option in settings
+* Removed Blank option from Booking button listing dropdown
+* Added option to disable listing description
 
 = 0.4.7 =
 * added dynamic URL for iFrame error message svg

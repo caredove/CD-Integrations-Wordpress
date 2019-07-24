@@ -93,10 +93,9 @@
                         //show the class of the field if set
                         // console.log('class = ' + t.shortcodes[shortcode].popupbody[i].classes);
                         // console.log(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name));
-                          
                           if(t.shortcodes[shortcode].popupbody[i].hasOwnProperty('checked')){
                             t.shortcodes[shortcode].popupbody[i].checked = attributes[t.shortcodes[shortcode].popupbody[i].name];
-                          }
+                          } 
                           t.shortcodes[shortcode].popupbody[i].value = attributes[t.shortcodes[shortcode].popupbody[i].name];                                                                   
                             // console.log(t.shortcodes[shortcode].popupbody[i].name);                                                                                     
                           if(t.shortcodes[shortcode].popupbody[i].value == 'embedded'){
