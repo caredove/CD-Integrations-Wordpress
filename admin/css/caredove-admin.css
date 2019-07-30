@@ -43,6 +43,10 @@
     color: #cdcdcdcd;
   }
 
+.caredove-tinymce-content{
+    position:relative;
+}
+
 .mce-caredove-tinymce-logo img{
  	max-width:200px;
  	width:200px;
@@ -196,4 +200,10 @@ button.caredove-button-solid, input[type="button"].caredove-button-solid, .cared
 
 .mce-caredove-sample-view-link a {
     float:right;
+}
+
+.mce-caredove-tinymce-section-title h3  {
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration:underline;
 }

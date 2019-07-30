@@ -364,18 +364,77 @@ class Caredove_Admin {
 								'name'	=> 'listings_per_page',
 								'label' => 'Listings Per Page',
 								'values' => [
-									array( 'text'=> '10', 'value'=>'10'),
-									array( 'text'=> '25', 'value'=>'25'),
-									array( 'text'=> '50', 'value'=>'50'),
-									array( 'text'=> '100', 'value'=>'100'),
+									array( 'text'=> '12', 'value'=>'12'),
+									array( 'text'=> '24', 'value'=>'24'),
+									array( 'text'=> '48', 'value'=>'48'),
 								]
+							),
+							array (
+								'type'   => 'textbox',
+								'name'   => 'listing_background_color',
+								'label'  => 'Listing Background Color',
+								'tooltip'=> 'Please use hex "#" color code',
+								'classes' => 'listing_background_color',
+								'placeholder' => 'Enter Hex Code e.g., #DFDDDD (default)'
+							),
+							array(
+								'type'=> 'container',
+								'html'=> '<br /><h3>Select which fields you would like to show</h3>',
+								'classes'=> 'caredove-tinymce-section-title'
+							),	
+							array(
+								'type' 	=> 'checkbox',
+								'name'	=> 'show_title',
+								'label' => 'Show Listing Title',
+								'checked' => 'true'
+							),							
+							array(
+								'type' 	=> 'checkbox',
+								'name'	=> 'show_description',
+								'label' => 'Show Listing Description',
+								'checked' => 'true'
+							),							
+							array(
+								'type' 	=> 'checkbox',
+								'name'	=> 'show_address',
+								'label' => 'Show Listing Address',
+								'checked' => ''
+							),						
+							array(
+								'type' 	=> 'checkbox',
+								'name'	=> 'show_phone',
+								'label' => 'Show Listing Phone',
+								'checked' => ''
+							),						
+							array(
+								'type' 	=> 'checkbox',
+								'name'	=> 'show_tty',
+								'label' => 'Show Listing TTY',
+								'checked' => ''
+							),							
+							array(
+								'type' 	=> 'checkbox',
+								'name'	=> 'show_inquiry_email',
+								'label' => 'Show Listing Inquiry Email',
+								'checked' => ''
 							),
 							array(
 								'type' 	=> 'checkbox',
-								'name'	=> 'hide_description',
-								'label' => 'Hide Listing Description',
+								'name'	=> 'show_inquiry_fax',
+								'label' => 'Show Listing Inquiry Fax',
 								'checked' => ''
 							),
+							array(
+								'type' 	=> 'checkbox',
+								'name'	=> 'show_inquiry_hours',
+								'label' => 'Show Listing Inquiry Hours',
+								'checked' => ''
+							),
+							array(
+								'type'=> 'container',
+								'html'=> '<br />',
+								'classes'=> 'caredove-tinymce-section-divider'
+							),	
 							array(
 								'type'=> 'textbox',
 								'name'=> 'button_text',

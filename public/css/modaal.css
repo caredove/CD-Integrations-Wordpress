@@ -6,8 +6,9 @@
 
 .modaal-noscroll {
 	overflow: hidden;
-	/* height: 100vh; */
-	/* position:fixed; */
+	height: 100vh;
+	width: 100vw;
+	position:fixed;
 }
 .modaal-content-header {
 	box-sizing:border-box;
@@ -49,7 +50,7 @@
 	overflow: hidden;
 }
 
-#modaal-title {
+.modaal-content-header h3#modaal-title {
 	margin-bottom:0;
 	line-height:40px;
 	font-weight:500;

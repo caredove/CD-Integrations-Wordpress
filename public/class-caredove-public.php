@@ -165,17 +165,18 @@ class Caredove_Public {
 			$pattern = '/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/';
 			$page_url = preg_replace($pattern, '', $a['page_url'] );
 			$full_url = $url_prefix."caredove.com/".$page_url;
+			$svg = '<svg version="1.1" viewBox="0 0 142.358 24.582"><path id="search-path" fill="none" d="M131.597,14.529c-1.487,1.487-3.542,2.407-5.811,2.407c-4.539,0-8.218-3.679-8.218-8.218s3.679-8.218,8.218-8.218c4.539,0,8.218,3.679,8.218,8.218C134.004,10.987,133.084,13.042,131.597,14.529c0,0,9.554,9.554,9.554,9.554H0"/></svg>';
 
 		if($a['display_option'] == 'link'){
 		 		ob_start();
 				?>
-					<button type="button" onclick="window.open('<?php echo $full_url; ?>','_blank');" class="caredove-inline-link <?php echo $style_class?> <?php echo $style_name ?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+					<button type="button" onclick="window.open('<?php echo $full_url; ?>','_blank');" class="caredove-inline-link <?php echo $style_class?> <?php echo $style_name ?> <?php if($a['search_icon'] == 'true'){ echo 'caredove-button-with-icon';}?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?><?php if($a['search_icon'] == 'true'){ echo $svg; } ?></button>
 				<?php
 				return ob_get_clean();
 		} else {
 				ob_start();
-								?>
-				<button type="button" class="<?php echo $style_class?> caredove-iframe-button <?php echo $style_name ?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $full_url?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?></button>
+				?>
+				<button type="button" class="<?php echo $style_class?> caredove-iframe-button <?php echo $style_name ?> <?php if($a['search_icon'] == 'true'){ echo 'caredove-button-with-icon';}?>" data-modal-title="<?php echo $a["modal_title"]?>" href="<?php echo $full_url?>" style="<?php echo $style_inline?>"><?php echo $a['button_text']; ?><?php if($a['search_icon'] == 'true'){ echo $svg; } ?></button>
 				<?php
 				return ob_get_clean();
 		}
@@ -190,6 +191,7 @@ class Caredove_Public {
 						'text_color' => '',
 						'button_style' => 'default',
 						'modal_title' => 'Search for Services',
+						'search_icon' => 'true'
 				), $atts );
 			 //in the future, we should strip out any unwanted characters, i.e. an extra forward slash that might be in the page_url value
 			$api_testing = get_option('caredove_api_testing',array());
@@ -223,6 +225,7 @@ class Caredove_Public {
 				'text_color' => '',
 				'button_style' => 'default',
 				'modal_title' => 'Book our Services',
+				'search_icon' => 'false'
 		), $atts );
 		//in the future, we should strip out any unwanted characters, i.e. an extra forward slash that might be in the page_url value
 		$iframe = '<iframe id="caredove-iframe" scrolling="yes" src="https://www.caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
@@ -243,10 +246,58 @@ class Caredove_Public {
 		foreach ($api_object->results as $k => $result){
 			if($k >= $current_offset && $k <= $current_limit){							
 					?>
-						<div class="caredove-listing-item <?php echo ($result->details->description == null ? '1row' : '2row' ) ?>">
-							<h3><?php echo $result->name; ?></h3>
-							<?php if($a['hide_description'] !== 'true'){ ?>
+						<div class="caredove-listing-item <?php echo ($result->details->description == null ? '1row' : '2row' ) ?>" style="background-color: <?php echo($a['listing_background_color']) ?>">
+							<?php if($a['show_title'] == 'true'){ ?>
+								<h3><?php echo $result->name; ?></h3>
+							<?php } ?>								
+							<?php if($a['show_description'] == 'true'){ ?>
 								<p><?php echo $result->details->description; ?></p>
+							<?php } ?>							
+							<?php if($a['show_address'] == 'true'){ ?>
+								<?php if(strlen($result->contact->addressText)){ ?>
+									<p><?php echo "<strong>Address: </strong><br />".$result->contact->addressText; ?></p>
+								<?php } ?>
+							<?php } ?>							
+							<?php if($a['show_phone'] == 'true'){ ?>
+								<?php if(strlen($result->contact->inquiryPhone)){ ?>
+									<p><?php echo "<strong>Phone #: </strong>".$result->contact->inquiryPhone; ?></p>
+								<?php } ?>
+							<?php } ?>							
+							<?php if($a['show_tty'] == 'true'){ ?>
+								<?php if(strlen($result->contact->tty)){ ?>
+									<p><?php echo "<strong>TTY: </strong>".$result->contact->tty; ?></p>
+								<?php } ?>
+							<?php } ?>													
+							<?php if($a['show_inquiry_email'] == 'true'){ ?>
+								<?php if(strlen($result->contact->inquiryEmail)){ ?>
+									<p><?php echo "<strong>Email: </strong>".$result->contact->inquiryEmail; ?></p>
+								<?php } ?>
+							<?php } ?>							
+							<?php if($a['show_inquiry_fax'] == 'true'){ ?>
+								<?php if(strlen($result->contact->fax)){ ?>
+									<p><?php echo "<strong>Fax #: </strong>".$result->contact->fax; ?></p>
+								<?php }?>
+							<?php } ?>							
+							<?php if($a['show_inquiry_hours'] == 'true'){ ?>
+								<?php if(sizeof($result->details->availableTime) > 0){ ?>
+									<p><strong>Available Hours:<br /></strong>
+										<?php foreach($result->details->availableTime as $availableTime){
+											$numberOfDays = sizeof($availableTime->daysOfWeek);
+											$i = 0;
+											foreach($availableTime->daysOfWeek as $days){
+												$i+=1;
+												echo $days;
+												if($i !== $numberOfDays){
+													echo ', ';
+												}
+											}
+											echo '<br />';
+											echo date("g:ia", strtotime($availableTime->availableStartTime));
+											echo ' to ';
+											echo date("g:ia", strtotime($availableTime->availableEndTime));
+
+										} ?></p>
+								<?php } ?>
 							<?php } ?>							
 							<?php $a['page_url'] = $result->eReferral->formUrl; ?>
 							<?php echo $this->caredove_button($a); ?>
@@ -268,10 +319,20 @@ class Caredove_Public {
 				'text_color' => '',
 				'modal_title' => 'Book an Appointment',
 				'listing_categories' => '',
-				'hide_description' => '',
-				'listings_per_page' => '5',
+				'listing_background_color' => '#DFDDDD',
+				'listings_per_page' => '6',
 				'offest' => '0',
 				'display_option' => 'false',
+				'show_title' => 'true',
+				'show_description' => 'true',
+				'show_address' => 'false',
+				'show_phone' => 'false',
+				'show_tty' => 'false',
+				'show_inquiry_email' => 'false',
+				'show_inquiry_fax' => 'false',
+				'show_inquiry_hours' => 'false',
+				'search_icon' => 'false'
+					
 		), $atts );
 
 

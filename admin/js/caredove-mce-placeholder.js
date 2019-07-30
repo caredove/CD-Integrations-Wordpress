@@ -70,7 +70,7 @@
               ed.addCommand('editImage', function( img, shortcode ) {
                     var attributes = {};
                     var hide_stuff = '';
-
+                    $('body').addClass("modal-open");
                     // console.log('shortcode Value: ' + shortcode);                
                     // console.log('this is the img tag: ' + img.length);
                     if (img.length != 0) {
@@ -120,7 +120,7 @@
                       resizable : true,
                       maximizable: true,
                       inline: true,
-                    //   autoScroll: true, 
+                      autoScroll: true, 
                       scrollbars: true,
                       buttons: t.shortcodes[shortcode].buttons,
                       body: t.shortcodes[shortcode].popupbody,
@@ -143,6 +143,10 @@
                         }                          
                         // placeholder = placeholder + index +'="'+item'"';
                         ed.insertContent( '['+ t.shortcodes[shortcode].shortcode + ' ' + placeholder + ']' );
+                        $('body').removeClass("modal-open");
+                      },
+                      onclose: function(e) {   
+                        $('body').removeClass("modal-open");
                       },
                       onrepaint: function(e) {
                         var window_id = this._id;                                                                                        

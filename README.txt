@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.4.8
+Stable tag: 0.4.9
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,18 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.4.9=
+* Added more specific css selector to reduce font size of window title on popup windows
+* Changed default # of listings to 12, 24, 48
+* Making 1-column 2-column and 3-column listing options work
+* Making listings match the height of the row
+* Added background color to listings (default light gray)
+* Added option for background color to listings shortcode
+* Added toggles for listings variables
+* Fixed Background scrolling issue on config page
+* Configured modal launch so that there is no "double scrolling" in Chrome
+* Added magnifying glass icon on the right of search buttons
 
 = 0.4.8=
 * Slightly improved the way Lists of listings were generated, now using Flexbox

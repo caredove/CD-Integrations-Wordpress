@@ -33,6 +33,21 @@ button.caredove-styled-button, input[type="button"].caredove-styled-button, .car
     border: 2px solid transparent;
     border-radius: 4px;
 }
+button.caredove-button-with-icon {
+    padding-right:40px;
+}
+button.caredove-button-with-icon svg {
+        position: absolute;
+        transform: translateX(-55px);
+        width: 80px;
+        height: auto;
+        stroke: #ffffff;
+        stroke-width: 3px;
+        stroke-dashoffset: 0;
+        stroke-dasharray: 64.6 206.305;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+}
 button.caredove-styled-button:hover, input[type="button"].caredove-styled-button:hover {
     cursor:pointer!important;
 }
@@ -73,32 +88,19 @@ button.caredove-button-solid, input[type="button"].caredove-button-solid, .cared
 .caredove-listings {
     margin:10px 0px;
     overflow:hidden;
+    width: 100%;
     /* display: grid; */
     display: flex;
     /* flex-flow: column wrap; */
     flex-wrap: wrap;
     /* max-height: 1200px; */
-    width: 100%;
 }
 .caredove-listing-item {
-    padding:15px 10px 10px 10px;   
-    /* max-width:450px;  */
-    /* min-width:250px; */
-    flex: 0 50%;
-    /* max-height:450px; */
-    margin: 0px 0px 20px 0px;
-    /* float:left; */
+    padding:15px 10px 15px 15px;   
+    flex: 0 100%;
+    margin: 0px 10px 20px 0px;
+    /* background:#DFDDDD; */
 }
-
-/* .caredove-listing-item.1row {
-    grid-row-start:auto;
-    grid-row-end:span 1;
-}
-.caredove-listing-item.2row {
-    grid-row-start:auto;
-    grid-row-end:span 2;
-} */
-
 .caredove-listing-item p {
     margin-bottom:1em;   
 }
@@ -114,14 +116,20 @@ button.caredove-button-solid, input[type="button"].caredove-button-solid, .cared
     /* grid-auto-columns: 300px 100px; */
 }
 .caredove-listings-2-column .caredove-listing-item {
-    /* width:50%; */
+    flex: 0 48%;
 }
 .caredove-listings-3-column .caredove-listing-item {
-    width:33.33%;
+    flex: 0 31%;
 }
 @media (max-width:600px){
     .caredove-listings .caredove-listing-item {
         width:100%;
+    }
+    .caredove-listings-2-column .caredove-listing-item {
+        flex: 0 100%;
+    }
+    .caredove-listings-3-column .caredove-listing-item {
+        flex: 0 100%;
     }
 }
  #caredove-iframe, .modaal-iframe-elem {
