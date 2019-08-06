@@ -33,20 +33,23 @@ button.caredove-styled-button, input[type="button"].caredove-styled-button, .car
     border: 2px solid transparent;
     border-radius: 4px;
 }
-button.caredove-button-with-icon {
-    padding-right:40px;
-}
+
 button.caredove-button-with-icon svg {
-        position: absolute;
-        transform: translateX(-55px);
-        width: 80px;
-        height: auto;
-        stroke: #ffffff;
-        stroke-width: 3px;
-        stroke-dashoffset: 0;
-        stroke-dasharray: 64.6 206.305;
-        stroke-linejoin: round;
-        stroke-linecap: round;
+    position: absolute;
+    margin-top:-1px;
+    width: 20px;
+    margin-left:10px;
+    stroke-width: 1px;
+}
+button.caredove-button-sm svg {
+    width:18px;
+    margin-top:-1px;
+    margin-left:6px;
+}
+button.caredove-button-lg svg {
+    width:25px;
+    margin-top:-3px;
+    margin-left:14px;
 }
 button.caredove-styled-button:hover, input[type="button"].caredove-styled-button:hover {
     cursor:pointer!important;
@@ -84,6 +87,16 @@ button.caredove-button-solid, input[type="button"].caredove-button-solid, .cared
     border-color:#00A4FF;
     color:#ffffff;
 }
+
+button.caredove-button-with-icon {
+    padding-right:40px;
+}
+button.caredove-button-with-icon.caredove-button-sm {
+    padding-right:30px;
+}
+button.caredove-button-with-icon.caredove-button-lg {
+    padding-right:50px;
+}
  
 .caredove-listings {
     margin:10px 0px;
@@ -98,7 +111,7 @@ button.caredove-button-solid, input[type="button"].caredove-button-solid, .cared
 .caredove-listing-item {
     padding:15px 10px 15px 15px;   
     flex: 0 100%;
-    margin: 0px 10px 20px 0px;
+    margin: 0px 10px 10px 0px;
     /* background:#DFDDDD; */
 }
 .caredove-listing-item p {

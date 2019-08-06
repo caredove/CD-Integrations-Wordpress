@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.4.9
+Stable tag: 0.5.0
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.5.0=
+* made vertical and horizontal spacing between listing items equal
+* Adjustments made to the styling of Search icon for search buttons
 
 = 0.4.9=
 * Added more specific css selector to reduce font size of window title on popup windows
