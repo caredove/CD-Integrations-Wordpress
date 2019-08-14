@@ -408,6 +408,8 @@
 			// append ajax modal markup to dom
 			if ($('#' + self.scope.id + '_overlay').length < 1) {
 				self.dom.append(build_markup);
+				// console.log(self.$elem.context.offsetTop);
+				// $(window).scrollTo(0, self.$elem.context.offsetTop);
 			}
 
 			// if inline, clone content into space
@@ -933,6 +935,7 @@
 
 									// now push content into markup
 				self.build_modal(content);	
+				console.log(self);
 				console.log(JSON.stringify(customvars));
 				setTimeout(
 				function() {

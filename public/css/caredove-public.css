@@ -148,7 +148,7 @@ button.caredove-button-with-icon.caredove-button-lg {
  #caredove-iframe, .modaal-iframe-elem {
     width:100%;
     /* min-height:900px; */
-    height:98%;
+    /* height:98%; */
     border:0;
     overflow-x:hidden; overflow-y:auto;
  }

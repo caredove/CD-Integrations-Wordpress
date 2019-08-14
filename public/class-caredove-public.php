@@ -193,7 +193,8 @@ class Caredove_Public {
 						'text_color' => '',
 						'button_style' => 'default',
 						'modal_title' => 'Search for Services',
-						'search_icon' => 'true'
+						'search_icon' => 'true',
+						'iframe_height' => '900px'
 				), $atts );
 			 //in the future, we should strip out any unwanted characters, i.e. an extra forward slash that might be in the page_url value
 			$api_testing = get_option('caredove_api_testing',array());
@@ -204,7 +205,7 @@ class Caredove_Public {
 				$url_prefix = 'https://www.';
 			}
 
-			 $iframe = '<iframe id="caredove-iframe" scrolling="yes" src="'.$url_prefix.'caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
+			 $iframe = '<iframe height="'.$a['iframe_height'].'" id="caredove-iframe" scrolling="yes" src="'.$url_prefix.'caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
 
 			 if($a['display_option'] == 'modal' || $a['display_option'] == 'false' || $a['display_option'] == 'link'){
 

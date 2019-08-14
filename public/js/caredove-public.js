@@ -48,21 +48,20 @@
 			//         toggleModal();
 			//     }
 			// }
-
-			// $(".caredove-iframe-button").on("click", function() {		
+				
 			// 	// var url = $(this).attr("data-url");
 			// 	var modal_title = $(this).attr("data-modal-title");
 			// // 	$('#caredove-iframe').attr('src', url + '?embed=1');
 			// // 	toggleModal();
-			// });
+			
 			// closeButton.addEventListener("click", toggleModal);
 			// window.addEventListener("click", windowOnClick);			
 			
 	 		$(".caredove-iframe-button").modaal({
 				loading_content: 'Loading content, please wait.',
-    		type: 'iframe',
-    		url_param: '?embed=1',
-    		iframe_footer: 'Powered by <a href="https://caredove.com">Caredove.com</a>'
+				type: 'iframe',
+				url_param: '?embed=1',
+				iframe_footer: 'Powered by <a href="https://caredove.com">Caredove.com</a>'
 			});
 	 		
 			// ENABLE SPAWNED IFRAME WINDOW TO CLOSE ITSELF
@@ -80,6 +79,12 @@
 			    }
 			  }
 			}, false);
+
+			// $(".caredove-iframe-button").on("click", function() {		
+			// 	var scrollY = $(document).scrollTop();             
+			// 	console.log(scrollY);
+			// 	window.scrollTo(0, scrollY);
+			// });
 
 	
 		});

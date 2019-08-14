@@ -250,9 +250,9 @@ class Caredove_Admin {
             array (
               'type'   => 'listbox',
               'values'  => [
-              	 		array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_modal_title-show caredove_button_text-show caredove_button_style-show' ),
-	                  array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-show caredove_button_style-show' ),
-	                  array( 'text'=> 'Embedded in page', 'value'=> 'embedded', 'classes' => 'optional caredove_modal_title-hide caredove_button_text-hide caredove_button_color-hide caredove_text_color-hide caredove_button_style-hide' )
+              	 		array( 'text'=> 'Button opens popup window', 'value'=> 'modal', 'classes' => 'optional caredove_iframe_height-hide caredove_modal_title-show caredove_button_text-show caredove_button_style-show' ),
+	                  array( 'text'=> 'Button opens link', 'value'=> 'link', 'classes' => 'optional caredove_iframe_height-hide caredove_modal_title-hide caredove_button_text-show caredove_button_style-show' ),
+	                  array( 'text'=> 'Embedded in page', 'value'=> 'embedded', 'classes' => 'optional caredove_iframe_height-show caredove_modal_title-hide caredove_button_text-hide caredove_button_color-hide caredove_text_color-hide caredove_button_style-hide' )
               ],
               'name'   => 'display_option',
               'label'  => 'Display Style',
@@ -267,6 +267,14 @@ class Caredove_Admin {
               'tooltip'=> 'This will be used for the button text',
               'classes' => 'caredove_button_text caredove_hide-embedded'
             ),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_options[4],
+			array(
+              'type'=> 'textbox',
+              'name'=> 'iframe_height',
+							'label'=> 'Embeded iFrame Height',
+							'placeholder'=> '900px (default)',
+              'tooltip'=> 'This value is used to overide the height of the embeded iframe',
+              'classes' => 'caredove_iframe_height caredove_hide-modal caredove_hide-link'
+            ),
             array (
               'type'   => 'textbox',
               'name'   => 'modal_title',
