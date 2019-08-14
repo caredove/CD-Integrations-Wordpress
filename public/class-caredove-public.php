@@ -205,7 +205,7 @@ class Caredove_Public {
 				$url_prefix = 'https://www.';
 			}
 
-			 $iframe = '<iframe height="'.$a['iframe_height'].'" id="caredove-iframe" scrolling="yes" src="'.$url_prefix.'caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
+			 $iframe = '<iframe style="height:'.$a['iframe_height'].'" id="caredove-iframe" scrolling="yes" src="'.$url_prefix.'caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
 
 			 if($a['display_option'] == 'modal' || $a['display_option'] == 'false' || $a['display_option'] == 'link'){
 
