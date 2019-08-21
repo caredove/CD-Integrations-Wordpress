@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.5.2
+Stable tag: 0.5.3
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,9 +38,12 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
-= 0.5.2=
+= 0.5.3=
 * fixing issue with iframe field not hiding and showing properly
 * fixing issue that caused search button icon not to be same as text colour
+
+= 0.5.2=
+* change height, to style height for iFrame height
 
 = 0.5.1=
 * added option to embedded search page for iFrame height
