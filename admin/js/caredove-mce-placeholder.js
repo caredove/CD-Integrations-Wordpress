@@ -69,7 +69,7 @@
 
               ed.addCommand('editImage', function( img, shortcode ) {
                     var attributes = {};
-                    var hide_stuff = '';
+                    var hide_stuff = [];
                     $('body').addClass("modal-open");
                     // console.log('shortcode Value: ' + shortcode);                
                     // console.log('this is the img tag: ' + img.length);
@@ -81,6 +81,7 @@
                     // override the object values with content from our HTML element when double clicked
                     // This isn't the most efficient way of pulling in the HTMl element content
                     // I will find a faster way
+                    // console.log('test');
                     if(img.match(/[\w-]+=(["']).*?\1/g) != null){
                       img.match(/[\w-]+=(["']).*?\1/g).forEach(function(attribute) {
                         attribute = attribute.match(/([\w-]+)=(["'])(.*?)\2/);
@@ -89,7 +90,6 @@
 
                       for(i=0; i < t.shortcodes[shortcode].popupbody.length; i++) {
                         if(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name)){
-
                         //show the class of the field if set
                         // console.log('class = ' + t.shortcodes[shortcode].popupbody[i].classes);
                         // console.log(attributes.hasOwnProperty(t.shortcodes[shortcode].popupbody[i].name));
@@ -98,12 +98,20 @@
                           } 
                           t.shortcodes[shortcode].popupbody[i].value = attributes[t.shortcodes[shortcode].popupbody[i].name];                                                                   
                             // console.log(t.shortcodes[shortcode].popupbody[i].name);                                                                                     
+                            // console.log(t.shortcodes[shortcode].popupbody[i].value);
+                        // if(t.shortcodes[shortcode].popupbody[i].classes){
+                        //     if(t.shortcodes[shortcode].popupbody[i].classes.includes('embedded')) {
+                        //         hide_stuff.push('embedded');
+                        //     }
+                        // }
                           if(t.shortcodes[shortcode].popupbody[i].value == 'embedded'){
-                            hide_stuff = 'embedded';
+                            hide_stuff.push('embedded');
                           } else if (t.shortcodes[shortcode].popupbody[i].value == 'link') {
-                            hide_stuff = 'link';
+                            hide_stuff.push('link');
                           } else if (t.shortcodes[shortcode].popupbody[i].value == 'default') {
-                            hide_stuff = 'default';
+                            hide_stuff.push('default');
+                          } else if (t.shortcodes[shortcode].popupbody[i].value == 'modal') {
+                            hide_stuff.push('modal');
                           }                          
                         } else {
                             t.shortcodes[shortcode].popupbody[i].value = '';
@@ -150,7 +158,6 @@
                       },
                       onrepaint: function(e) {
                         var window_id = this._id;                                                                                        
-
                         button_styles = attributes['button_style']; 
                         // console.log(button_styles);
                         $('select.caredove_button_style').val(button_styles).change();
@@ -169,21 +176,30 @@
 
                             var inputs = $('#' + window_id + '-body');
 
-                            if (hide_stuff !== ''){
-                                inputs.find('.mce-caredove_hide-'+hide_stuff).attr("disabled", true);
-                                inputs.find('.mce-caredove_hide-'+hide_stuff).addClass("mce-disabled");
-                                inputs.find('.mce-caredove_hide-'+hide_stuff).siblings(".mce-label").addClass("mce-disabled");
-                                inputs.find('.mce-caredove_hide-sample').hide();
-                            } else if(img.length == 0){
-                                //hide stuff when this is a new item we're adding
+                            for(var i=0; i < hide_stuff.length; i++){
+
+                                if (hide_stuff !== ''){                                                                
+                                    console.log('hide_stuff =' + hide_stuff[i]);
+                                    inputs.find('.mce-caredove_hide-'+hide_stuff[i]).attr("disabled", true);
+                                    inputs.find('.mce-caredove_hide-'+hide_stuff[i]).addClass("mce-disabled");
+                                    inputs.find('.mce-caredove_hide-'+hide_stuff[i]).siblings(".mce-label").addClass("mce-disabled");
+                                    inputs.find('.mce-caredove_hide-sample').hide();
+                                }                         
+                            }
+                            if(img.length == 0){
+                                console.log('hide_stuff =' + hide_stuff[i]);
+                                //hide stuff when this is a new item we're adding                                    
                                 inputs.find('.mce-caredove_hide-modal').attr("disabled", true);
                                 inputs.find('.mce-caredove_hide-modal').addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-modal').siblings(".mce-label").addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-default').attr("disabled", true);
                                 inputs.find('.mce-caredove_hide-default').addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-default').siblings(".mce-label").addClass("mce-disabled");
+                                inputs.find('.mce-caredove_hide-embedded').attr("disabled", true);
+                                inputs.find('.mce-caredove_hide-embedded').addClass("mce-disabled");
+                                inputs.find('.mce-caredove_hide-embedded').siblings(".mce-label").addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-sample').hide();
-                            }                           
+                            }   
                         }                                                           
                     },                  
                     

@@ -52,9 +52,9 @@
 
           variables.map(function(value) {
               if( value.indexOf("mce-http") > -1 ) {
-                  console.log(variables);        
+                  // console.log(variables);        
                   var preview_link = value.replace('mce-','');
-                  console.log(preview_link);
+                  // console.log(preview_link);
                   $('.caredove-sample-view-link').attr('href', preview_link);
               }                          
           });                           
@@ -102,7 +102,7 @@
             }
             
             if($('.mce-caredove_button_color').val().length > 0){
-                console.log('button color is filled');
+                // console.log('button color is filled');
                 button_color = $('.mce-caredove_button_color').val();
             } else {
                 button_color = "#00A4FF";
