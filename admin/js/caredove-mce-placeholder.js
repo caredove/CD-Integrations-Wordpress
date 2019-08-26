@@ -195,9 +195,9 @@
                                 inputs.find('.mce-caredove_hide-default').attr("disabled", true);
                                 inputs.find('.mce-caredove_hide-default').addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-default').siblings(".mce-label").addClass("mce-disabled");
-                                inputs.find('.mce-caredove_hide-embedded').attr("disabled", true);
-                                inputs.find('.mce-caredove_hide-embedded').addClass("mce-disabled");
-                                inputs.find('.mce-caredove_hide-embedded').siblings(".mce-label").addClass("mce-disabled");
+                                // inputs.find('.mce-caredove_hide-embedded').attr("disabled", true);
+                                // inputs.find('.mce-caredove_hide-embedded').addClass("mce-disabled");
+                                // inputs.find('.mce-caredove_hide-embedded').siblings(".mce-label").addClass("mce-disabled");
                                 inputs.find('.mce-caredove_hide-sample').hide();
                             }   
                         }                                                           
