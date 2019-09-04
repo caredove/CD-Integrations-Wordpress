@@ -41,9 +41,6 @@ button.caredove-button-with-icon svg {
     margin-left:10px;
     stroke-width: 1px;
 }
-button.caredove-button-with-icon svg path{
-    stroke:#ffffff;
-}
 button.caredove-button-sm svg {
     width:18px;
     margin-top:-1px;
@@ -82,13 +79,18 @@ button.caredove-button-outline, input[type="button"].caredove-button-outline, .c
     color:#00A4FF;
     background:none!important;
 }
-
+button.caredove-button-outline svg path{
+    stroke:#00A4FF;
+}
 button.caredove-button-solid, input[type="button"].caredove-button-solid, .caredove-button-solid, a.caredove-button-solid {
     border-width:0;
     border-width:2px;
     border-style:solid;
     border-color:#00A4FF;
     color:#ffffff;
+}
+button.caredove-button-solid svg path{
+    stroke:#ffffff;
 }
 
 button.caredove-button-with-icon {
