@@ -159,9 +159,9 @@ class Caredove_Public {
 			$api_testing = get_option('caredove_api_testing',array());
 
 			if($api_testing == "true"){
-				$url_prefix = 'https://sandbox.';
+				$url_prefix = 'https://launch.sandbox.';
 			} else {
-				$url_prefix = 'https://www.';
+				$url_prefix = 'https://launch.';
 			}
 			$pattern = '/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/';
 			$page_url = preg_replace($pattern, '', $a['page_url'] );
@@ -201,9 +201,9 @@ class Caredove_Public {
 			$api_testing = get_option('caredove_api_testing',array());
 
 			if($api_testing == "true"){
-				$url_prefix = 'https://sandbox.';
+				$url_prefix = 'https://launch.sandbox.';
 			} else {
-				$url_prefix = 'https://www.';
+				$url_prefix = 'https://launch.';
 			}
 
 			 $iframe = '<iframe style="height:'.$a['iframe_height'].'" id="caredove-iframe" scrolling="yes" src="'.$url_prefix.'caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
@@ -232,7 +232,7 @@ class Caredove_Public {
 				'search_icon' => 'false'
 		), $atts );
 		//in the future, we should strip out any unwanted characters, i.e. an extra forward slash that might be in the page_url value
-		$iframe = '<iframe id="caredove-iframe" scrolling="yes" src="https://www.caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
+		$iframe = '<iframe id="caredove-iframe" scrolling="yes" src="https://launch.caredove.com/'.$a['page_url'].'?embed=1"></iframe>';
 
 		if($a['display_option'] == 'modal' || $a['display_option'] == 'false' || $a['display_option'] == 'link'){
 

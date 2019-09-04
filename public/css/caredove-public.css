@@ -41,6 +41,9 @@ button.caredove-button-with-icon svg {
     margin-left:10px;
     stroke-width: 1px;
 }
+button.caredove-button-with-icon svg path{
+    stroke:#ffffff;
+}
 button.caredove-button-sm svg {
     width:18px;
     margin-top:-1px;
