@@ -156,6 +156,7 @@
 	background: #fff;
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 	cursor: auto;
+	overflow-y: initial !important
 }
 
 .modaal-container.is_loading {
@@ -247,6 +248,7 @@
 	height: 80%;
 	flex:1;
 	box-sizing:border-box;
+	overflow-y: auto;
 }
 
 .modaal-confirm-wrap {

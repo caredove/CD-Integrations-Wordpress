@@ -155,5 +155,9 @@ button.caredove-button-with-icon.caredove-button-lg {
     /* min-height:900px; */
     /* height:98%; */
     border:0;
-    overflow-x:hidden; overflow-y:auto;
+    overflow-x:hidden; overflow-y:auto;    
  }
+
+.modaal-content-container::-webkit-scrollbar { width: 0 !important }
+.modaal-content-container { overflow: -moz-scrollbars-none; }
+.modaal-content-container { -ms-overflow-style: none; }
