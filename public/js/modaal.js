@@ -893,8 +893,8 @@
 				custom_iframe_title = self.options.iframe_title;
 			}
 		
-			// const theUrl = url + self.options.url_param;
-			const theUrl = 'http://steedancrowe.com';
+			const theUrl = url + self.options.url_param;
+			// const theUrl = 'http://steedancrowe.com';
 			//test the iFrame URL first, and make sure we have access before trying to show it
 			// var testCall = $.ajax({
 			// 			url: theUrl,
