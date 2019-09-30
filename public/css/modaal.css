@@ -245,7 +245,7 @@
 
 .modaal-content-container {
 	padding: 0;
-	height: 80%;
+	/* height: 80%; */
 	flex:1;
 	box-sizing:border-box;
 	overflow-y: auto;
