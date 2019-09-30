@@ -635,6 +635,7 @@ class Caredove_Admin {
 					//if connection is bad, send error response to admin page
 					$caredove_api->http_code = "something went wrong: " . $http_code . ' - ' . wp_remote_retrieve_response_message( $response );
 					$caredove_api->response = $response;
+					set_transient('caredove_listings', '', 60 * 10);
 				}
 			}
 
