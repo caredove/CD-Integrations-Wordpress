@@ -302,7 +302,7 @@ class Caredove_Admin {
 							array(
 								'type'=> 'container',
 								'name'=> 'sample_view_link',
-								'html'=> '<a href="'.$caredove_booking_buttons[0]['value'].'" target="_blank" class="caredove-sample-view-link">view page</a>',
+								'html'=> '<a href="'.empty($caredove_booking_buttons[0])? '#': $caredove_booking_buttons[0]['value'].'" target="_blank" class="caredove-sample-view-link">view page</a>',
 								'classes'=> 'caredove-sample-view-link'
 							),
 							array(

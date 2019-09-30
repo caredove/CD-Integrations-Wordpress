@@ -117,6 +117,33 @@
     line-height: 1.3333333;
     border-radius: 6px;
 }
+.mce-container button.caredove-button-with-icon.caredove-button-sm {
+    padding-right:35px;
+}
+.mce-container button.caredove-button-with-icon.caredove-button-md {
+    padding-right:40px;
+}
+.mce-container button.caredove-button-with-icon.caredove-button-lg {
+    padding-right:55px;
+}
+.mce-container button svg {
+    position: absolute;
+    margin-top:-1px;
+    width: 20px;
+    margin-left:10px;
+    stroke-width: 1px;
+}
+.mce-container button.caredove-button-sm svg {
+    width:18px;
+    margin-top:-1px;
+    margin-left:6px;
+}
+.mce-container button.caredove-button-lg svg {
+    width:25px;
+    margin-top:-3px;
+    margin-left:14px;
+}
+
 .mce-container button.caredove-button-outline {
     border-width:2px;
     border-style:solid;
