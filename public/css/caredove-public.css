@@ -150,14 +150,74 @@ button.caredove-button-with-icon.caredove-button-lg {
         flex: 0 100%;
     }
 }
- #caredove-iframe, .modaal-iframe-elem {
+ #caredove-iframe {
     width:100%;
-    /* min-height:900px; */
+    min-height:900px;
     /* height:98%; */
-    border:0;
+    /* border:0; */
+    overflow-x:hidden; overflow-y:auto;    
+ }
+
+ .modaal-content-container .modaal-iframe-elem {
+    width:100%;
+    min-height:85vh;
+    margin-bottom:0;
     overflow-x:hidden; overflow-y:auto;    
  }
 
 .modaal-content-container::-webkit-scrollbar { width: 0 !important }
 .modaal-content-container { overflow: -moz-scrollbars-none; }
 .modaal-content-container { -ms-overflow-style: none; }
+.modaal-iframe-elem::-webkit-scrollbar { width: 0 !important }
+.modaal-iframe-elem { overflow: -moz-scrollbars-none; }
+.modaal-iframe-elem { -ms-overflow-style: none; }
+
+.modaal-content-header {
+	box-sizing:border-box;
+	border-bottom:1px solid #e5e5e5;
+	padding: 0 15px;	
+}
+.modaal-content-footer {
+	box-sizing:border-box;
+	border-top:1px solid #e5e5e5;
+	padding:5px 15px;
+	font-size:12px;
+}
+/*Lots of extra styles to neutralize any potential styles on sites*/
+.modaal-content-footer p{
+	font-size:13px;
+	line-height:35px;
+	font-weight:400;
+	color:#000;
+	text-align:left;
+	font-family:Roboto, Verdana;
+	padding:0;
+	margin:0;
+}
+
+.modaal-content-footer p a  {
+	color:#007AD0;
+	text-decoration:none;
+	border-bottom:0;
+	font-style:normal;
+}
+
+.modaal-outer-wrapper .modaal-inner-wrapper {
+	padding: 30px 25px;
+}
+
+.modaal-content .modaal-content-container {
+    padding: 0;
+}
+
+
+
+@media only screen and (max-width: 1050px) {
+
+    .modaal-outer-wrapper .modaal-inner-wrapper {
+        padding: 20px 0px;
+    }
+    .modaal-wrapper .modaal-container .modaal-close {
+        background:#000;
+    }
+}

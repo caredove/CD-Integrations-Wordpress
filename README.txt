@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.5.6
+Stable tag: 0.5.7
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,8 +38,14 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 0.5.7=
+* Made modal full width on mobile
+* Rebuilt modal to work better on mobile without scrolling issues
+* Increased delay from spinning/loading icon and error message on modal
+* made error message on modal two lines so that the URL is on it’s own line
+
 = 0.5.6=
-* Added origional iFrame link to Popup error message
+* Added original iFrame link to Popup error message
 * Added search button icon to button preview
 * Made some CSS changes to modal to hopefully improve usability on iPad Air
 * Made refreshing of API data less pushy

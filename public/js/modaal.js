@@ -926,7 +926,7 @@
 			// 	self.build_modal(content);
 			// });
 
-			var errorSVG = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100"><defs><style>.cls-1{fill:#white;}</style></defs><title>Placeholder For Search</title><g><rect x="0" y="0" width="100%" height="100" fill="white"></rect><text x="50%" y="50%" font-family="Verdana" font-size="14" fill="black" dominant-baseline="middle" text-anchor="middle">We\'re sorry, but something went wrong, please try again or enter the following URL in your browser: <a xlink:href="'+ theUrl.replace('?embed=1','') +'" target="_blank">'+ theUrl.replace('?embed=1','') +'</a></text></g></svg>';
+			var errorSVG = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100"><defs><style>.cls-1{fill:#white;}</style></defs><title>Placeholder For Search</title><g><rect x="0" y="0" width="100%" height="100" fill="white"></rect><text x="50%" y="40%" font-family="Verdana" font-size="14" fill="black" dominant-baseline="middle" text-anchor="middle">We\'re sorry, but something went wrong, please try again or enter the following URL in your browser:</text><text x="50%" y="70%" font-family="Verdana" font-size="14" fill="black" dominant-baseline="middle" text-anchor="middle"><a xlink:href="'+ theUrl.replace('?embed=1','') +'" target="_blank">'+ theUrl.replace('?embed=1','') +'</a></text></g></svg>';
 			var errorSVG64 = btoa(errorSVG);
 
 			content = 
@@ -943,7 +943,7 @@
 				setTimeout(
 				function() {
 					$('.modaal-iframe-elem').css('background', 'url("data:image/svg+xml;base64,'+errorSVG64+'") center center no-repeat');
-				}, 10000);
+				}, 20000);
 			
 			
 
