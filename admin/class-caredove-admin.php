@@ -353,10 +353,10 @@ class Caredove_Admin {
 		    					'type'   => 'listbox',
                   'name'   => 'listing_categories',
                   'label'  => 'Listing Categories',
-                  'values' => $caredove_listing_categories,
+				  'values' => $caredove_listing_categories,				
                   'value' => 'none'
-              ),
-			    		array(
+			  ),				
+			  array(
 	              'type'   => 'listbox',
 	              'name'   => 'list_style',
 	              'label'  => 'List Style',
@@ -585,7 +585,7 @@ class Caredove_Admin {
 		echo '<input type="text" name="' . $this->option_name . '_api_org_id' . '" id="' . $this->option_name . '_api_org_id' . '" value="' . $api_org_id . '"> ' . __( 'get your organization ID from caredove.com', 'caredove' );
 	}
 
-		public function caredove_api_testing_field() {
+	public function caredove_api_testing_field() {
 		$api_testing = get_option( $this->option_name . '_api_testing' );
 		if ($api_testing == "true"){
 			$api_testing_status = "checked";

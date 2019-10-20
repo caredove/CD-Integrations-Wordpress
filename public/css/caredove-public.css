@@ -210,7 +210,9 @@ button.caredove-button-with-icon.caredove-button-lg {
     padding: 0;
 }
 
-
+.page .modaal-wrapper.modaal-iframe {
+    z-index:99999;
+}
 
 @media only screen and (max-width: 1050px) {
 
@@ -218,6 +220,6 @@ button.caredove-button-with-icon.caredove-button-lg {
         padding: 20px 0px;
     }
     .modaal-wrapper .modaal-container .modaal-close {
-        background:#000;
+        background:none;
     }
 }

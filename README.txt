@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.5.7
+Stable tag: 0.5.8
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,13 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.5.8=
+* Added padding to top of modal header
+* Changed z-index of modal to show on top of sticky menus
+* Removing console.logs from modaal.JS, admin.js and mce-placeholder.js
+* Moving close button for modal
+
 
 = 0.5.7=
 * Made modal full width on mobile

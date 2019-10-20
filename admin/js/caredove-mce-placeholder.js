@@ -187,7 +187,7 @@
                                 }                         
                             }
                             if(img.length == 0){
-                                console.log('hide_stuff =' + hide_stuff[i]);
+                                // console.log('hide_stuff =' + hide_stuff[i]);
                                 //hide stuff when this is a new item we're adding                                    
                                 inputs.find('.mce-caredove_hide-modal').attr("disabled", true);
                                 inputs.find('.mce-caredove_hide-modal').addClass("mce-disabled");

@@ -938,8 +938,8 @@
 
 									// now push content into markup
 				self.build_modal(content);	
-				console.log(self);
-				console.log(JSON.stringify(customvars));
+				// console.log(self);
+				// console.log(JSON.stringify(customvars));
 				setTimeout(
 				function() {
 					$('.modaal-iframe-elem').css('background', 'url("data:image/svg+xml;base64,'+errorSVG64+'") center center no-repeat');
