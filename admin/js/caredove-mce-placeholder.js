@@ -128,7 +128,7 @@
                       resizable : true,
                       maximizable: true,
                       inline: true,
-                      autoScroll: true, 
+                      autoScroll: false, 
                       scrollbars: true,
                       buttons: t.shortcodes[shortcode].buttons,
                       body: t.shortcodes[shortcode].popupbody,

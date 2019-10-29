@@ -635,7 +635,6 @@ class Caredove_Admin {
 					//if connection is bad, send error response to admin page
 					$caredove_api->http_code = "something went wrong: " . $http_code . ' - ' . wp_remote_retrieve_response_message( $response );
 					$caredove_api->response = $response;
-					set_transient('caredove_listings', '', 60 * 10);
 				}
 			}
 
@@ -651,21 +650,26 @@ class Caredove_Admin {
 			$options['root_url'] = 'caredove.com/api/native_v1/Service/';
 			$options['category_id'] = '';
 
-			if(!empty($options['category_id'])){
-				$category_listings = get_transeint('caredove_listings_category_'.$options['category_id']);
-				if(empty($category_listings)){
-					$caredove_api = Caredove_Admin::connect_to_api($options);
-					set_transient('caredove_listings_category_'.$options['category_id'], $caredove_api->data, 60 * 10);
-					$listings = $caredove_api->data;
-				}
-			} elseif(empty($listings)){
-	    		$caredove_api = Caredove_Admin::connect_to_api($options);
-	    		if(!empty($caredove_api->data)){
-	    			set_transient('caredove_listings', $caredove_api->data, 60 * 10);
-						$listings = $caredove_api->data;
-	    		}
+			// if(!empty($options['category_id'])){
+			// 	$category_listings = get_transeint('caredove_listings_category_'.$options['category_id']);
+			// 	if(empty($category_listings)){
+			// 		$caredove_api = Caredove_Admin::connect_to_api($options);
+			// 		set_transient('caredove_listings_category_'.$options['category_id'], $caredove_api->data, 60 * 2  * 60);
+			// 		$listings = $caredove_api->data;
+			// 	}
+			// } elseif(empty($listings)){
+	    	// 	$caredove_api = Caredove_Admin::connect_to_api($options);
+	    	// 	if(!empty($caredove_api->data)){
+	    	// 		set_transient('caredove_listings', $caredove_api->data, 60 * 2 * 60);
+			// 			$listings = $caredove_api->data;
+	    	// 	}
 
-	    }
+			// }
+			$caredove_api = Caredove_Admin::connect_to_api($options);
+			if(!empty($caredove_api->data)){
+				set_transient('caredove_listings', $caredove_api->data, 60 * 2 * 60);
+					$listings = $caredove_api->data;
+	    	}
 
 			return $listings;
 	}
@@ -677,14 +681,19 @@ class Caredove_Admin {
 
 		$categories = get_transient('caredove_categories');
 
-		if(empty($categories)){
-    		$caredove_api = Caredove_Admin::connect_to_api($options);
+		// if(empty($categories)){
+    	// 	$caredove_api = Caredove_Admin::connect_to_api($options);
+    	// 	if(!empty($caredove_api->data)){
+    	// 		set_transient('caredove_categories', $caredove_api->data, 60 * 2 * 60);
+		// 			$categories = $caredove_api->data;	
+    	// 	}
+				
+		// }
+		$caredove_api = Caredove_Admin::connect_to_api($options);
     		if(!empty($caredove_api->data)){
-    			set_transient('caredove_categories', $caredove_api->data, 60 * 10);
+    			set_transient('caredove_categories', $caredove_api->data, 60 * 2 * 60);
 					$categories = $caredove_api->data;	
     		}
-				
-    }
 
 		return $categories;
 
