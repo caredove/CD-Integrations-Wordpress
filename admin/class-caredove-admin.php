@@ -592,16 +592,17 @@ class Caredove_Admin {
 		}else{
 			$api_testing_status = "";
 		}
-		echo '<input type="checkbox" name="' . $this->option_name . '_api_testing' . '" id="' . $this->option_name . '_api_testing' . '" value="true" ' . $api_testing_status . ' > ' . __( 'Use test connection at sandbox.caredove.com', 'caredove' );
+		echo '<input type="checkbox" name="' . $this->option_name . '_api_testing' . '" id="' . $this->option_name . '_api_testing' . '" value="true" ' . $api_testing_status . ' > ' . __( 'Add plugins to the sandbox environment', 'caredove' );
+		echo '<br /><div style="margin-top:10px;max-width:500px;">Note: Existing search and refer button plugins will not be affected by changes to this setting and will need to be updated manually. Listings plugins will update automatically after some time.</div>';
 	}
 
 	static function connect_to_api($options) {
 
     	$caredove_api = new StdClass;
-    	$api_username = get_option('caredove_api_username',array());
-    	$api_password = get_option('caredove_api_password',array());
-    	$api_org_id = get_option('caredove_api_org_id',array());
-    	$api_testing = get_option('caredove_api_testing',array());
+    	$api_username = get_option('caredove_api_username');
+    	$api_password = get_option('caredove_api_password');
+    	$api_org_id = get_option('caredove_api_org_id');
+    	$api_testing = get_option('caredove_api_testing');
 
     	$api_auth = $api_username . ':' . $api_password;
 

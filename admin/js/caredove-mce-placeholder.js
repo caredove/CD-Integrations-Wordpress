@@ -1,4 +1,4 @@
-(function(){
+(function($){
     /*
      * Create the TinyMCE plugin object.
      * 
@@ -450,4 +450,4 @@
     // Add the plugin object to the TinyMCE plugin manager
     tinymce.PluginManager.add( 'visualshortcodes', tinymce.plugins.visualShortcodes );
     
-})();
+})(jQuery);

@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.6.1=
+* Fixed undefined $ in caredove-mce-placeholder.js
+* Changed language on the settings page for the Test API option
 
 = 0.6.0=
 * Removed access token for GitHub
