@@ -16,7 +16,7 @@
  * Plugin Name:       Caredove
  * Plugin URI:        https://about.caredove.com/wp-plugin
  * Description:       This plugin provides integration with caredove.com for scheduling buttons, services listings and search.Here is a short description of the plugin. 
- * Version:           0.6.0=1
+ * Version:           0.6.1
  * Author:            Caredove
  * Author URI:        https://caredove.com
  * License:           GPL-2.0+
