@@ -302,7 +302,7 @@ class Caredove_Admin {
 							array(
 								'type'=> 'container',
 								'name'=> 'sample_view_link',
-								'html'=> '<a href="'.empty($caredove_booking_buttons[0])? '#': $caredove_booking_buttons[0]['value'].'" target="_blank" class="caredove-sample-view-link">view page</a>',
+								'html'=> '<a href="'.empty($caredove_booking_buttons[0]) ? null : $caredove_booking_buttons[0]['value'].'" target="_blank" class="caredove-sample-view-link">view page</a>',
 								'classes'=> 'caredove-sample-view-link'
 							),
 							array(
@@ -670,7 +670,10 @@ class Caredove_Admin {
 			if(!empty($caredove_api->data)){
 				set_transient('caredove_listings', $caredove_api->data, 60 * 2 * 60);
 					$listings = $caredove_api->data;
-	    	}
+	    	} else { //if the connetion fails, don't try again for 24 hours
+				set_transient('caredove_listings', '', 86400);
+				$listings = '';
+			}
 
 			return $listings;
 	}
@@ -693,8 +696,11 @@ class Caredove_Admin {
 		$caredove_api = Caredove_Admin::connect_to_api($options);
     		if(!empty($caredove_api->data)){
     			set_transient('caredove_categories', $caredove_api->data, 60 * 2 * 60);
-					$categories = $caredove_api->data;	
-    		}
+				$categories = $caredove_api->data;	
+    		} else { //if the connetion fails, don't try again for 24 hours
+				set_transient('caredove_categories', '', 86400);
+				$categories = $caredove_api->data;
+			}
 
 		return $categories;
 
