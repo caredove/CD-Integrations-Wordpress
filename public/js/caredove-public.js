@@ -30,7 +30,9 @@
 	 */	  
 
 	 	$(document).ready(function(){
-
+	 		var meta = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"/>'
+	 		$('meta[name=viewport]').remove();
+    		$('head').append(meta);
 	 		//  var modal = document.querySelector(".caredove-modal");
 			// var trigger = document.querySelector(".caredove-iframe-button");
 			// var closeButton = document.querySelector(".caredove-modal-close");
