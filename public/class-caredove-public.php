@@ -247,8 +247,10 @@ class Caredove_Public {
 	}
 
 	public function caredove_listings($api_object, $current_offset, $current_limit, $a){
+
 		foreach ($api_object->results as $k => $result){
-			if($k >= $current_offset && $k <= $current_limit){							
+			if($k >= $current_offset && $k <= $current_limit){
+							
 					?>
 						<div class="caredove-listing-item <?php echo ($result->details->description == null ? '1row' : '2row' ) ?>" style="background-color: <?php echo($a['listing_background_color']) ?>">
 							<?php if($a['show_title'] == 'true'){ ?>
@@ -306,7 +308,7 @@ class Caredove_Public {
 							<?php $a['page_url'] = $result->eReferral->formUrl; ?>
 							<?php echo $this->caredove_button($a); ?>
 						</div>
-					<?php
+					<?php				
 			}
 		}
 	}
@@ -323,7 +325,8 @@ class Caredove_Public {
 				'text_color' => '',
 				'modal_title' => 'Book an Appointment',
 				'listing_categories' => '',
-				'listing_background_color' => '#DFDDDD',
+				'category_code' => '',
+				'listing_background_color' => '#F7F7F7',
 				'listings_per_page' => '6',
 				'offest' => '0',
 				'display_option' => 'false',
@@ -339,19 +342,31 @@ class Caredove_Public {
 					
 		), $atts );
 
-
-
-  	if($a['listing_categories'] != ''){
-			 $caredove_api_data = Caredove_Admin::get_api_listings($listing_options['category_id'] = $a['listing_categories']);
-  	} else {
-  		 $caredove_api_data = Caredove_Admin::get_api_listings($listing_options = '');
-  	}
+  		$caredove_api_data = Caredove_Admin::get_api_listings($listing_options = '');
 
   	if(isset($caredove_api_data)){
 	  		$api_object = json_decode($caredove_api_data);
 	}
+	
+	$categories = json_decode(Caredove_Admin::get_api_categories());
 
-  	if ( isset($api_object->results) ) :
+	if($a['listing_categories'] !== ''){
+		foreach($categories->results as $category){
+			if($category->id == $a['listing_categories']){
+				$a['category_code'] = $category->display;
+			}
+		}
+	}	
+
+	 	if ( isset($api_object->results) ) :
+
+			if($a['category_code'] !== ''){
+				foreach($api_object->results as $key => $theResult){
+					if($theResult->category->display != $a['category_code']){						
+						unset($api_object->results[$key]);
+					}
+				}
+			}
 
 			$max_num_pages = ceil(sizeof($api_object->results) / $a['listings_per_page']);
 			$current_page = (get_query_var( 'paged' ) ? get_query_var( 'paged' ) : "1" );
@@ -362,29 +377,27 @@ class Caredove_Public {
 			// echo('current limit'.$current_limit);
 			ob_start();
 			?><div class="caredove-listings caredove-listings-<?php echo $a['list_style'] ?>">
-					<?php $this->caredove_listings($api_object, $current_offset, $current_limit, $a); ?>					
-			</div><?php
+				<?php $this->caredove_listings($api_object, $current_offset, $current_limit, $a); ?>					
+			</div><?php			
 
+      	// Your loop
 
-      // Your loop
-
-    // This is responsible for 1, 2, 3 pagination links. You can easily change this to previous and next links.
-    if ( $max_num_pages > 1 ) :
-      $big = 999999999;
-      echo '<div class="pagination">';
-      echo paginate_links( array(
-        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-        'format' => '?paged=%#%',
-        'current' => max( 1, get_query_var('paged') ),
-        'total' => $max_num_pages
-      ) );
-      echo '</div>';
-    endif;
+		// This is responsible for 1, 2, 3 pagination links. You can easily change this to previous and next links.
+		if ( $max_num_pages > 1 ) :
+			$big = 999999999;
+			echo '<div class="pagination">';
+			echo paginate_links( array(
+				'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+				'format' => '?paged=%#%',
+				'current' => max( 1, get_query_var('paged') ),
+				'total' => $max_num_pages
+			) );
+			echo '</div>';
+		endif;
 		return ob_get_clean();
 
-  endif;
+  	endif;
 
 	}
-
 
 }

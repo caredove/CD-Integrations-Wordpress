@@ -4,7 +4,7 @@ Donate link: https://caredove.com
 Tags: caredove, integration, api
 Requires at least: 3.0.1
 Tested up to: 5.3
-Stable tag: 0.6.0
+Stable tag: 0.6.4
 Requires PHP: 6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,22 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.6.4=
+* Fixed error that was causing Title and Description to be persistant despite being disabled on listings
+
+= 0.6.3=
+* Changed '900px (default)' to 'Minimum 900px' for iframe height default field text
+* Updated default colours and adding more apdding for Listings
+* Fixing error that was causing all listings to show up when a specific category was selected
+
+= 0.6.2=
+* Removed stray # on admin button popup modal
+* added a 24 hours timeout to failed API connections. Transient will cache blank data. 
+
+= 0.6.1=
+* Fixed undefined $ in caredove-mce-placeholder.js
+* Changed language on the settings page for the Test API option
 
 = 0.6.0=
 * Removed access token for GitHub

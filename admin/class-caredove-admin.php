@@ -210,7 +210,118 @@ class Caredove_Admin {
 				</select>",
 				'hidden' => 'true',
 				'classes' => ''
-			);						  	 
+			);			
+			$popup->button_options[] = array(
+				'type'=> 'textbox',
+				'name'=> 'button_text',
+				'label'=> 'Button Text',
+				'tooltip'=> 'This will be used for the button text',
+				'classes' => 'caredove_button_text caredove_hide-embedded'
+			  );
+			  $popup->button_options[] = array(
+				  'type'   => 'listbox',
+				  'name'   => 'button_style',
+				  'label'  => 'Button Style',
+				  'values' => [
+					  array( 'text'=> 'Theme Default', 'value'=> 'default', 'classes'=> 'optional caredove_button_color-hide caredove_text_color-hide caredove-style-default' ),
+					  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'),
+					  array( 'text'=> 'Medium - solid', 'value'=> 'solid-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md' ),
+					  array( 'text'=> 'Large - solid', 'value'=> 'solid-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg' ),
+					  array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm' ),
+					  array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md' ),
+					  array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg' ),
+				  ],
+				  'classes' => 'caredove_button_style caredove_hide-embedded optional-control',
+				  'value' => 'default'
+			  );						
+			  $popup->button_options[] = array (
+				  'type'   => 'textbox',
+				  'name'   => 'button_color',
+				  'label'  => 'Button Color',
+				  'tooltip'=> 'Please use hex "#" color code',
+				  'classes' => 'caredove_button_color caredove_hide-default',
+				  'placeholder' => 'Enter Hex Code e.g., #00A4FF (default)'
+					  );
+			  $popup->button_options[] = array (
+				  'type'   => 'textbox',
+				  'name'   => 'text_color',
+				  'label'  => 'Text Color',
+				  'tooltip'=> 'Please use hex "#" color code',
+				  'classes' => 'caredove_text_color caredove_hide-default',
+				  'placeholder' => 'Enter Hex Code e.g., #FFFFFF (default)'
+							  );	
+			  $popup->button_options[] = array(
+				  'type'   => 'container',
+				  'name'   => 'button_style_hidden',
+				  'label'  => '',
+				  'html' => "<select class='caredove_button_style caredove_hide-embedded optional-control'>
+						  <option value='default' class='optional caredove_button_color-hide caredove_text_color-hide caredove-style-default'>Theme Default</option>
+						  <option value='solid-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'>Small - solid</option>
+						  <option value='solid-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md'>Medium - solid</option>
+						  <option value='solid-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg'>Large - solid</option>
+						  <option value='outline-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm'>Small - outlined</option>
+						  <option value='outline-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md'>Medium - outlined</option>
+						  <option value='outline-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg'>Large - outlined</option>
+				  </select>",
+				  'hidden' => 'true',
+				  'classes' => ''
+			  );			
+			  //deafult button options for listings
+			  $popup->listings_button_options[] = array(
+				'type'=> 'textbox',
+				'name'=> 'button_text',
+				'label'=> 'Button Text',
+				'tooltip'=> 'This will be used for the button text',
+				'classes' => 'caredove_button_text caredove_hide-embedded'
+			  );
+			  $popup->listings_button_options[] = array(
+				  'type'   => 'listbox',
+				  'name'   => 'button_style',
+				  'label'  => 'Button Style',
+				  'values' => [
+					  array( 'text'=> 'Theme Default', 'value'=> 'default', 'classes'=> 'optional caredove_button_color-hide caredove_text_color-hide caredove-style-default' ),
+					  array( 'text'=> 'Small - solid', 'value'=> 'solid-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'),
+					  array( 'text'=> 'Medium - solid', 'value'=> 'solid-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md' ),
+					  array( 'text'=> 'Large - solid', 'value'=> 'solid-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg' ),
+					  array( 'text'=> 'Small - outlined', 'value'=> 'outline-sm', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm' ),
+					  array( 'text'=> 'Medium - outlined', 'value'=> 'outline-md', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md' ),
+					  array( 'text'=> 'Large - outlined', 'value'=> 'outline-lg', 'classes'=> 'optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg' ),
+				  ],
+				  'classes' => 'caredove_button_style caredove_hide-embedded optional-control',
+				  'value' => 'default'
+			  );						
+			  $popup->listings_button_options[] = array (
+				  'type'   => 'textbox',
+				  'name'   => 'button_color',
+				  'label'  => 'Button Color',
+				  'tooltip'=> 'Please use hex "#" color code',
+				  'classes' => 'caredove_button_color caredove_hide-default',
+				  'placeholder' => 'Enter Hex Code e.g., #666666 (default)'
+					  );
+			  $popup->listings_button_options[] = array (
+				  'type'   => 'textbox',
+				  'name'   => 'text_color',
+				  'label'  => 'Text Color',
+				  'tooltip'=> 'Please use hex "#" color code',
+				  'classes' => 'caredove_text_color caredove_hide-default',
+				  'placeholder' => 'Enter Hex Code e.g., #666666 (default)'
+							  );	
+			  $popup->listings_button_options[] = array(
+				  'type'   => 'container',
+				  'name'   => 'button_style_hidden',
+				  'label'  => '',
+				  'html' => "<select class='caredove_button_style caredove_hide-embedded optional-control'>
+						  <option value='default' class='optional caredove_button_color-hide caredove_text_color-hide caredove-style-default'>Theme Default</option>
+						  <option value='solid-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-sm'>Small - solid</option>
+						  <option value='solid-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-md'>Medium - solid</option>
+						  <option value='solid-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-solid-lg'>Large - solid</option>
+						  <option value='outline-sm' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-sm'>Small - outlined</option>
+						  <option value='outline-md' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-md'>Medium - outlined</option>
+						  <option value='outline-lg' class='optional caredove_button_color-show caredove_text_color-show caredove-sample-button-wrapper-show caredove-style-outline-lg'>Large - outlined</option>
+				  </select>",
+				  'hidden' => 'true',
+				  'classes' => ''
+			  );						  	 
 			 $popup->logo = array(
 			 				'type'=> 'container',
 			 				'html'=> '<img src="'.plugins_url("img/Caredove-Logo.svg", __FILE__).'" />',
@@ -271,7 +382,7 @@ class Caredove_Admin {
               'type'=> 'textbox',
               'name'=> 'iframe_height',
 							'label'=> 'Embeded iFrame Height',
-							'placeholder'=> '900px (default)',
+							'placeholder'=> 'Minimum 900px',
               'tooltip'=> 'This value is used to overide the height of the embeded iframe',
               'classes' => 'caredove_iframe_height caredove_hide-modal caredove_hide-link'
             ),
@@ -302,7 +413,7 @@ class Caredove_Admin {
 							array(
 								'type'=> 'container',
 								'name'=> 'sample_view_link',
-								'html'=> '<a href="'.empty($caredove_booking_buttons[0])? '#': $caredove_booking_buttons[0]['value'].'" target="_blank" class="caredove-sample-view-link">view page</a>',
+								'html'=> '<a href="'.empty($caredove_booking_buttons[0]) ? null : $caredove_booking_buttons[0]['value'].'" target="_blank" class="caredove-sample-view-link">view page</a>',
 								'classes'=> 'caredove-sample-view-link'
 							),
 							array(
@@ -383,7 +494,7 @@ class Caredove_Admin {
 								'label'  => 'Listing Background Color',
 								'tooltip'=> 'Please use hex "#" color code',
 								'classes' => 'listing_background_color',
-								'placeholder' => 'Enter Hex Code e.g., #DFDDDD (default)'
+								'placeholder' => 'Enter Hex Code e.g., #F7F7F7 (default)'
 							),
 							array(
 								'type'=> 'container',
@@ -450,7 +561,7 @@ class Caredove_Admin {
 								'tooltip'=> 'This will be used for the button text',
 								'placeholder'=> 'Book Now (default)',
 								'classes' => 'caredove_button_text caredove_hide-embedded'
-							),$popup->button_options[1],$popup->button_options[2],$popup->button_options[3],$popup->button_options[4],$popup->button_sample
+							),$popup->listings_button_options[1],$popup->listings_button_options[2],$popup->listings_button_options[3],$popup->listings_button_options[4],$popup->button_sample
 			    	]
 					)
 
@@ -592,16 +703,17 @@ class Caredove_Admin {
 		}else{
 			$api_testing_status = "";
 		}
-		echo '<input type="checkbox" name="' . $this->option_name . '_api_testing' . '" id="' . $this->option_name . '_api_testing' . '" value="true" ' . $api_testing_status . ' > ' . __( 'Use test connection at sandbox.caredove.com', 'caredove' );
+		echo '<input type="checkbox" name="' . $this->option_name . '_api_testing' . '" id="' . $this->option_name . '_api_testing' . '" value="true" ' . $api_testing_status . ' > ' . __( 'Add plugins to the sandbox environment', 'caredove' );
+		echo '<br /><div style="margin-top:10px;max-width:500px;">Note: Existing search and refer button plugins will not be affected by changes to this setting and will need to be updated manually. Listings plugins will update automatically after some time.</div>';
 	}
 
 	static function connect_to_api($options) {
 
     	$caredove_api = new StdClass;
-    	$api_username = get_option('caredove_api_username',array());
-    	$api_password = get_option('caredove_api_password',array());
-    	$api_org_id = get_option('caredove_api_org_id',array());
-    	$api_testing = get_option('caredove_api_testing',array());
+    	$api_username = get_option('caredove_api_username');
+    	$api_password = get_option('caredove_api_password');
+    	$api_org_id = get_option('caredove_api_org_id');
+    	$api_testing = get_option('caredove_api_testing');
 
     	$api_auth = $api_username . ':' . $api_password;
 
@@ -648,10 +760,11 @@ class Caredove_Admin {
 
 			$options = array();
 			$options['root_url'] = 'caredove.com/api/native_v1/Service/';
-			$options['category_id'] = '';
+			// $options['category_id'] = $listing_options;
+			// print_r($listing_options);
 
 			// if(!empty($options['category_id'])){
-			// 	$category_listings = get_transeint('caredove_listings_category_'.$options['category_id']);
+			// 	$category_listings = get_transient('caredove_listings_category_'.$options['category_id']);
 			// 	if(empty($category_listings)){
 			// 		$caredove_api = Caredove_Admin::connect_to_api($options);
 			// 		set_transient('caredove_listings_category_'.$options['category_id'], $caredove_api->data, 60 * 2  * 60);
@@ -662,15 +775,23 @@ class Caredove_Admin {
 	    	// 	if(!empty($caredove_api->data)){
 	    	// 		set_transient('caredove_listings', $caredove_api->data, 60 * 2 * 60);
 			// 			$listings = $caredove_api->data;
-	    	// 	}
+	    	// 	} else { //if the connetion fails, don't try again for 24 hours
+			// 		set_transient('caredove_listings', '', 86400);
+			// 		$listings = '';
+			// 	}
 
 			// }
-			$caredove_api = Caredove_Admin::connect_to_api($options);
-			if(!empty($caredove_api->data)){
-				set_transient('caredove_listings', $caredove_api->data, 60 * 2 * 60);
-					$listings = $caredove_api->data;
-	    	}
-
+			if(empty($listings)){
+				$caredove_api = Caredove_Admin::connect_to_api($options);
+				if(!empty($caredove_api->data)){
+					set_transient('caredove_listings', $caredove_api->data, 60 * 2 * 60);
+						$listings = $caredove_api->data;
+				} else { //if the connetion fails, don't try again for 24 hours
+					set_transient('caredove_listings', '', 86400);
+					$listings = '';
+				}
+	
+			}
 			return $listings;
 	}
 
@@ -689,11 +810,16 @@ class Caredove_Admin {
     	// 	}
 				
 		// }
-		$caredove_api = Caredove_Admin::connect_to_api($options);
-    		if(!empty($caredove_api->data)){
-    			set_transient('caredove_categories', $caredove_api->data, 60 * 2 * 60);
-					$categories = $caredove_api->data;	
-    		}
+		if(empty($categories)){
+			$caredove_api = Caredove_Admin::connect_to_api($options);
+			if(!empty($caredove_api->data)){
+				set_transient('caredove_categories', $caredove_api->data, 60 * 2 * 60);
+				$categories = $caredove_api->data;	
+			} else { //if the connetion fails, don't try again for 24 hours
+				set_transient('caredove_categories', '', 86400);
+				$categories = $caredove_api->data;
+			}
+		}
 
 		return $categories;
 

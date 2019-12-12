@@ -1,4 +1,4 @@
-(function(){
+(function($){
     /*
      * Create the TinyMCE plugin object.
      * 
@@ -137,10 +137,15 @@
                         var placeholder = "";
                         
                         for(var key in popupValues){
-                            
                             if(key == 'page_url'){
                                 popupValues[key] = popupValues[key].replace(/(\/#|\/|#)$/, ''); //removes trailing slash
                                 popupValues[key] = popupValues[key].replace(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/, ''); //removes any http and base url
+                            }
+                            if(key == 'show_title' && popupValues[key] == ''){
+                                placeholder = placeholder + ' ' + key + '=""';
+                            }
+                            if(key == 'show_description' && popupValues[key] == ''){
+                                placeholder = placeholder + ' ' + key + '=""';
                             }
                             if(popupValues[key] == ''){
                                 //don't add the shortcode param, if it's blank
@@ -450,4 +455,4 @@
     // Add the plugin object to the TinyMCE plugin manager
     tinymce.PluginManager.add( 'visualshortcodes', tinymce.plugins.visualShortcodes );
     
-})();
+})(jQuery);
