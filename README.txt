@@ -37,6 +37,8 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+= 0.6.5=
+* Fixed issue with Zoom on safari input boxes IOS 
 
 = 0.6.4=
 * Fixed issue with zoom on safari input fields focus
