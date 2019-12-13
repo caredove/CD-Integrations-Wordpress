@@ -172,7 +172,7 @@ button.caredove-button-with-icon.caredove-button-lg {
  }
 
  .modaal-content-container .modaal-iframe-elem {
-    width:300px;
+    width:100%;
     min-height:85vh;
     margin-bottom:0;
     overflow-x:hidden; overflow-y:auto;    
