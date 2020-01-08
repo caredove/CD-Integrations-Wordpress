@@ -788,7 +788,7 @@ class Caredove_Admin {
 						$listings = $caredove_api->data;
 				} else { //if the connetion fails, don't try again for 24 hours
 					set_transient('caredove_listings', '', 86400);
-					$listings = '';
+					$listings = 'failed';
 				}
 	
 			}
@@ -817,7 +817,7 @@ class Caredove_Admin {
 				$categories = $caredove_api->data;	
 			} else { //if the connetion fails, don't try again for 24 hours
 				set_transient('caredove_categories', '', 86400);
-				$categories = $caredove_api->data;
+				$categories = 'failed';
 			}
 		}
 
